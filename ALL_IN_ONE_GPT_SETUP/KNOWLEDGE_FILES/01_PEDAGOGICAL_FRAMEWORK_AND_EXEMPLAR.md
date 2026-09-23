@@ -13,6 +13,10 @@ Every unit strictly follows the DepEd MATATAG instructional balance:
 
 ### Word Density & Page Standards
 - **Word Density Floor**: Minimum **3,500 words per Lesson** (totaling **15,000 to 18,000+ words per 3-lesson unit**).
+- **40-Page Minimum Floor for Student Content (Excluding Answer Keys)**:
+  * The **40-Page Minimum** applies **STRICTLY to the Student Instructional Core**: Page 1–3 (Front Matter), Pages 4–39 (Lessons 1–3 at 11–12 full pages each), and Pages 40–43 (40-pt Unit Assessment, Synthesis, and Glossary).
+  * **Answer Keys and Teacher Guides are strictly EXCLUDED** from the 40-page student minimum floor!
+  * Susi sa Pagwawasto (Complete Answer Keys), Teacher's Diagnostic Guide, and the QA Audit Certificate begin on **Page 44+**, bringing the complete publication to **50 to 54+ full pages**!
 - **Paragraph Standard**: Subtopics must NEVER be summarized in single sentences or bullet points. Every subtopic must feature **5 to 7 dense, richly developed academic paragraphs** (80–120 words per paragraph) explaining foundational origins, conceptual mechanisms, comparative analysis, and real-world relevance.
 - **Zero Placeholder Tolerance**: NEVER use `...`, `[Insert text here]`, `[Continue for remaining items]`, or shorthand. Every paragraph, dialogue turn, quiz question (1 to 15), answer option (A, B, C, D), and rubric cell MUST be fully written out in publication-ready prose.
 - **Natural Continuous Flow (No Internal Page Breaks)**: NEVER insert `[PAGE BREAK]` inside lessons, between subtopics, after callouts, or before tasks. Content must flow continuously. Hard page breaks are strictly reserved for major structural boundaries:
@@ -21,7 +25,9 @@ Every unit strictly follows the DepEd MATATAG instructional balance:
   3. After Page 3 (Table of Contents)
   4. At the end of each Lesson
   5. After the Unit Assessment
-  6. After Unit Summary & Glossary
+  6. After Unit Summary & Glossary (Page 43)
+  7. Before Susi sa Pagwawasto (Page 44)
+  8. Before the QA Audit Certificate Stamp (Page 54)
 
 ---
 

@@ -17,9 +17,10 @@ Every unit must strictly demonstrate 100% fidelity to the official DepEd MATATAG
 2. **The 3 Essential Questions (Mahahalagang Tanong)**:
    - Must frame overarching inquiry, not trivial factual recall.
    - Each of the 3 subtopics in the lesson MUST explicitly answer one of the Essential Questions.
-3. **Strict 70/30 Instructional Ratio**:
-   - **70% Instructional Depth**: Lessons must be masterclasses of deep, contextualized prose (3,500+ words per lesson). Summaries, bulleted outlines, and shorthand placeholders (`...`) are strictly prohibited.
+3. **Strict 70/30 Instructional Ratio & 40-Page Student Floor**:
+   - **70% Instructional Depth**: Lessons must be masterclasses of deep, contextualized prose (minimum 3,500+ words per lesson floor, totaling 15,000–18,000+ words per unit). Summaries, bulleted outlines, and shorthand placeholders (`...`) are strictly prohibited.
    - **30% Formative Practice**: Guided practice, authentic GRASPS performance tasks with complete 4x4 analytic rubrics, 15-item formative quizzes, and unit assessments.
+   - **40-Page Student Core Minimum Floor (Excluding Answer Keys)**: The 40-page requirement covers **STRICTLY student instructional material** (Cover, Lessons 1–3, Unit Assessment, Summary). Susi sa Pagwawasto (Answer Keys) and Teacher's Guides are **strictly EXCLUDED** from this floor and begin on Page 44+ (bringing the total complete publication to 50–54+ pages).
 4. **Spiral Progression Principle**:
    - Concepts must build systematically on prior grade competencies without regressing to elementary simplifications or making un-scaffolded leaps into collegiate theory.
 

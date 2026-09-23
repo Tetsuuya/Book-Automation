@@ -44,15 +44,18 @@ Every generated textbook **MUST strictly satisfy** these core constraints:
    - **70% Masterclass Lesson Content**: Deep, substantive conceptual explanations, historical/scientific context, unabridged anchor reading/lab protocol, Socratic inquiry seminars (8-10 turns), and concept matrices. Minimum **3,500 words per Lesson** (~15,000+ words per 3-lesson unit).
    - **30% Activity & Assessment**: Guided practice recall drills, analytical matrices (5-6 rows), authentic performance tasks (GRASPS model) with complete 4x4 analytic rubrics (all 16 cells fully filled), 15-item formative quizzes with brackets `[  ]`, unit assessments (40 pts), and complete answer keys with rationales.
 
-2. **40+ Full Pages Target with Natural Continuous Flow**:
-   - The final document spans **at least 40 full pages** (typically 42–45 pages).
+2. **40+ Full Pages Target (Strictly for Student Content, Excluding Answer Keys)**:
+   - **40-Page Minimum Floor for Student Lessons**: The 40-page minimum applies **strictly to the student instructional core** (Front Matter, Lessons 1–3 at 11–12 pages each, 40-pt Unit Assessment, Synthesis, and Glossary).
+   - **Answer Keys and Teacher Guides are EXCLUDED from the 40-page minimum**: Susi sa Pagwawasto and Teacher's Diagnostic Guide begin on **Page 44+**, bringing the total publication to **50 to 54+ full pages**.
    - **NO INTERNAL PAGE BREAKS**: Content must flow naturally and continuously. Never insert page breaks between topics, after callouts, or before tasks. Hard page breaks are strictly reserved for major structural boundaries:
      1. After Cover (Page 1)
      2. After Preface (Page 2)
      3. After Table of Contents (Page 3)
      4. At the end of each Lesson
      5. After Unit Assessment
-     6. After Summary & Glossary
+     6. After Summary & Glossary (Page 43)
+     7. Before Susi sa Pagwawasto (Page 44)
+     8. Before QA Audit Certificate (Page 54)
 
 3. **Page 1: Dedicated Front Cover (100% Zero Branding in Prompts)**:
    - Contains institutional header, large 24pt unit title, formal subtitle, and a dedicated **Front Cover AI Image Generation Prompt Box**.
