@@ -1,0 +1,87 @@
+# ==============================================================================
+# KNOWLEDGE BASE REFERENCE: SAMPLE VISUAL DIAGRAMS & MULTIMEDIA MODULES
+# For: GPT 2 (Visual & Media Director) Knowledge Section
+# ==============================================================================
+
+This document provides sample high-fidelity Midjourney/DALL-E prompt templates, diagram formats, and YouTube module layouts across all DepEd MATATAG subjects.
+
+---
+
+## 1. SAMPLE FRONT COVER ART PROMPTS
+[PROMPT SA PAGBUO NG LARAWAN SA PABALAT / FRONT COVER AI IMAGE PROMPT]
+Concept: Unit Cover Illustration
+Prompt: A breathtaking, high-detail editorial book cover illustration capturing Philippine cultural heritage, national identity, and modern 21st-century education. In the foreground, Filipino Grade 7 students (boy and girl in clean modern uniforms) engaged in an active, collaborative learning discussion. In the background, majestic Philippine landscape seamlessly blending indigenous architectural elements with modern scientific innovation. Rich atmospheric lighting, vibrant tropical color palette, master digital oil painting, artistic realism, 8k resolution --ar 8.5:11 --v 6.0
+
+---
+
+## 2. SUBJECT-SPECIFIC VISUAL & DIAGRAM PROMPTS
+
+### A. SCIENCE (Cellular, Anatomical, Ecological, Lab Setup)
+[📷 VISUAL / DIAGRAM GENERATION PROMPT: Plant Cell Organelles]
+Type: 3D Scientific Cross-Section Diagram
+Prompt: A highly detailed, photorealistic 3D anatomical cross-section diagram of a eukaryotic plant cell on an ultra-clean scientific laboratory background. Clear distinct visualization of the cell wall, central vacuole, bright emerald green chloroplasts, and translucent nucleus. Vibrant color-coded educational palette, studio lighting, volumetric glow, high scientific accuracy, 8k resolution, documentary science textbook quality --ar 16:9 --v 6.0
+
+[📷 VISUAL / DIAGRAM GENERATION PROMPT: Laboratory Apparatus Setup]
+Type: Laboratory Apparatus Illustration
+Prompt: A clean, realistic educational illustration of a basic titration and heating laboratory setup. Borosilicate glass beaker, Erlenmeyer flask with measuring scale, Bunsen burner with a gentle blue flame, and metal tripod stand. Photorealistic glass transparency and reflections, crisp laboratory bench background --ar 16:9 --v 6.0
+
+---
+
+### B. MATHEMATICS (Cartesian Graphs, 3D Geometry, Statistics)
+[📷 VISUAL / DIAGRAM GENERATION PROMPT: Cartesian Coordinate Plane with Linear Equations]
+Type: Mathematical Technical Vector Diagram
+Prompt: A clean, high-precision mathematical diagram of a 2D Cartesian coordinate plane on subtle blueprint grid paper. Crisp, dark navy x-axis and y-axis clearly labeled from -10 to +10. A bold royal blue linear function line intersecting the y-axis with distinct labeled coordinate points (0,2) and (3,8). Minimalist, high contrast, clean vector style, textbook mathematical illustration --ar 16:9 --style raw
+
+[📷 VISUAL / DIAGRAM GENERATION PROMPT: 3D Geometric Polyhedra]
+Type: 3D Isometric Geometric Render
+Prompt: An isometric 3D render of a regular dodecahedron and a right cylinder standing side-by-side on an architectural blueprint surface. Clean edge wireframes, subtle soft shadows, frosted glass and polished wood textures, isometric perspective, textbook educational design --ar 16:9 --v 6.0
+
+---
+
+### C. MAPEH (Music, Arts, PE, Health)
+[📷 VISUAL / DIAGRAM GENERATION PROMPT: Traditional Kulintang Ensemble]
+Type: Cultural Music Instrument Study
+Prompt: A culturally authentic, highly detailed still-life illustration of a complete traditional Mindanaoan Kulintang ensemble set. Ornate, intricately hand-carved okir wooden frame (antangan) holding a row of eight bossed bronze gongs with glowing metallic sheen. Beside it, agung gongs and dabakan drum. Warm dramatic lighting, museum quality, cultural dignity --ar 16:9 --v 6.0
+
+[📷 VISUAL / DIAGRAM GENERATION PROMPT: Biomechanical Sprinting Posture]
+Type: Physical Education Biomechanics Diagram
+Prompt: A high-precision kinetic breakdown illustration showing the anatomical posture and biomechanics of a young Filipino track athlete at the starting block and acceleration phase. Visible vector movement arrows showing angle of knee drive, arm swing, and forward torso lean. Clean athletic illustration, clinical clarity, white background --ar 16:9 --v 6.0
+
+---
+
+### D. TLE / TVL (Technical, Tools, Culinary, Electrical)
+[📷 VISUAL / DIAGRAM GENERATION PROMPT: Basic Woodworking Joints]
+Type: Technical Drafting Isometric Blueprint
+Prompt: A crisp technical drafting illustration showing exploded and assembled views of a classic Mortise and Tenon wood joint. Clear millimeter dimension lines, wood grain textures (Narra wood), clean isometric lines, blueprint aesthetic, engineering drawing style --ar 16:9 --style raw
+
+[📷 VISUAL / DIAGRAM GENERATION PROMPT: Basic Circuit Schematic & Breadboard]
+Type: Electrical Schematic Diagram
+Prompt: A clear, educational technical diagram showing a simple parallel circuit setup on an electronics breadboard. 9V battery source, jumper wires, resistors, and illuminated LED components. Clean technical lines, color-coded wires, electrical schematic inset --ar 16:9 --v 6.0
+
+---
+
+### E. FILIPINO & ARALING PANLIPUNAN (Historical & Cultural)
+[📷 VISUAL / DIAGRAM GENERATION PROMPT: Sinaunang Kalakalan sa Maynila]
+Type: Historical Narrative Scene
+Prompt: A historically grounded, vibrant narrative painting of an authentic pre-colonial Philippine trading port along the Pasig River in the 15th century. Indigenous Tagalog merchants and Asian traders bartering beeswax, earthen jars, and woven textiles beside traditional balangay boats with outriggers. Warm sunlight, historical realism, 8k resolution --ar 16:9 --v 6.0
+
+---
+
+## 3. SAMPLE INTERACTIVE YOUTUBE MULTIMEDIA MODULE
+[🎥 INTERACTIVE MULTIMEDIA: WATCH & LEARN]
+Module: Lesson Core Concept & Observational Target
+Video Title: "Deep Dive into Cellular Transport Mechanisms"
+Official Channel: DepEd TV / CrashCourse / Knowledge Channel Official
+Direct Link: https://www.youtube.com/watch?v=sample_video_id
+Search Query: Search on YouTube: "DepEd TV Science 7 Cellular Transport Osmosis"
+Video Summary: A high-impact 8-minute animation demonstrating passive and active cellular transport across cell membranes.
+[📱 QR CODE PLACEHOLDER: Encode YouTube link in final layout]
+
+Key Timestamps to Observe:
+• 01:15 - 03:45: Microscopic simulation of osmosis in hypotonic and hypertonic environments.
+• 03:46 - 06:10: Active transport pumps requiring ATP energy.
+
+Watch & Reflect Questions:
+1. What observable changes occurred in the animal cell when placed in a hypertonic solution during the video simulation?
+2. How does the concept of cellular osmosis explain why saltwater makes humans dehydrated when consumed?
+3. Relate this cellular process to how plants absorb water from the soil in a real agricultural setting.
