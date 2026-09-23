@@ -13,3 +13,6 @@ Desktop.ini
 # Temporary files
 *.tmp
 *.log
+*.pdf
+preview_pages/
+preview_pages_premium/
