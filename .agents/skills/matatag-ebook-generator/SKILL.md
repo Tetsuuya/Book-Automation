@@ -67,9 +67,12 @@ Every generated textbook **MUST strictly satisfy** these core constraints:
      * Typography instruction: Specify a sleek deep navy banner at the top featuring clean, crisp capital letters. Append: `clean graphic layout, perfectly centered professional typography, ultra-high resolution, no gibberish text, no watermarks, no logos --ar 8.5:11 --v 6.0`.
    - **MULTI-SUBJECT NEUTRALITY**: Never default or bias toward Grade 7 Filipino. When the user requests Grade 8 Filipino, Values Education 7, Science 8, Math 9, or Araling Panlipunan, dynamically adapt all titles, cover prompts, terminology, and mediums of instruction accordingly.
 
-4. **Dense Visual Prompts (4 to 6 per Lesson, 15–20+ per Unit)**:
-   - Visual frames must appear every 2–3 pages throughout the entire textbook.
-   - Includes cross-sections, historical artifacts, diagrams, flowcharts, and student activity layouts.
+4. **Strict 10-Prompt Quota & Concrete Scene Architecture**:
+   - Exactly 1 Full-Page Front Cover Prompt on Page 1 (`--ar 8.5:11`, 3-tier title banner in quotes).
+   - Exactly 3 Image Prompt Frames per Lesson (Subtopic 1, Subtopic 2, Applied / Multimodal Task, `--ar 16:9`).
+   - Zero image prompts in Back Matter.
+   - Total Unit Quota: Exactly **10 Image Prompts Total** ($1 + 3 \times 3 = 10$).
+   - **STRICT BAN ON ABSTRACT META-PROMPTS**: Follow `06_AI_IMAGE_PROMPT_STANDARDS_AND_EXEMPLARS.md`. NEVER output words like `"illustrating the central concept of this subtopic"`, `"showing source checking"`, or `"educational infographic"`. Every prompt MUST describe concrete photons hitting physical surfaces via the 5 Pillars: (1) Specific characters and physical hand actions, (2) Tangible architectural environment, (3) 3 to 4 concrete props, (4) Directional lighting/atmosphere, and (5) Camera framing and artistic medium.
 
 5. **Bulletproof Interactive YouTube Modules (Zero QR Codes, Zero 404s)**:
    - NO QR code boxes (eliminates broken ASCII codes and non-functional print elements).
@@ -85,11 +88,10 @@ Every generated textbook **MUST strictly satisfy** these core constraints:
    - **Interactive YouTube Modules**: Soft red (`#FFF5F5`) with solid YouTube Red (`#CC0000`) left border.
    - **AI Image Prompts**: Soft gray (`#FAFAFA`) with dashed border (`#CCCCCC`).
 
-7. **Structured Table Answer Keys (Strict Prohibition on Paragraph Blobs)**:
-   - **NEVER output answer keys in compressed single-paragraph strings** (`Bahagi I: 1. B | 2. C... Bahagi II: 11. ...`).
-   - **Table A (MCQs 1-10)**: Render as a clean 10-column compact table grid (`[Aytem | 1 | 2 | ... | 10]`, `[Tamang Sagot | B | C | ...]`).
-   - **Table B (Analytical Items 11-15)**: Render as a 2-column table (`[Aytem | Inaasahang Sagot, Batayan, at Rubrik]`) with 2-3 sentence model responses and rubrics.
-   - **Comprehensive Unit Assessment (40 pts)**: Must also be formatted into clean, structured tables (Part I Analysis Table, Part II Application Table, etc.).
+7. **Unit Assessment Architecture, Structured Keys & Psychometric Balance**:
+   - **Comprehensive Unit Assessment (50 Pts)**: 30-Item Multiple Choice Quiz (Items 1–30 with `[  ]` checkboxes, balanced A–D spread) followed immediately by the Authentic Performance Task (GRASPS Model + Complete 4x4 Analytic Rubric, 20 pts).
+   - **Structured Table Answer Keys**: Rendered in clean table grids (10-col for lessons, two 15-col grids for 30-item Unit Assessment, plus 2-col rationale tables). **ZERO paragraph blobs!**
+   - **ANTI-"MOSTLY B" / BALANCED CHOICES**: Correct answers MUST be evenly distributed across options `A`, `B`, `C`, and `D` (~25% each; 7-8 per 30 items). Never repeat any letter >2 times consecutively. Distractors must be parallel in length and complexity.
 
 8. **Zero-Hallucination & Factual Integrity Standards**:
    - The AI must NEVER fabricate data, dates, laws, historical figures, or mathematical derivations.
@@ -109,6 +111,6 @@ Every generated textbook **MUST strictly satisfy** these core constraints:
 To prevent LLM output token cutoffs and guarantee 3,500+ words per lesson:
 - **Turn 0 (Handshake)**: Acknowledge uploaded TOC/Curriculum Guide and ask teacher to confirm: (1) Subject & Grade Level, (2) Unit Number & Lesson range.
 - **Turn 1 (Front Matter)**: Output 3-page Front Matter (Cover with 3-tier prompt, Preface, TOC). STOP & ask to proceed.
-- **Turn 2 to 4 (Lessons 1 to 3)**: Output each lesson one at a time in full 3,500+ word depth with 4-5 visual prompt boxes and 7 interactive protocols. STOP & ask to proceed.
-- **Turn 5 (Back Matter & QA Audit)**: Output Unit Assessment (40 pts), Unit Synthesis, Glossary (20-25 terms), Complete Structured Answer Key, and the 100-Point QA Audit Certificate Stamp.
+- **Turn 2 to 4 (Lessons 1 to 3)**: Output each lesson one at a time in full 3,500+ word depth with exactly 3 visual prompt boxes and 7 interactive protocols. STOP & ask to proceed.
+- **Turn 5 (Back Matter & QA Audit)**: Output 30-Item MCQ Unit Assessment (Items 1–30), Performance Task with 4x4 rubric, Unit Synthesis, Glossary (20-25 terms), Complete Structured Answer Key (with 30-item grid), and the 100-Point QA Audit Certificate Stamp.
 - **Turn 6 (Compilation)**: Execute `03_DOCX_BUILDER_SCRIPT.py` to compile the `.docx` textbook with zero orphan pages and provide direct download.

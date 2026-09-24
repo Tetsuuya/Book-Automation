@@ -132,13 +132,6 @@ def build_yunit3_aralin14(doc):
     # =========================================================================
     add_heading_2(doc, "PAKSA 14.2: Mga Pahayagan at Wikang Nasusulat noong Panahon ng Espanyol")
     
-    prompt_14_senakulo = (
-        "PROMPT: A dramatic, wide-angle depiction of an outdoor community Senakulo passion play staged in a Philippine town plaza. "
-        "A local actor portraying the suffering Christ carrying the heavy wooden cross, escorted by costumed Roman soldiers wearing handcrafted tin armor "
-        "and red cloaks, surrounded by an emotional crowd of townspeople. Late afternoon dust illuminated by golden sunlight, authentic Philippine folk theater aesthetic --ar 16:9 --v 6.0"
-    )
-    add_prompt_box(doc, "DULAANG PANGKASAYSAYAN: ANG SENAKULO SA PLAZA NG BAYAN", prompt_14_senakulo)
-    
     add_body_p(
         doc,
         "Kasabay ng mga akdang panrelihiyon, mahalagang bahagi ng tekstong impormasyonal sa panahong kolonyal ang pag-unlad ng mga pahayagan at ng wikang "
@@ -483,35 +476,35 @@ def build_yunit3_aralin14(doc):
          ["A. Dalit", "B. Quintilla", "C. Tanaga", "D. Diona"]),
         ("2. Paano naiiba ang layunin ng mga prayle sa layunin ng mga katutubong Pilipino sa pagpapalaganap ng Pasyon?",
          ["A. Nais ng mga prayle na maging makata ang lahat, samantalang nais ng mga katutubo na maging mang-aawit.",
-          "B. Ginamit ito ng mga prayle upang ituro ang pagpapasakop, samantalang nakita ng mga katutubo ang pag-asa sa pagtatagumpay ng mga api.",
-          "C. Nais ng mga prayle na ibenta ang aklat, samantalang ipinamigay ito ng mga katutubo nang libre.",
-          "D. Walang anumang pagkakaiba sa kanilang naging pagtanggap sa akda."]),
+          "B. Nais ng mga prayle na ibenta ang aklat, samantalang ipinamigay ito ng mga katutubo nang libre.",
+          "C. Walang anumang pagkakaiba sa kanilang naging pagtanggap sa akda.",
+          "D. Ginamit ito ng mga prayle upang ituro ang pagpapasakop, samantalang nakita ng mga katutubo ang pag-asa sa pagtatagumpay ng mga api."]),
         ("3. Bakit itinuturing na gawaing panlipunan (social practice) ang Pabasa sa kulturang Pilipino?",
-         ["A. Dahil binabayaran ng pamahalaan ang lahat ng nakikinig sa pag-awit.",
-          "B. Dahil ito ay sama-samang isinasagawa sa mga tahanan kung saan nagtitipon, nag-uusap, at nagsasalu-salo ang pamayanan.",
+         ["A. Dahil ito ay sama-samang isinasagawa sa mga tahanan kung saan nagtitipon, nag-uusap, at nagsasalu-salo ang pamayanan.",
+          "B. Dahil binabayaran ng pamahalaan ang lahat ng nakikinig sa pag-awit.",
           "C. Dahil ipinagbabawal ang pag-awit nito sa loob ng mga pribadong silid.",
           "D. Dahil mga dayuhan lamang ang pinapayagang magbasa nito."]),
         ("4. Alin sa mga sumusunod ang unang pang-araw-araw na pahayagan sa Pilipinas na itinatag noong 1846?",
          ["A. Del Superior Govierno", "B. La Esperanza", "C. Diariong Tagalog", "D. La Solidaridad"]),
         ("5. Sa pagsusuri ng isang lumang dokumento na may salitang hindi na ginagamit ngayon, ano ang PINAKARESPONSABLENG unang hakbang?",
          ["A. Palitan agad ito ng pinakamalapit na modernong salitang maisip.",
-          "B. Basahin ang buong pangungusap upang matukoy ang kontekstuwal na pahiwatig bago sumangguni sa talatinigan.",
-          "C. Burahin ang salita upang hindi malito ang mga mambabasa.",
+          "B. Burahin ang salita upang hindi malito ang mga mambabasa.",
+          "C. Basahin ang buong pangungusap upang matukoy ang kontekstuwal na pahiwatig bago sumangguni sa talatinigan.",
           "D. Ipagpalagay na mali ang baybay ng may-akda noong unang panahon."]),
         ("6. Ano ang pangunahing gampanin ng 'foreground' sa pagbuo ng isang makasaysayang comic panel?",
          ["A. Ipakita ang malalayong bundok at ulap sa likuran.",
-          "B. Ituon ang pansin ng mambabasa sa pangunahing tauhan, kilos, at emosyon ng tagpo.",
-          "C. Punuin ang espasyo ng mga dekorasyong walang kaugnayan sa kuwento.",
-          "D. Takpan ang mga pagkakamali sa pagguhit ng mga gusali."]),
+          "B. Punuin ang espasyo ng mga dekorasyong walang kaugnayan sa kuwento.",
+          "C. Takpan ang mga pagkakamali sa pagguhit ng mga gusali.",
+          "D. Ituon ang pansin ng mambabasa sa pangunahing tauhan, kilos, at emosyon ng tagpo."]),
         ("7. Paano dapat magtulungan ang caption at ang larawan sa isang responsableng comic book brochure?",
-         ["A. Dapat ulitin ng caption ang bawat bagay na iginuhit sa larawan.",
-          "B. Dapat magbigay ang caption ng konteksto o impormasyong hindi kayang ipakita ng larawan lamang.",
+         ["A. Dapat magbigay ang caption ng konteksto o impormasyong hindi kayang ipakita ng larawan lamang.",
+          "B. Dapat ulitin ng caption ang bawat bagay na iginuhit sa larawan.",
           "C. Dapat magkasalungat ang sinasabi ng caption sa ipinapakita ng larawan.",
           "D. Dapat mas marami ang salita kaysa sa espasyo ng drowing."]),
         ("8. Bakit mapanganib na gumawa ng pangkalahatang kongklusyon tungkol sa buong lipunan mula lamang sa isang larawan ng marangyang bahay-na-bato?",
          ["A. Dahil baka nasunog na ang bahay sa kasalukuyan.",
-          "B. Dahil ang larawan ay kumakatawan lamang sa uring maykaya at hindi sumasalamin sa kalagayan ng mayoryang magsasaka.",
-          "C. Dahil laging peke ang mga lumang larawan.",
+          "B. Dahil laging peke ang mga lumang larawan.",
+          "C. Dahil ang larawan ay kumakatawan lamang sa uring maykaya at hindi sumasalamin sa kalagayan ng mayoryang magsasaka.",
           "D. Dahil hindi mahalaga ang arkitektura sa pag-aaral ng panitikan."])
     ]
 
@@ -541,9 +534,9 @@ def build_yunit3_aralin14(doc):
           "D. Na ipinagbawal ng pamahalaan ang pagbebenta ng Pasyon sa buong kapuluan."]),
         ("10. Sa pagguhit ng mga tauhan sa isang historikal na komiks, paano maiiwasan ang stereotype sa mga mahihirap na mamamayan?",
          ["A. Huwag na silang isama sa alinmang panel ng komiks.",
-          "B. Ipakita sila na may sariling dignidad, talino, aktibong pagkilos, at kontekstuwal na katotohanan.",
-          "C. Bihisan sila ng modernong kasuotan upang magmukhang mayaman.",
-          "D. Gawin silang katawa-tawa upang maging masaya ang mambabasa."])
+          "B. Bihisan sila ng modernong kasuotan upang magmukhang mayaman.",
+          "C. Gawin silang katawa-tawa upang maging masaya ang mambabasa.",
+          "D. Ipakita sila na may sariling dignidad, talino, aktibong pagkilos, at kontekstuwal na katotohanan."])
     ]
 
     for q_text, choices in mcq_items_14_p2:

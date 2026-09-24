@@ -99,7 +99,51 @@ Use a 2-column structured table with explicit rationale for each item:
 | **14** | **[Key Concept / Competency]**: [Complete 2-3 sentence model response interpreting visual semiotics, data graphs, or structural variables]. |
 | **15** | **[Key Concept / Competency]**: [Complete 2-3 sentence model response synthesizing conceptual principles with real-world application]. |
 
-#### Table C: Unit Assessment Answer Key
-- **Part I (Stimulus / Document Analysis)**: 2-column table mapping Items 1–5 to model responses.
-- **Part II (Application & Problem Solving)**: Compact table grid for Items 6–15.
-- **Part III (Essay)** & **Part IV (GRASPS Performance Task)**: Explicit references to the 4x4 analytic rubrics in the textbook with scoring criteria breakdown.
+#### Table C: Comprehensive Unit Assessment Answer Key (Items 1–30 + Performance Task)
+- **Part I: 30-Item Multiple Choice Grids**:
+  Use two compact 15-column structured table grids:
+  - **Talahanayan A (Aytem 1–15)**:
+  | Aytem | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 |
+  | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+  | **Tamang Sagot** | **C** | **A** | **D** | **B** | **D** | **A** | **C** | **B** | **A** | **C** | **B** | **D** | **A** | **B** | **C** |
+
+  - **Talahanayan B (Aytem 16–30)**:
+  | Aytem | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 |
+  | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+  | **Tamang Sagot** | **D** | **A** | **C** | **B** | **D** | **A** | **C** | **D** | **B** | **C** | **A** | **D** | **B** | **A** | **C** |
+
+- **Part II: Autentikong Gawaing Pagganap (Performance Task)**:
+  Explicit reference to the GRASPS 4x4 analytic rubric (20 points max) and diagnostic guidance for teachers.
+
+---
+
+# PART 3: PSYCHOMETRIC CHOICE BALANCE & ANTI-CHOICE-BIAS PROTOCOLS
+
+### 🚫 STRICT PROHIBITION: BAN "MOSTLY B" & LETTER CLUSTERING BIAS
+In poorly authored tests, AI models often fall into the trap of defaulting to **Choice B** as the correct answer for nearly every item (e.g., `B | B | B | B | B`). This undermines assessment validity and enables students to guess correctly without demonstrating mastery. **This bias is strictly forbidden in MATATAG publications.**
+
+### ✅ MANDATORY PSYCHOMETRIC DISTRIBUTION RULES:
+1. **Balanced ~25% Distribution Across Options**:
+   - For every 10-item Multiple Choice quiz, the correct answers MUST be evenly distributed among `A`, `B`, `C`, and `D`:
+     - **Option A**: 2 to 3 times (20% – 30%)
+     - **Option B**: 2 to 3 times (20% – 30%)
+     - **Option C**: 2 to 3 times (20% – 30%)
+     - **Option D**: 2 to 3 times (20% – 30%)
+   - For a 5-item test: Exactly one letter may appear twice; the other three must appear once (e.g., `C, A, D, B, C`).
+
+2. **Maximum Consecutive Identical Answers = 2**:
+   - Never repeat the same letter more than two (2) times in a row (e.g., `A, A, C...` is permissible, but `A, A, A...` or `B, B, B...` is strictly forbidden).
+
+3. **Parallel Distractor Length, Grammar, & Plausibility**:
+   - The correct choice MUST NOT be noticeably longer, more elaborate, or more technically detailed than the distractors (a classic clue that reveals the answer).
+   - Distractors must represent plausible misconceptions, not absurd non-sequiturs.
+   - All 4 options (`A`, `B`, `C`, `D`) should maintain roughly equal grammatical length and complexity.
+
+4. **Zero Predictable Patterns**:
+   - Avoid simplistic cyclical rotations (e.g., `A, B, C, D, A, B, C, D`). The sequence must be pseudo-randomized while preserving the ~25% balance.
+
+5. **Unique, Independent Key per Lesson & Grade (Anti-Pattern Security)**:
+   - Each lesson and grade level MUST generate its own completely unique, independent answer key sequence.
+   - **Never copy or reuse the same letter sequence** across different lessons or grades (e.g., Grade 7 Aralin 13, Grade 8 Aralin 13, and Grade 9 Lesson 13 must all have completely distinct, randomized answer sequences so students can never deduce cross-grade patterns).
+   - The tables shown in Table A, Table B, and Table C of this document are **format exemplars**, NOT fixed universal answer keys. Correct answers must organically reflect the actual questions written.
+

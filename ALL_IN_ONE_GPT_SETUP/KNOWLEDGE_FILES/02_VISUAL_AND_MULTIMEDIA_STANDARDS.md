@@ -13,12 +13,22 @@ Whenever a `[VISUAL: ...]` tag is embedded into the textbook, it must be structu
 - **Border**: Navy Blue (`#1B365D`, 4.5pt / `sz="36"`) solid left border. Subtle light borders on top, right, and bottom (`#D0D7DE`).
 - **Header**: `🖼️ [IMAGE PLACEHOLDER: Specific Subject Title]` in 10.5pt Bold Navy Blue (`#1B365D`).
 - **Pedagogical Function**: 1–2 sentences explaining how this visual supports the learning competency.
+- **Reference**: Follow [`06_AI_IMAGE_PROMPT_STANDARDS_AND_EXEMPLARS.md`](file:///c:/Users/Rhenel%20Jhon%20Sajol/Documents/CERE_BOOK/ALL_IN_ONE_GPT_SETUP/KNOWLEDGE_FILES/06_AI_IMAGE_PROMPT_STANDARDS_AND_EXEMPLARS.md) for the 5 Physical Cinematographic Pillars and banned abstract prompts ("Wall of Shame").
 - **Strict Zero-Branding Rule for Prompts**:
   * **NEVER** include publisher names, brand names, or government acronyms (`DepEd`, `MATATAG`, `CERE`) inside ANY AI image prompt.
   * AI image generators (Midjourney, DALL-E) try to render acronyms as distorted text, fake badges, or watermark artifacts.
   * Always describe pure visual elements (scene, lighting, subjects, uniforms without badges, historical context, colors).
   * Always append negative styling: `no text, no logos, no watermark, no branding --ar 16:9 --v 6.0` (or `--ar 8.5:11` for covers).
 - **Teacher / Student Instruction**: *"Paunawa: Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures)."*
+
+### Mandatory 10-Prompt Quota per Unit:
+To maintain clean typography and prevent visual clutter, every generated textbook unit has a strict ceiling of **exactly 10 image prompts**:
+- **Page 1 (Front Cover)**: Exactly 1 Full-Page Cover AI Prompt Box (3-tier title banner, `--ar 8.5:11`).
+- **Lesson 1**: Exactly 3 Image Prompt Frames (Subtopic 1, Subtopic 2, Applied / Multimodal Task, `--ar 16:9`).
+- **Lesson 2**: Exactly 3 Image Prompt Frames (Subtopic 1, Subtopic 2, Applied / Multimodal Task, `--ar 16:9`).
+- **Lesson 3**: Exactly 3 Image Prompt Frames (Subtopic 1, Subtopic 2, Applied / Multimodal Task, `--ar 16:9`).
+- **Unit Assessment & Back Matter**: Zero image prompts (focused purely on 1-30 MCQ quiz, Performance Task, Synthesis, and Answer Keys).
+- **Total Unit Quota**: Exactly **10 Image Prompts Total** ($1 + 3 \times 3 = 10$).
 
 ---
 

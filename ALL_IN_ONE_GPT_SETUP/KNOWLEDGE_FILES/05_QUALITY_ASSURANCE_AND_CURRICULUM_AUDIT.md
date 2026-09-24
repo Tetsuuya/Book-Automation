@@ -96,17 +96,22 @@ The AI must NEVER fabricate data, dates, laws, historical figures, or mathematic
 1. **Cover Typography & Title Banner**:
    - Deep Navy Blue banner at the top specifying 3 tiers of text in quotes: `"[BOOK TITLE] [SUBJECT] [GRADE]"`, `"UNIT [X]: [THEME]"`, and `"[Scope 1] • [Scope 2]"`.
    - Never use generic `[IMAGE PLACEHOLDER]` on Page 1.
-2. **Zero Branding in Image Prompts**:
+2. **Zero Branding in Image Prompts & Strict 10-Prompt Quota**:
    - NO `"DepEd"`, `"MATATAG"`, or publisher logos inside AI image prompts. Institutional identity belongs ONLY in running headers and footers.
+   - **Strict 10-Prompt Quota**: Exactly 1 Cover Prompt on Page 1 (`--ar 8.5:11`) + 3 Image Prompts per Lesson (`--ar 16:9`) = Exactly **10 image prompts total per unit** ($1 + 3 \times 3 = 10$). Zero image prompts in Back Matter.
 3. **YouTube Search Links**:
    - Zero QR codes. All interactive media modules MUST use guaranteed search query URLs: `https://www.youtube.com/results?search_query=[URL_ENCODED_KEYWORDS]`.
 4. **Navy Header System**:
    - Heading 1 in solid Navy Blue (`#1B365D`) banner cell with white text.
    - Heading 2 in soft blue (`#EBF3FA`) block with 4.5pt solid Navy left border.
-5. **Structured Table Answer Keys**:
-   - Multiple Choice (1–10) in a 10-column compact table grid.
-   - Analytical items (11–15) in a 2-column table with 2–3 sentence model responses citing specific evidence.
-   - **ZERO paragraph blobs!**
+5. **Unit Assessment Architecture & Structured Table Keys**:
+   - **Unit Assessment (50 Pts)**: Comprehensive 30-Item Multiple Choice Quiz (Items 1–30 with `[  ]` checkboxes, balanced A–D spread) followed immediately by the Authentic Performance Task (GRASPS Model + Complete 4x4 Analytic Rubric).
+   - **Structured Table Answer Keys**: Rendered in clean table grids (10-col for lessons, two 15-col grids for 30-item Unit Assessment, plus 2-col rationale tables). **ZERO paragraph blobs!**
+6. **Psychometric Option Balance & Anti-'Mostly B' Bias**:
+   - Correct answers MUST be evenly distributed across options `A`, `B`, `C`, and `D` (~25% each; 2 to 3 per 10 items).
+   - Strict ban on letter-clustering bias (never default to 'B' or any single letter).
+   - Zero consecutive runs of >2 identical letters (e.g. `A-A-C` is allowed, `B-B-B` is prohibited).
+   - Parallel distractor length and plausibility so the correct option is not consistently the longest or most detailed.
 
 ---
 
@@ -120,7 +125,7 @@ At the conclusion of Back Matter (Turn 5), the generator evaluates the textbook 
 | **2. Developmental Appropriateness** | Cognitive demand matched to grade band (DOK 1-4), age-appropriate readability, gender-fair and inclusive language. | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
 | **3. Zero-Hallucination & Accuracy** | 100% verified historical dates, authentic literary selections, sound scientific laws, zero math calculation errors. | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
 | **4. Pedagogical Rigor & Density** | 3,500+ words per lesson, 8-10 turn scholarly Socratic dialogue, complete 4x4 analytic rubrics (all 16 cells filled), continuous flow. | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
-| **5. Layout, Visuals & Answer Keys** | 3-tier Cover banner, zero branding in prompts, active YouTube search links, structured table answer keys (no paragraph blobs). | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
+| **5. Layout, Visuals & Answer Keys** | 3-tier Cover banner, zero branding in prompts, active YouTube search links, structured table answer keys (no paragraph blobs), balanced choices (~25% each, zero 'mostly B' bias). | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
 | **TOTAL SCORE** | **Comprehensive DepEd MATATAG Unit Rating** | **100 pts** | **Target: 95–100 pts** |
 
 ---
@@ -136,6 +141,7 @@ PEDAGOGICAL RATIO: 70% Masterclass Lesson Content / 30% Formative Practice
 READABILITY & LEVEL: Grade-Level Appropriate (DOK 1-4 Cognitive Progression)
 FACTUAL AUDIT: Zero Hallucinations • Historical, Scientific & Math Verified
 ANSWER KEY FORMAT: Clean Structured Tables (MCQ Grid + Rationale Matrix)
+OPTION DISTRIBUTION: Balanced Psychometric Spread across A, B, C, D (~25% each, max 2 consecutive)
 OVERALL QA AUDIT SCORE: [98/100] • STATUS: PASSED FOR CLASSROOM DEPLOYMENT
 ═══════════════════════════════════════════════════════════════════════
 ```

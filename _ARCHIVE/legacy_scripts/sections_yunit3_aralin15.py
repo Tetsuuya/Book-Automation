@@ -132,13 +132,6 @@ def build_yunit3_aralin15(doc):
     # =========================================================================
     add_heading_2(doc, "PAKSA 15.2: Pagkuha ng Impormasyon para sa Balita at Wikang Gamit sa Panayam")
     
-    prompt_15_cartero = (
-        "PROMPT: A picturesque 19th-century historical scene of a colonial postal courier (cartero) riding a native horse along a scenic rural road between Manila and Paombong, Bulacan. "
-        "Carrying a leather mail satchel containing wax-sealed parchment letters. Lush bamboo groves, mango trees, and native bahay kubo along the road under bright morning skies. "
-        "Historically accurate travel costume and saddlery, cinematic landscape realism --ar 16:9 --v 6.0"
-    )
-    add_prompt_box(doc, "SISTEMA NG KOMUNIKASYON: ANG KORTE NG SULAT (MAYNILA HANGGANG PAOMBONG)", prompt_15_cartero)
-    
     add_body_p(
         doc,
         "Ang panayam ay isang sistematiko, layunin, at organisadong pakikipagtalastasan sa pagitan ng tagapanayam (interviewer) at kinakapanayam (interviewee) "
@@ -461,14 +454,14 @@ def build_yunit3_aralin15(doc):
 
     mcq_items_15_p1 = [
         ("1. Ano ang tawag sa anyong pampanitikan ng 'Urbana at Feliza' na gumagamit ng palitan ng mga liham sa pagitan ng mga tauhan?",
-         ["A. Alegoriko", "B. Epistolaryo", "C. Pikaresko", "D. Tulang Pasalaysay"]),
+         ["A. Epistolaryo", "B. Alegoriko", "C. Pikaresko", "D. Tulang Pasalaysay"]),
         ("2. Sino ang paring may-akda ng klasikong aklat na 'Pagsusulatan ng Dalawang Binibini na si Urbana at si Feliza' (1864)?",
-         ["A. P. Gaspar Aquino de Belen", "B. P. Modesto de Castro", "C. P. Mariano Pilapil", "D. P. Pedro Pelaez"]),
+         ["A. P. Gaspar Aquino de Belen", "B. P. Mariano Pilapil", "C. P. Modesto de Castro", "D. P. Pedro Pelaez"]),
         ("3. Ayon sa liham ni Urbana kay Feliza, bakit dapat maglinis ng katawan at magsuklay ng buhok bago humarap sa magulang o guro?",
          ["A. Upang magmukhang mayaman at makahingi ng pabor.",
-          "B. Sapagkat ang karumihan ay nagpapakita ng kawalan ng paggalang sa kapuwa at nagdudulot ng pandidiri.",
-          "C. Upang gayahin ang mga banyagang nakikita sa mga larawan.",
-          "D. Dahil may parusang kulong ang sinumang marumi ang damit."]),
+          "B. Upang gayahin ang mga banyagang nakikita sa mga larawan.",
+          "C. Dahil may parusang kulong ang sinumang marumi ang damit.",
+          "D. Sapagkat ang karumihan ay nagpapakita ng kawalan ng paggalang sa kapuwa at nagdudulot ng pandidiri."]),
         ("4. Alin sa mga sumusunod ang PINAKAMAHUSAY na halimbawa ng bukas at neutral na tanong sa isang panayam para sa balita?",
          ["A. \"Hindi ba't napakahusay ng inyong pamamalakad sa paaralan?\"",
           "B. \"Paano ninyo ilalarawan ang mga naging tagumpay at hamon sa pagpapatupad ng bagong patakaran?\"",
@@ -476,19 +469,19 @@ def build_yunit3_aralin15(doc):
           "D. \"Masaya ang lahat sa programa, hindi ba?\""]),
         ("5. Ano ang pangunahing layunin ng isang 'follow-up question' sa panayam?",
          ["A. Baguhin agad ang paksa kapag hindi nagustuhan ang sagot.",
-          "B. Palalimin, linawin, o kumuha ng kongkretong ebidensiya at datos batay sa naunang sagot ng kinakapanayam.",
-          "C. Pilitin ang kinakapanayam na sumang-ayon sa sariling pananaw ng tagapagbalita.",
+          "B. Pilitin ang kinakapanayam na sumang-ayon sa sariling pananaw ng tagapagbalita.",
+          "C. Palalimin, linawin, o kumuha ng kongkretong ebidensiya at datos batay sa naunang sagot ng kinakapanayam.",
           "D. Tapusin nang mabilis ang panayam upang makauwi na."]),
         ("6. Bakit mapanganib ang paggamit ng 'leading question' (nangungunang tanong) sa pamamahayag?",
-         ["A. Dahil nagiging masyadong mahaba ang artikulo sa pahayagan.",
-          "B. Dahil idinidikte nito ang sagot at nawawala ang pagiging patas, obhetibo, at mapagkakatiwalaan ng balita.",
+         ["A. Dahil idinidikte nito ang sagot at nawawala ang pagiging patas, obhetibo, at mapagkakatiwalaan ng balita.",
+          "B. Dahil nagiging masyadong mahaba ang artikulo sa pahayagan.",
           "C. Dahil baka hindi maintindihan ng mambabasa ang mga salita.",
           "D. Dahil mas mahal ang bayad sa tagapanayam kapag ganoon ang tanong."]),
         ("7. Paano wawasakin ng isang responsableng manunulat ng komiks ang stereotype tungkol sa kababaihan noong panahon ng Espanyol?",
          ["A. Huwag nang maglagay ng babaeng tauhan sa kuwento.",
-          "B. Ilarawan ang mga babae na may sariling ahensiya, talino, aktibong pagpapasya, at ambag sa pamayanan.",
-          "C. Ipakita silang laging umiiyak at naghihintay ng tulong sa bawat panel.",
-          "D. Baguhin ang kanilang kasuotan patungo sa makabagong kasuotan sa kasalukuyan."]),
+          "B. Ipakita silang laging umiiyak at naghihintay ng tulong sa bawat panel.",
+          "C. Baguhin ang kanilang kasuotan patungo sa makabagong kasuotan sa kasalukuyan.",
+          "D. Ilarawan ang mga babae na may sariling ahensiya, talino, aktibong pagpapasya, at ambag sa pamayanan."]),
         ("8. Alin sa mga sumusunod ang tamang rebisyon ng linyang: \"Feliza maghugas ka ng kamay mo ngayon na para malinis ka!\"?",
          ["A. \"Feliza maghugas ka kamay ngayon na.\"",
           "B. \"Feliza, maghugas ka ng iyong mga kamay ngayon upang mapanatili ang kalinisan.\"",
@@ -516,14 +509,14 @@ def build_yunit3_aralin15(doc):
 
     mcq_items_15_p2 = [
         ("9. Ano ang ibig sabihin ng prinsipyo na ang 'kalinisan ay salamin ng kaluluwa' ayon sa kaisipan ni Urbana?",
-         ["A. Na ang taong may mamahaling sabon ay tiyak na maliligtas sa kabilang buhay.",
-          "B. Na ang panlabas na kaayusan at disiplina sa katawan ay nagmumula sa dalisay na budhi at paggalang sa Diyos at kapuwa.",
+         ["A. Na ang panlabas na kaayusan at disiplina sa katawan ay nagmumula sa dalisay na budhi at paggalang sa Diyos at kapuwa.",
+          "B. Na ang taong may mamahaling sabon ay tiyak na maliligtas sa kabilang buhay.",
           "C. Na kailangang magsuot ng puting damit araw-araw.",
           "D. Na hindi na kailangang magdasal kung naligo na sa umaga."]),
         ("10. Sa pag-edit ng diyalogo sa isang speech balloon, bakit mahalagang maging matipid sa salita?",
          ["A. Upang makatipid sa tinta ng bolpen o printer.",
-          "B. Upang hindi matakpan ang mahalagang visual elements ng larawan at maging madaling basahin ang mensahe.",
-          "C. Dahil bawal ang mahahabang pangungusap sa wikang Filipino.",
+          "B. Dahil bawal ang mahahabang pangungusap sa wikang Filipino.",
+          "C. Upang hindi matakpan ang mahalagang visual elements ng larawan at maging madaling basahin ang mensahe.",
           "D. Upang magmukhang misteryoso ang tauhan sa komiks."])
     ]
 

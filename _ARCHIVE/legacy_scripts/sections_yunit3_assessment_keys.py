@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
-"""Yunit III Assessment, Summary, Glossary, and Answer Keys: Pages 40 to 44 (5 Full Pages)"""
+"""Yunit III Assessment, Summary, Glossary, and Answer Keys: Pages 40 to 44+
+Features:
+- Bahagi I: 30-Item Comprehensive Multiple Choice Quiz (Items 1-30) with [ ] checkboxes
+- Bahagi II: Authentic Performance Task (GRASPS Framework + 4x4 Analytic Rubric)
+- Unit Summary & 25-term Glossary
+- Structured Table Answer Keys (10-col grids for lessons + 15-col grids for 30-item Unit Assessment)
+"""
 
 import docx
 from docx.shared import Inches, Pt, RGBColor
@@ -11,124 +17,204 @@ from generate_expanded_ebook import (
 
 def build_yunit3_assessment_and_keys(doc):
     # =========================================================================
-    # PAHINA 40: PANGWAKAS NA PAGTATAYA SA YUNIT III (BAHAGI I: 10 PUNTOS)
+    # PAHINA 40: PANGWAKAS NA PAGTATAYA SA YUNIT III (50 PUNTOS)
     # =========================================================================
-    add_heading_1(doc, "PANGWAKAS NA PAGTATAYA SA YUNIT III (40 PUNTOS)")
+    add_heading_1(doc, "PANGWAKAS NA PAGTATAYA SA YUNIT III (50 PUNTOS)")
     add_heading_2(doc, "Yunit III: Ako at ang Aking Pagkatao, Tanglaw ng Katatagan")
     add_body_p(
         doc,
-        "Panimula: Ang komprehensibong pagtatayang ito ay sumusukat sa iyong kritikal na pag-unawa at kasanayan sa pagsusuri ng panitikan sa Panahon ng "
-        "Pananakop ng Espanya, tekstong ekspositori at pampahayagan, panghihiram at pagtutumbas ng wika, etika ng panayam, at pagbuo ng multimodal na teksto. "
-        "Binubuo ito ng apat na bahagi: (I) Kritikal na Pagsusuri ng Bagong Teksto, (II) Konsepto at Aplikasyon, (III) Estrukturadong Sanaysay, at (IV) Gawaing Pagganap."
+        "Panimula: Ang komprehensibong pagtatayang ito ay sumusukat sa iyong kabuuang kasanayan at kritikal na pag-unawa sa buong Yunit III "
+        "(Aralin 13 hanggang 15). Binubuo ito ng dalawang pangunahing bahagi: "
+        "(I) Komprehensibong Pagsusulit na Maramihang Pagpipili (Aytem 1–30, 30 Puntos) na sumusuri sa kaligirang pangkasaysayan, Pasyon, "
+        "kagandahang-asal, tekstong impormasyonal, wika, at disenyong multimodal; at "
+        "(II) Autentikong Gawaing Pagganap (Performance Task, 20 Puntos) gamit ang GRASPS Model at Analitikong Rubrik."
     )
 
-    add_heading_3(doc, "Bahagi I: Kritikal na Pagsusuri ng Bagong Teksto / Datos (10 Puntos)")
-    add_body_p(doc, "Basahing mabuti ang sumusunod na bagong sipi ng historikal na dokumento at sagutin ang mga sumusunod na katanungan (2 puntos bawat aytem):", italic_prefix="")
-
-    add_callout_box(
+    add_heading_3(doc, "Bahagi I: Maramihang Pagpipili (Aytem 1 hanggang 30 — 30 Puntos)")
+    add_body_p(
         doc,
-        "ANG TALA SA SINUPAN NG PAROKYA NG SANTO TOMAS (1888):\n"
-        "\"Noong ika-20 ng Nobyembre 1888, dumating sa aming bayan ang isang tanyag na manggagamot mula sa Maynila kasama ang dalawang madre ng kawanggawa. "
-        "Ayon sa ulat ng pahayagang kolonyal, ang layunin ng kanilang pagbisita ay upang 'turuan ang mga ignorante at maruruming katutubo ng wastong "
-        "pamumuhay upang maiwasan ang sakit na kolera.' Gayunman, sa aktuwal na talaan ng parokya, mababasa na bago pa dumating ang mga taga-Maynila, "
-        "ang mga katutubong kababaihan na pinamumunuan ni Kapitana Juana ay nakapagtayo na ng kubol-pagamutan sa tabi ng ilog, nagpapakulo na ng inuming "
-        "tubig, at gumagamit ng mga halamang-gamot tulad ng sambong at lagundi upang mapigilan ang pagkalat ng epidemya sa kanilang pamayanan.\""
+        "Panuto: Basahing mabuti ang bawat katanungan. Piliin ang titik ng pinakatumpak na sagot at lagyan ng tsek [ ✓ ] ang kahon katabi ng iyong napiling titik. (1 puntos bawat aytem)"
     )
 
-    p1_items = [
-        ("1. Pagkilatis sa Pagkiling: Paano ginamit sa ulat ng pahayagang kolonyal ang mga salitang 'ignorante at marurumi' upang lumikha ng isang may pagkiling na pananaw tungkol sa mga katutubo? (2 pts)",
-         "Inaasahang Pagsusuri: Ipinapakita nito ang pananaw ng mananakop na nagpapalagay na walang sariling kaalaman ang mga katutubo at kailangan silang 'iligtas' ng banyagang sibilisasyon."),
-        ("2. Pagtatabi ng Datos laban sa Pahayag: Ano ang tiyak na ebidensiya sa talaan ng parokya na sumasalungat sa sinabi ng pahayagang kolonyal? (2 pts)",
-         "Inaasahang Pagsusuri: Ang ebidensiya na bago pa dumating ang mga madre ay nakapagtayo na si Kapitana Juana ng kubol-pagamutan at nagpapakulo na ng tubig."),
-        ("3. Ahensiya at Katatagan ng Kababaihan: Paano binabasag ng tauhang si Kapitana Juana ang stereotype ng mahina at walang kibo na kababaihan noong panahon ng Espanyol? (2 pts)",
-         "Inaasahang Pagsusuri: Ipinamalas niya ang pamumuno, maagap na pagpapasya, kaalamang medikal, at malasakit sa kalusugan ng kaniyang bayan."),
-        ("4. Pagsusuri sa Konteksto ng Kalinisan: Iugnay ang ginawa ng mga katutubo sa kaisipan ni Urbana tungkol sa kalinisan bilang paggalang sa kapuwa at kaligtasan ng katawan. (2 pts)",
-         "Inaasahang Pagsusuri: Ang pagpapanatili ng kalinisan ay hindi lamang panlabas kundi panlipunang pananagutan upang mapangalagaan ang buhay ng pamayanan."),
-        ("5. Mapanuring Katanungan: Kung ikaw ay mamamahayag na kakapanayamin si Kapitana Juana, sumulat ng isang bukas at neutral na tanong na maglalantad sa kaniyang naging karanasan nang walang paghuhusga. (2 pts)",
-         "Inaasahang Pagsusuri: Halimbawa: 'Paano po ninyo pinangunahan ang pamayanan sa pagharap sa epidemya bago dumating ang tulong mula sa Maynila?'")
+    p1_mcq_30 = [
+        # --- ARALIN 13 ITEMS (1 - 10) ---
+        ("1. Ano ang pangunahing layunin ng patakarang reduccion na ipinatupad ng mga mananakop na Espanyol kaugnay ng pamamahala at panitikan?",
+         ["A. Hikayatin ang mga katutubong maglakbay sa ibang bansa upang mag-aral.",
+          "B. Ihiwalay ang mga katutubo sa mga prayle upang mapanatili ang sinaunang kultura.",
+          "C. Tipunin ang mga mamamayan sa ilalim ng tunog ng kampana upang mapadali ang kontrol at pagpapalaganap ng relihiyon.",
+          "D. Pabagsakin ang ekonomiya ng mga lungsod upang palakasin ang mga baryo."]),
+        ("2. Alin sa mga sumusunod ang PINAKATUMPANG paglalarawan sa kalagayan ng panitikan sa Pilipinas bago dumating ang mga Espanyol noong 1565?",
+         ["A. Mayaman at maunlad na tradisyong pasalita tulad ng epiko, awiting-bayan, at karunungang-bayan.",
+          "B. Pawang mga aklat sa wikang Espanyol lamang ang binabasa ng mga datu.",
+          "C. Walang anumang panitikan dahil hindi pa marunong sumulat ang mga ninuno.",
+          "D. Nakasalalay lamang sa mga pahayagang inililimbag sa Maynila at Cebu."]),
+        ("3. Bakit itinuturing na may pagkiling o hindi ganap na neutral ang mga opisyal na balitang inilathala noong panahong kolonyal?",
+         ["A. Dahil kulang sa papel at tinta ang mga palimbagan noong panahong iyon.",
+          "B. Dahil puro tula lamang ang nilalaman ng mga kolonyal na pahayagan.",
+          "C. Dahil hindi marunong magbasa ng balita ang mga karaniwang mamamayan.",
+          "D. Dahil ang mga pahayagan ay kontrolado at sumasailalim sa mahigpit na sensura ng pamahalaan at simbahan."]),
+        ("4. Sa pagsusuri ng lunsarang tekstong 'Ang Ulat sa Liwasan,' ano ang ibinubunyag ng lihim na liham ng kura na hindi makikita sa opisyal na balita?",
+         ["A. Ang masayang pagsasayaw ng mga mamamayan sa harap ng munisipyo.",
+          "B. Ang matinding takot, tensiyon, at lihim na pagtutol ng mga katutubo sa bagong buwis.",
+          "C. Ang pagdating ng malaking barko mula sa Espanya na may dalang mga regalo.",
+          "D. Ang pagkakasundo ng mga katutubo at guardia civil sa pagbuo ng bagong tulay."]),
+        ("5. Alin sa mga sumusunod ang halimbawa ng pagtutumbas ng salita sa halip na tuwirang panghihiram?",
+         ["A. Paggamit ng salitang 'alkalde' mula sa 'alcalde'.",
+          "B. Paggamit ng salitang 'gobernador' para sa pinuno ng lalawigan.",
+          "C. Paggamit ng salitang 'kumpisal' mula sa salitang 'confesar'.",
+          "D. Paggamit ng salitang 'pamahalaang lungsod' para sa konseptong 'ayuntamiento'."]),
+        ("6. Ano ang tinutukoy ng konseptong 'presentismo' na dapat iwasan sa pagsusuri ng mga lumang akda?",
+         ["A. Ang paghuhusga sa mga pangyayari sa nakaraan gamit lamang ang makabagong pamantayan nang hindi inuunawa ang konteksto.",
+          "B. Ang pagbibigay ng regalo sa mga guro tuwing araw ng pagsusulit.",
+          "C. Ang pagiging huli sa pagpasok sa klase sa panahon ng talakayan.",
+          "D. Ang labis na paggamit ng pandiwang pangkasalukuyan sa pagsulat ng balita."]),
+        ("7. Paano nakatutulong ang caption sa isang comic book brochure upang mapalalim ang kahulugan ng larawan?",
+         ["A. Inuulit lamang nito ang eksaktong nakikita na sa drowing upang humaba ang teksto.",
+          "B. Tinatakpan nito ang mukha ng mga tauhan upang maging misteryoso ang tagpo.",
+          "C. Nagbibigay ito ng kontekstong pangkasaysayan at damdamin na hindi kayang ipakita ng biswal lamang.",
+          "D. Pinapalitan nito ang pangangailangan sa pagguhit ng background."]),
+        ("8. Bakit mapanganib ang paggamit ng mapanlahatang stereotype sa paglalarawan ng mga pangkat-etniko sa komiks?",
+         ["A. Dahil nagiging mas madaling basahin ang komiks para sa mga bata.",
+          "B. Dahil binubura nito ang pagkakaiba-iba, talino, at tunay na dignidad ng mga katutubong pamayanan.",
+          "C. Dahil magiging masyadong makulay ang mga pahina ng brochure.",
+          "D. Dahil mas mura ang magiging gastusin sa pagpapalimbag ng aklat."]),
+        ("9. Sa pagbuo ng isang responsableng balita, ano ang unang dapat gawin kapag nakatanggap ng ulat na may magkasalungat na pahayag?",
+         ["A. Beripikahin ang impormasyon sa iba pang mapagkakatiwalaang batis at ilahad ang magkakaibang panig nang patas.",
+          "B. Piliin agad ang pahayag ng may pinakamataas na katungkulan at balewalain ang iba.",
+          "C. Huwag nang isulat ang balita upang maiwasan ang gulo.",
+          "D. Gumawa ng sariling kuwento na magugustuhan ng mga mambabasa."]),
+        ("10. Alin sa mga sumusunod ang nagpapakita ng ahensiya at katatagan ng mga katutubong Pilipino sa kabila ng pananakop?",
+         ["A. Ang ganap na pagtalikod sa lahat ng katutubong kaugalian nang walang pagtutol.",
+          "B. Ang pagtanggap sa lahat ng banyagang batas nang hindi nagtatanong.",
+          "C. Ang paglalangkap ng sariling ritmo, talinghaga, at damdamin sa loob ng mga ipinakilalang anyong banyaga.",
+          "D. Ang paglimot sa sariling wika upang magsalita lamang ng Espanyol."]),
+
+        # --- ARALIN 14 ITEMS (11 - 20) ---
+        ("11. Ano ang tawag sa tradisyonal na anyo ng saknong ng Pasyon na binubuo ng limang taludtod na may walong pantig bawat isa?",
+         ["A. Dalit", "B. Quintilla", "C. Tanaga", "D. Diona"]),
+        ("12. Paano naiiba ang layunin ng mga prayle sa layunin ng mga katutubong Pilipino sa pagpapalaganap ng Pasyon?",
+         ["A. Nais ng mga prayle na maging makata ang lahat, samantalang nais ng mga katutubo na maging mang-aawit.",
+          "B. Nais ng mga prayle na ibenta ang aklat, samantalang ipinamigay ito ng mga katutubo nang libre.",
+          "C. Walang anumang pagkakaiba sa kanilang naging pagtanggap sa akda.",
+          "D. Ginamit ito ng mga prayle upang ituro ang pagpapasakop, samantalang nakita ng mga katutubo ang pag-asa sa pagtatagumpay ng mga api."]),
+        ("13. Bakit itinuturing na gawaing panlipunan (social practice) ang Pabasa sa kulturang Pilipino?",
+         ["A. Dahil ito ay sama-samang isinasagawa sa mga tahanan kung saan nagtitipon, nag-uusap, at nagsasalu-salo ang pamayanan.",
+          "B. Dahil binabayaran ng pamahalaan ang lahat ng nakikinig sa pag-awit.",
+          "C. Dahil ipinagbabawal ang pag-awit nito sa loob ng mga pribadong silid.",
+          "D. Dahil mga dayuhan lamang ang pinapayagang magbasa nito."]),
+        ("14. Alin sa mga sumusunod ang unang pang-araw-araw na pahayagan sa Pilipinas na itinatag noong 1846?",
+         ["A. Del Superior Govierno", "B. La Esperanza", "C. Diariong Tagalog", "D. La Solidaridad"]),
+        ("15. Sa pagsusuri ng isang lumang dokumento na may salitang hindi na ginagamit ngayon, ano ang PINAKARESPONSABLENG unang hakbang?",
+         ["A. Palitan agad ito ng pinakamalapit na modernong salitang maisip.",
+          "B. Burahin ang salita upang hindi malito ang mga mambabasa.",
+          "C. Basahin ang buong pangungusap upang matukoy ang kontekstuwal na pahiwatig bago sumangguni sa talatinigan.",
+          "D. Ipagpalagay na mali ang baybay ng may-akda noong unang panahon."]),
+        ("16. Ano ang pangunahing gampanin ng 'foreground' sa pagbuo ng isang makasaysayang comic panel?",
+         ["A. Ipakita ang malalayong bundok at ulap sa likuran.",
+          "B. Punuin ang espasyo ng mga dekorasyong walang kaugnayan sa kuwento.",
+          "C. Takpan ang mga pagkakamali sa pagguhit ng mga gusali.",
+          "D. Ituon ang pansin ng mambabasa sa pangunahing tauhan, kilos, at emosyon ng tagpo."]),
+        ("17. Paano dapat magtulungan ang caption at ang larawan sa isang responsableng comic book brochure?",
+         ["A. Dapat magbigay ang caption ng konteksto o impormasyong hindi kayang ipakita ng larawan lamang.",
+          "B. Dapat ulitin ng caption ang bawat bagay na iginuhit sa larawan.",
+          "C. Dapat magkasalungat ang sinasabi ng caption sa ipinapakita ng larawan.",
+          "D. Dapat mas marami ang salita kaysa sa espasyo ng drowing."]),
+        ("18. Bakit mapanganib na gumawa ng pangkalahatang kongklusyon tungkol sa buong lipunan mula lamang sa isang larawan ng marangyang bahay-na-bato?",
+         ["A. Dahil baka nasunog na ang bahay sa kasalukuyan.",
+          "B. Dahil laging peke ang mga lumang larawan.",
+          "C. Dahil ang larawan ay kumakatawan lamang sa uring maykaya at hindi sumasalamin sa kalagayan ng mayoryang magsasaka.",
+          "D. Dahil hindi mahalaga ang arkitektura sa pag-aaral ng panitikan."]),
+        ("19. Ano ang ipinahihiwatig ng pag-uulat ng pahayagang 'El Comercio' (1875) tungkol sa mga lihim na pag-uusap ng mga katutubo sa panahon ng Kuwaresma?",
+         ["A. Na walang pakialam ang pamahalaan sa mga gawaing panrelihiyon.",
+          "B. Na naging lehitimong panakip ang relihiyosong pagtitipon upang mag-usap ang mga mamamayan tungkol sa kanilang mga hinaing.",
+          "C. Na mas gusto ng mga magsasaka na magbasa ng diyaryo kaysa umawit ng Pasyon.",
+          "D. Na ipinagbawal ng pamahalaan ang pagbebenta ng Pasyon sa buong kapuluan."]),
+        ("20. Sa pagguhit ng mga tauhan sa isang historikal na komiks, paano maiiwasan ang stereotype sa mga mahihirap na mamamayan?",
+         ["A. Huwag na silang isama sa alinmang panel ng komiks.",
+          "B. Bihisan sila ng modernong kasuotan upang magmukhang mayaman.",
+          "C. Gawin silang katawa-tawa upang maging masaya ang mambabasa.",
+          "D. Ipakita sila na may sariling dignidad, talino, aktibong pagkilos, at kontekstuwal na katotohanan."]),
+
+        # --- ARALIN 15 ITEMS (21 - 30) ---
+        ("21. Ano ang tawag sa anyong pampanitikan ng 'Urbana at Feliza' na gumagamit ng palitan ng mga liham sa pagitan ng mga tauhan?",
+         ["A. Epistolaryo", "B. Alegoriko", "C. Pikaresko", "D. Tulang Pasalaysay"]),
+        ("22. Sino ang paring may-akda ng klasikong aklat na 'Pagsusulatan ng Dalawang Binibini na si Urbana at si Feliza' (1864)?",
+         ["A. P. Gaspar Aquino de Belen", "B. P. Mariano Pilapil", "C. P. Modesto de Castro", "D. P. Pedro Pelaez"]),
+        ("23. Ayon sa kaisipan ni Urbana kay Feliza, bakit dapat panatilihin ang kalinisan ng katawan at kaayusan sa pagkilos?",
+         ["A. Upang magmukhang mayaman at makahingi ng pabor sa mga pinuno.",
+          "B. Upang gayahin ang mga banyagang nakikita sa mga larawan.",
+          "C. Dahil may parusang kulong ang sinumang marumi ang pananamit.",
+          "D. Sapagkat ang kalinisan at kaayusan ay salamin ng kalinisan ng budhi at paggalang sa sarili at kapuwa."]),
+        ("24. Alin sa mga sumusunod ang PINAKAMAHUSAY na halimbawa ng bukas at neutral na tanong sa isang panayam para sa balita?",
+         ["A. \"Hindi ba't napakahusay ng inyong pamamalakad sa paaralan?\"",
+          "B. \"Paano ninyo ilalarawan ang mga naging tagumpay at hamon sa pagpapatupad ng bagong patakaran?\"",
+          "C. \"Kayo po ang may kasalanan kung bakit marumi ang liwasan, tama?\"",
+          "D. \"Masaya ang lahat sa programa, hindi ba?\""]),
+        ("25. Ano ang pangunahing layunin ng isang 'follow-up question' sa panayam?",
+         ["A. Baguhin agad ang paksa kapag hindi nagustuhan ang sagot ng kinakapanayam.",
+          "B. Pilitin ang kinakapanayam na sumang-ayon sa sariling pananaw ng tagapagbalita.",
+          "C. Palalimin, linawin, o kumuha ng kongkretong ebidensiya batay sa naunang pahayag ng kinakapanayam.",
+          "D. Tapusin nang mabilis ang panayam upang makauwi na."]),
+        ("26. Bakit mapanganib ang paggamit ng 'leading question' (nangungunang tanong) sa pamamahayag?",
+         ["A. Dahil idinidikte nito ang sagot at nawawala ang pagiging patas, obhetibo, at mapagkakatiwalaan ng balita.",
+          "B. Dahil nagiging masyadong mahaba ang artikulo sa pahayagan.",
+          "C. Dahil baka hindi maintindihan ng mambabasa ang mga salita.",
+          "D. Dahil mas mahal ang bayad sa tagapanayam kapag ganoon ang tanong."]),
+        ("27. Paano wawasakin ng isang responsableng manunulat ng komiks ang stereotype tungkol sa kababaihan noong panahon ng Espanyol?",
+         ["A. Huwag nang maglagay ng babaeng tauhan sa alinmang kuwento.",
+          "B. Ipakita silang laging umiiyak at naghihintay ng tulong sa bawat tagpo.",
+          "C. Baguhin ang kanilang kasuotan patungo sa makabagong pananamit sa kasalukuyan.",
+          "D. Ilarawan ang mga babae na may sariling ahensiya, talino, aktibong pagpapasya, at ambag sa pamayanan."]),
+        ("28. Alin sa mga sumusunod ang tamang rebisyon ng linyang: \"Feliza maghugas ka ng kamay mo ngayon na para malinis ka!\"?",
+         ["A. \"Feliza maghugas ka kamay ngayon na.\"",
+          "B. \"Feliza, maghugas ka ng iyong mga kamay ngayon upang mapanatili ang kalinisan.\"",
+          "C. \"Edi maghugas ka na lang Feliza para tapos na!\"",
+          "D. \"Hugas kamay ka na Feliza dali!\""]),
+        ("29. Ano ang ibig sabihin ng prinsipyo na ang 'kalinisan ay salamin ng kaluluwa' ayon sa didaktikong panitikan?",
+         ["A. Na ang panlabas na kaayusan at disiplina sa katawan ay nagmumula sa dalisay na budhi at paggalang sa Diyos at kapuwa.",
+          "B. Na ang taong may mamahaling sabon ay tiyak na maliligtas sa kabilang buhay.",
+          "C. Na kailangang magsuot ng puting damit araw-araw nang walang patid.",
+          "D. Na hindi na kailangang magdasal kung naligo na sa umaga."]),
+        ("30. Sa pag-edit ng diyalogo sa isang speech balloon, bakit mahalagang maging matipid at maingat sa salita?",
+         ["A. Upang makatipid sa tinta ng bolpen o printer.",
+          "B. Dahil bawal ang mahahabang pangungusap sa wikang Filipino.",
+          "C. Upang hindi matakpan ang mahalagang visual elements ng larawan at maging madaling basahin ang mensahe.",
+          "D. Upang magmukhang misteryoso ang tauhan sa komiks."])
     ]
 
-    for q, ans in p1_items:
-        add_body_p(doc, q, bold_prefix="")
-
-    # doc.add_page_break() [REMOVED TO PREVENT ORPHAN BLANK PAGES]
-
-    # =========================================================================
-    # PAHINA 41: BAHAGI II (KONSEPTO AT WIKA) AT BAHAGI III (SANAYSAY)
-    # =========================================================================
-    add_heading_2(doc, "PANGWAKAS NA PAGTATAYA: BAHAGI II AT BAHAGI III")
-    add_heading_3(doc, "Bahagi II: Konsepto, Wika, at Aplikasyon (10 Puntos)")
-    add_body_p(doc, "Panuto: Piliin ang titik ng pinakatumpak na sagot para sa bawat bilang. (1 puntos bawat aytem)")
-
-    p2_mcq = [
-        ("1. Ang proseso kung saan ang katutubong talinghaga at damdamin ay patagong isinama sa banyagang anyo ng Pasyon ay tinatawag na—",
-         ["A. Reduccion", "B. Sinkretismo at Inkulturasyon", "C. Kolonyal na Sensura", "D. Presentismo"]),
-        ("2. Alin ang pinakatamang pagtutumbas sa Filipino ng konseptong administratibo na 'Gobernadorcillo' batay sa konteksto ng bayan?",
-         ["A. Munting Gobernador", "B. Punong-bayan / Kapitan del Barrio", "C. Tagasingil ng Buwis", "D. Sundalo ng Pamahalaan"]),
-        ("3. Sa panayam para sa balita, bakit itinuturing na depektibo ang tanong na: 'Hindi ba't pabaya ang mga kawani sa paglilinis?'",
-         ["A. Dahil masyadong maikli ang tanong.", "B. Dahil nangunguna ito at nagpapataw ng paghusga sa halip na maging neutral.", "C. Dahil bawal magtanong sa kawani.", "D. Dahil gumagamit ng wikang Filipino."]),
-        ("4. Alin sa mga sumusunod ang nagpapakita ng responsableng paggamit ng speech balloon sa comic book brochure?",
-         ["A. Paglalagay ng buong sanaysay sa loob ng iisang lobo ng diyalogo.", "B. Paggamit ng matipid, wasto sa bantas, at natural na pananalita na angkop sa tauhan.", "C. Pagtakip sa mukha ng tauhan upang makatipid sa espasyo.", "D. Paggamit ng mga modernong balbal sa historikal na tagpo."]),
-        ("5. Ang pangunahing aral sa lunsarang 'Urbana at Feliza' tungkol sa kalinisan ay—",
-         ["A. Ang kalinisan ay para lamang sa mga maykaya.", "B. Ang kalinisan ng katawan at kaayusan sa pagkilos ay salamin ng kalinisan ng budhi at dangal.", "C. Hindi kailangang mag-aral kung malinis ang kasuotan.", "D. Ang pananamit ang tanging batayan ng kabutihan ng tao."])
-    ]
-
-    for q, chs in p2_mcq:
-        add_body_p(doc, q, bold_prefix="")
-        for c in chs:
+    for q_text, choices in p1_mcq_30:
+        add_body_p(doc, q_text, bold_prefix="")
+        for ch in choices:
             p_c = doc.add_paragraph()
             format_paragraph(p_c, space_before=1, space_after=1)
             p_c.paragraph_format.left_indent = Inches(0.2)
-            r_c = p_c.add_run(c)
+            r_c = p_c.add_run(f"[   ]  {ch}")
             r_c.font.name = 'Cambria'
             r_c.font.size = Pt(9.5)
 
-    add_heading_3(doc, "Bahagi III: Estrukturadong Sanaysay at Pagpapalalim (10 Puntos)")
-    add_body_p(
-        doc,
-        "Paksa ng Sanaysay: \"Ang Panitikan bilang Salamin ng Katatagan: Paano Napanatili ng mga Pilipino ang Kanilang Kaakuhan at Dignidad sa Gitna ng Pananakop ng Espanya?\"\n\n"
-        "Panuto: Sumulat ng isang organisado, malalim, at makabuluhang sanaysay na binubuo ng 3 talata (200–250 salita). "
-        "Dapat gamitin at iugnay sa iyong paliwanag ang hindi bababa sa apat sa sumusunod na mga konsepto:\n"
-        "• Kaligirang Pangkasaysayan\n"
-        "• Pasyon at Tradisyong Pabasa\n"
-        "• Urbana at Feliza (Kagandahang-asal)\n"
-        "• Mapanuring Pagsusuri sa Balita at Batis\n"
-        "• Etnisidad at Representasyon sa Multimodal na Komiks\n"
-        "• Pagtutumbas at Kasarinlan ng Wika"
-    )
-
-    headers_rubrik_essay = ["Pamantayan sa Pagmamarka ng Sanaysay", "Laang Puntos", "Deskripsiyon ng Kahusayan"]
-    data_rubrik_essay = [
-        ["Lalim ng Pagsusuri at Konsepto", "4 Puntos", "Matalas na naipaliwanag ang apat o higit pang konsepto nang may matibay na historikal na batayan."],
-        ["Lohika, Organisasyon, at Transisyon", "3 Puntos", "Napakalinaw ng simula, gitna, at wakas; mahusay ang daloy gamit ang mga retorikal na pang-ugnay."],
-        ["Wika, Gramatika, at Bantas", "3 Puntos", "Wasto ang baybay, bantas, at pormalidad ng akademikong Filipino nang walang balbal o kamalian."]
-    ]
-    add_custom_table(doc, headers_rubrik_essay, data_rubrik_essay)
-
-    # doc.add_page_break() [REMOVED TO PREVENT ORPHAN BLANK PAGES]
-
     # =========================================================================
-    # PAHINA 42: BAHAGI IV - GAWAING PAGGANAP (GRASPS MODEL AT RUBRIK)
+    # BAHAGI II: AUTENTIKONG GAWAING PAGGANAP (PERFORMANCE TASK — 20 PUNTOS)
     # =========================================================================
-    add_heading_2(doc, "PANGWAKAS NA PAGTATAYA: BAHAGI IV — GAWAING PAGGANAP (10 PUNTOS)")
-    add_heading_3(doc, "Autentikong Pagganap: Pinal na Comic Book Brochure gamit ang GRASPS Model")
+    add_heading_2(doc, "Bahagi II: Autentikong Gawaing Pagganap (Performance Task — 20 Puntos)")
+    add_heading_3(doc, "Gawaing Multimodal gamit ang GRASPS Model: 6-Panel Comic Book Brochure")
     
     add_body_p(
         doc,
-        "G (Goal / Layunin): Bumuo ng isang 6-panel na pang-edukasyong comic book brochure na naglalarawan sa isang makasaysayang tagpo sa panahon ng "
-        "Espanyol na nagtatanghal sa katatagan ng pagkataong Pilipino, pagkakaisa ng komunidad sa kabila ng kolonyal na kontrol, at dignidad ng kababaihan at katutubo.\n\n"
+        "G (Goal / Layunin): Bumuo ng isang organisado, makabuluhan, at masining na 6-panel na pang-edukasyong comic book brochure "
+        "na naglalarawan sa isang makasaysayang tagpo sa panahon ng Espanyol. Dapat itong magtanghal sa katatagan ng pagkataong Pilipino, "
+        "pagkakaisa ng pamayanan sa kabila ng kolonyal na kontrol, at tunay na dignidad ng kababaihan at mga katutubo nang walang stereotype.\n\n"
         "R (Role / Papel): Ikaw ay Punong Manunulat, Historikal na Tagasuri, at Tagapagdisenyo ng Multimodal na Nilalaman para sa pampaaralang eksibit.\n\n"
         "A (Audience / Mambabasa): Mga mag-aaral sa Baitang 7, mga guro sa Filipino at Araling Panlipunan, at ang buong pamayanan ng paaralan.\n\n"
         "S (Situation / Sitwasyon): Bilang pagdiriwang ng Buwan ng Kasaysayan at Wika, maglulunsad ang paaralan ng isang eksibit ng mga likhang multimodal. "
         "Kailangang ipakita sa brochure kung paano naging 'tanglaw ng katatagan' ang mga karaniwang mamamayan sa pamamagitan ng kanilang pananampalataya, "
         "kultura, at sariling wika.\n\n"
-        "P (Product / Produkto): Isang organisado, malinis, at masining na 6-panel Comic Book Brochure na may: (1) Pamagat at Introduksiyon, "
-        "(2) 6 na Kompletong Panel na may Foreground/Background, (3) Speech Balloons na wasto ang diyalogo at bantas, (4) Makabuluhang Caption, at "
-        "(5) Maikling Tala sa Batis at Konteksto sa huling bahagi.\n\n"
-        "S (Standards / Pamantayan): Mamarkahan ang iyong produkto batay sa sumusunod na analitikong rubrik na may kabuuang 10 puntos."
+        "P (Product / Produkto): Isang 6-panel Comic Book Brochure na naglalaman ng: (1) Makatawag-pansing Pamagat at Panimula, "
+        "(2) 6 na Kompletong Panel na may malinaw na Foreground at Background, (3) Speech Balloons na may maingat at angkop na diyalogo, "
+        "(4) Makabuluhang Captions na nagpapalalim sa konteksto, at (5) Maikling Tala sa Batis at Konteksto sa huling bahagi.\n\n"
+        "S (Standards / Pamantayan): Mamarkahan ang iyong awtput batay sa sumusunod na analitikong rubrik na may kabuuang 20 puntos."
     )
 
-    headers_grasps_rubrik = ["Pamantayan", "Napakahusay (4)", "Mahusay (3)", "Nalilinang (2)", "Nangangailangan ng Gabay (1)"]
+    headers_grasps_rubrik = ["Pamantayan sa Pagmamarka", "Napakahusay (5)", "Mahusay (4)", "Nalilinang (3)", "Nangangailangan ng Gabay (2)"]
     data_grasps_rubrik = [
         ["Nilalaman at Kontekstong Pangkasaysayan (30%)", "Ganap na tumpak, malalim ang pagkakaugnay sa mga aralin ng Yunit III; malinaw ang kontekstong kolonyal nang walang anachronism.", "Tumpak ang karamihan sa mga detalye; angkop ang tagpo at mensahe sa kasaysayan.", "May ilang kakulangan o malabong historikal na ugnayan sa salaysay.", "Maraming maling impormasyon sa kasaysayan; hindi maunawaan ang konteksto."],
         ["Diyalogo, Wika, at Bantas (25%)", "Napakalinaw, wasto ang gramatika at bantas; natural at angkop ang boses ng bawat tauhan sa speech balloon.", "Wasto at malinaw ang karamihan sa mga diyalogo; may kaunting maliliit na pagkukulang.", "Medyo magulo o artipisyal ang pananalita; may mga kamalian sa bantas.", "Maraming mali sa gramatika at bantas na nakahahadlang sa mensahe."],
@@ -137,12 +223,10 @@ def build_yunit3_assessment_and_keys(doc):
     ]
     add_custom_table(doc, headers_grasps_rubrik, data_grasps_rubrik)
 
-    add_body_p(doc, "Pagmamarka sa Bahagi IV: (Kabuuang Iskor sa Rubrik ÷ 16) × 10 = Puntos sa Bahagi IV", italic_prefix="")
-
-    # doc.add_page_break() [REMOVED TO PREVENT ORPHAN BLANK PAGES]
+    add_body_p(doc, "Pagmamarka sa Bahagi II: Kabuuang Puntos sa Rubrik (Pinakamataas: 20 Puntos). Kabuuang Marka sa Pangwakas na Pagtataya: Bahagi I (30 pts) + Bahagi II (20 pts) = 50 Puntos.", italic_prefix="")
 
     # =========================================================================
-    # PAHINA 43: BUOD NG YUNIT III AT KOMPREHENSIBONG TALATINIGAN
+    # BUOD NG YUNIT III AT KOMPREHENSIBONG TALATINIGAN
     # =========================================================================
     add_heading_1(doc, "BUOD NG YUNIT III AT KOMPREHENSIBONG TALATINIGAN")
     add_heading_2(doc, "Sintesis ng Pagkatuto: Ako at ang Aking Pagkatao, Tanglaw ng Katatagan")
@@ -189,10 +273,7 @@ def build_yunit3_assessment_and_keys(doc):
     doc.add_page_break()
 
     # =========================================================================
-    # PAHINA 44: KOMPLETONG SUSI SA PAGWAWASTO AT GABAY SA GURO
-    # =========================================================================
-    # =========================================================================
-    # PAHINA 44: KOMPLETONG SUSI SA PAGWAWASTO AT GABAY SA GURO
+    # PAHINA 44+: KOMPLETONG SUSI SA PAGWAWASTO AT GABAY SA GURO
     # =========================================================================
     add_heading_1(doc, "KOMPLETONG SUSI SA PAGWAWASTO AT GABAY SA GURO")
     add_heading_2(doc, "Susi sa mga Mabilisang Pagtataya at Pangwakas na Pagsusulit")
@@ -201,7 +282,7 @@ def build_yunit3_assessment_and_keys(doc):
     add_heading_3(doc, "1. Susi sa Mabilisang Pagtataya sa Aralin 13")
     add_body_p(doc, "Bahagi I: Maramihang Pagpipili (Aytem 1–10)", bold_prefix="")
     headers_mcq = ["Aytem", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
-    data_mcq13 = [["Sagot", "B", "C", "B", "B", "B", "B", "B", "B", "B", "B"]]
+    data_mcq13 = [["Sagot", "C", "A", "D", "B", "D", "A", "C", "B", "A", "C"]]
     add_custom_table(doc, headers_mcq, data_mcq13)
 
     add_body_p(doc, "Bahagi II: Mapanuring Pagsusuri at Pagpapaliwanag (Aytem 11–15)", bold_prefix="")
@@ -218,7 +299,7 @@ def build_yunit3_assessment_and_keys(doc):
     # --- ARALIN 14 ANSWER KEY ---
     add_heading_3(doc, "2. Susi sa Mabilisang Pagtataya sa Aralin 14")
     add_body_p(doc, "Bahagi I: Maramihang Pagpipili (Aytem 1–10)", bold_prefix="")
-    data_mcq14 = [["Sagot", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B"]]
+    data_mcq14 = [["Sagot", "B", "D", "A", "B", "C", "D", "A", "C", "B", "D"]]
     add_custom_table(doc, headers_mcq, data_mcq14)
 
     add_body_p(doc, "Bahagi II: Mapanuring Pagsusuri at Pagpapaliwanag (Aytem 11–15)", bold_prefix="")
@@ -234,7 +315,7 @@ def build_yunit3_assessment_and_keys(doc):
     # --- ARALIN 15 ANSWER KEY ---
     add_heading_3(doc, "3. Susi sa Mabilisang Pagtataya sa Aralin 15")
     add_body_p(doc, "Bahagi I: Maramihang Pagpipili (Aytem 1–10)", bold_prefix="")
-    data_mcq15 = [["Sagot", "B", "B", "B", "B", "B", "B", "B", "B", "B", "B"]]
+    data_mcq15 = [["Sagot", "A", "C", "D", "B", "C", "A", "D", "B", "A", "C"]]
     add_custom_table(doc, headers_mcq, data_mcq15)
 
     add_body_p(doc, "Bahagi II: Mapanuring Pagsusuri at Pagpapaliwanag (Aytem 11–15)", bold_prefix="")
@@ -247,30 +328,25 @@ def build_yunit3_assessment_and_keys(doc):
     ]
     add_custom_table(doc, headers_open, data_open15)
 
-    # --- PANGWAKAS NA PAGTATAYA ANSWER KEY ---
-    add_heading_3(doc, "4. Susi sa Pangwakas na Pagtataya sa Yunit III")
-    add_body_p(doc, "Bahagi I: Pagsusuri sa Dokumentong Pangkasaysayan (Aytem 1–5)", bold_prefix="")
-    headers_p1 = ["Aytem", "Inaasahang Pagsusuri at Batayan"]
-    data_p1 = [
-        ["1", "Kolonyal na Pananaw: Nilikha ito ng kolonyal na pahayagan upang magmukhang sila ang tagapagligtas."],
-        ["2", "Lokal na Batis: Ang talaan ng parokya na nagpatunay na nauna nang kumilos si Kapitana Juana."],
-        ["3", "Katatagan at Liderato: Nagpamalas siya ng liderato, agham, at pagkukusa sa harap ng epidemya."],
-        ["4", "Pagpapahalaga sa Kapuwa: Ang kalinisan at pag-iingat sa tubig ay paggalang sa kalusugan at buhay ng kapuwa."],
-        ["5", "Etikal na Tanong: 'Ano po ang inyong naging pamamaraan sa pagpapakulo ng tubig upang mahikayat ang mga mamamayan?'"]
-    ]
-    add_custom_table(doc, headers_p1, data_p1)
+    # --- PANGWAKAS NA PAGTATAYA ANSWER KEY (30 ITEMS MCQ) ---
+    add_heading_3(doc, "4. Susi sa Pangwakas na Pagtataya sa Yunit III (30 Aytem na Maramihang Pagpipili)")
+    add_body_p(doc, "Susi sa Pagwawasto: Aytem 1 hanggang 15 (Talahanayan A)", bold_prefix="")
+    headers_p1_15 = ["Aytem", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"]
+    data_p1_15 = [["Sagot", "C", "A", "D", "B", "D", "A", "C", "B", "A", "C", "B", "D", "A", "B", "C"]]
+    add_custom_table(doc, headers_p1_15, data_p1_15)
 
-    add_body_p(doc, "Bahagi II: Konsepto, Wika, at Aplikasyon (Aytem 1–5)", bold_prefix="")
-    headers_mcq_p2 = ["Aytem", "1", "2", "3", "4", "5"]
-    data_mcq_p2 = [["Sagot", "B", "B", "B", "B", "B"]]
-    add_custom_table(doc, headers_mcq_p2, data_mcq_p2)
+    add_body_p(doc, "Susi sa Pagwawasto: Aytem 16 hanggang 30 (Talahanayan B)", bold_prefix="")
+    headers_p16_30 = ["Aytem", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"]
+    data_p16_30 = [["Sagot", "D", "A", "C", "B", "D", "A", "C", "D", "B", "C", "A", "D", "B", "A", "C"]]
+    add_custom_table(doc, headers_p16_30, data_p16_30)
 
-    add_body_p(doc, "Bahagi III (Sanaysay) at Bahagi IV (GRASPS Performance Task): Gamitin ang nakalaang 4x4 analitikong rubrik sa Pahina 41 at 42.", bold_prefix="")
+    add_body_p(doc, "Bahagi II: Autentikong Gawaing Pagganap (Performance Task): Gamitin ang analitikong rubrik sa itaas (20 Puntos kabuuan).", bold_prefix="")
 
     add_callout_box(
         doc,
         "TALA AT DIAGNOSTIC GUIDE PARA SA GURO:\n"
-        "1. Gamitin ang mga maling sagot sa pagsusuri ng ebidensiya upang matukoy kung nahihirapan pa ang mag-aaral sa paghihiwalay ng katotohanan laban sa opinyon.\n"
-        "2. Sa pagmamarka ng sanaysay, bigyang-diin ang kakayahan ng mag-aaral na magtagpi-tagpi ng mga konsepto mula sa iba't ibang aralin.\n"
-        "3. Sa Comic Book Brochure, huwag sukatin ang galing sa pagguhit; sukatin ang linaw ng komunikasyon, katumpakan ng konteksto, at etikal na representasyon."
+        "1. Pagsusuri ng Aytem 1-10 (Aralin 13): Kung mababa ang iskor ng mag-aaral, balikan ang kasanayan sa pagkilala sa kaligirang pangkasaysayan at pagsusuri ng pagkiling sa balita.\n"
+        "2. Pagsusuri ng Aytem 11-20 (Aralin 14): Sumusukat sa lalim ng pagkaunawa sa Pasyon bilang gawaing panlipunan at paghihiwalay ng datos laban sa interpretasyon.\n"
+        "3. Pagsusuri ng Aytem 21-30 (Aralin 15): Sumusukat sa etika ng panayam, kagandahang-asal bilang kapuwa-dangal, at tamang rebisyon ng diyalogo sa komiks.\n"
+        "4. Sa Gawaing Pagganap (Comic Book Brochure): Bigyang-diin ang katumpakang historikal, natural na diyalogo, at etikal na representasyon ng kababaihan at katutubo."
     )

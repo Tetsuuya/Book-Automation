@@ -101,13 +101,6 @@ def build_yunit3_aralin13(doc):
         "ay lihim na ibinaon sa mga salaysay ng pagdurusa at pagtubos."
     )
 
-    prompt_13_artifact = (
-        "PROMPT: A high-resolution museum artifact photograph of an authentic 16th-century Philippine manuscript page showing the Lord Prayer (Ama Namin) "
-        "printed in parallel columns: Spanish Latin, Romanized phonetic Tagalog, and native Baybayin script with calligraphic flourishes. Aged textured vellum paper, "
-        "sepia iron-gall ink, natural historical wear, soft museum exhibit display lighting, crisp archival detail --ar 16:9 --v 6.0"
-    )
-    add_prompt_box(doc, "PAGSUSURI SA ARTIFACT: DALAWAHING SISTEMA NG PAGSULAT (BAYBAYIN AT TITIK LATIN)", prompt_13_artifact)
-    
     headers_13_1 = ["Panahon / Aspekto", "Kalagayang Panlipunan", "Pangunahing Anyo ng Panitikan", "Layunin at Gamit ng Akda"]
     data_13_1 = [
         ["Bago ang Pananakop (Katutubo)", "Malalayang barangay; ugnayan sa kalikasan; pamumuno ng datu at babaylan", "Pasalitang panitikan: Bugtong, Salawikain, Epiko, Awiting-bayan", "Pagkakakilanlan ng tribo; ritwal; edukasyong komunal"],
@@ -199,13 +192,6 @@ def build_yunit3_aralin13(doc):
     # PAHINA 7: LUNSARANG TEKSTO - ANG ULAT SA LIWASAN AT ANG LIHAM NG KURA
     # =========================================================================
     add_heading_2(doc, "LUNSARANG TEKSTO: Ang Ulat sa Liwasan at ang Liham ng Kura")
-    
-    prompt_13_ladino = (
-        "PROMPT: An evocative historical classical oil painting of the 17th-century Ladino Tagalog poet, Fernando Bagongbanta, seated at a dark wooden writing desk in an Intramuros study. "
-        "Dressed in colonial Tagalog attire, holding a goose feather quill, writing alternating bilingual Tagalog and Spanish verses on aged paper by the warm glow of an oil lamp. "
-        "Bookshelves, inkwells, and religious icons in the background. Chiaroscuro lighting, master classical painting style, 8k resolution --ar 16:9 --v 6.0"
-    )
-    add_prompt_box(doc, "LADINO POETRY: SI FERNANDO BAGONGBANTA AT ANG DALAWAHING TULA", prompt_13_ladino)
     add_body_p(doc, "Orihinal na Tekstong Pangkasaysayan at Ekspositori para sa Masinsing Pagsusuri", italic_prefix="")
 
     add_body_p(
@@ -489,19 +475,19 @@ def build_yunit3_aralin13(doc):
     mcq_items_13_p1 = [
         ("1. Ano ang pangunahing layunin ng patakarang reduccion na ipinatupad ng mga mananakop na Espanyol kaugnay ng pamamahala at panitikan?",
          ["A. Hikayatin ang mga katutubong maglakbay sa ibang bansa upang mag-aral.",
-          "B. Tipunin ang mga mamamayan sa ilalim ng tunog ng kampana upang mapadali ang kontrol at pagpapalaganap ng relihiyon.",
-          "C. Ihiwalay ang mga katutubo sa mga prayle upang mapanatili ang sinaunang kultura.",
+          "B. Ihiwalay ang mga katutubo sa mga prayle upang mapanatili ang sinaunang kultura.",
+          "C. Tipunin ang mga mamamayan sa ilalim ng tunog ng kampana upang mapadali ang kontrol at pagpapalaganap ng relihiyon.",
           "D. Pabagsakin ang ekonomiya ng mga lungsod upang palakasin ang mga baryo."]),
         ("2. Alin sa mga sumusunod ang PINAKATUMPANG paglalarawan sa kalagayan ng panitikan sa Pilipinas bago dumating ang mga Espanyol noong 1565?",
-         ["A. Walang anumang panitikan dahil hindi pa marunong sumulat ang mga ninuno.",
+         ["A. Mayaman at maunlad na tradisyong pasalita tulad ng epiko, awiting-bayan, at karunungang-bayan.",
           "B. Pawang mga aklat sa wikang Espanyol lamang ang binabasa ng mga datu.",
-          "C. Mayaman at maunlad na tradisyong pasalita tulad ng epiko, awiting-bayan, at karunungang-bayan.",
+          "C. Walang anumang panitikan dahil hindi pa marunong sumulat ang mga ninuno.",
           "D. Nakasalalay lamang sa mga pahayagang inililimbag sa Maynila at Cebu."]),
         ("3. Bakit itinuturing na may 'pananaw' o hindi ganap na neutral ang mga opisyal na balitang inilathala noong panahong kolonyal?",
          ["A. Dahil kulang sa papel at tinta ang mga palimbagan noong panahong iyon.",
-          "B. Dahil ang mga pahayagan ay kontrolado at sumasailalim sa mahigpit na sensura ng pamahalaan at simbahan.",
-          "C. Dahil puro tula lamang ang nilalaman ng mga kolonyal na pahayagan.",
-          "D. Dahil hindi marunong magbasa ng balita ang mga karaniwang mamamayan."]),
+          "B. Dahil puro tula lamang ang nilalaman ng mga kolonyal na pahayagan.",
+          "C. Dahil hindi marunong magbasa ng balita ang mga karaniwang mamamayan.",
+          "D. Dahil ang mga pahayagan ay kontrolado at sumasailalim sa mahigpit na sensura ng pamahalaan at simbahan."]),
         ("4. Sa pagsusuri ng lunsarang tekstong 'Ang Ulat sa Liwasan,' ano ang ibinubunyag ng lihim na liham ng kura na hindi makikita sa opisyal na balita?",
          ["A. Ang masayang pagsasayaw ng mga mamamayan sa harap ng munisipyo.",
           "B. Ang matinding takot, tensiyon, at lihim na pagtutol ng mga katutubo sa bagong buwis.",
@@ -509,18 +495,18 @@ def build_yunit3_aralin13(doc):
           "D. Ang pagkakasundo ng mga katutubo at guardia civil sa pagbuo ng bagong tulay."]),
         ("5. Alin sa mga sumusunod ang halimbawa ng pagtutumbas ng salita sa halip na tuwirang panghihiram?",
          ["A. Paggamit ng salitang 'alkalde' mula sa 'alcalde'.",
-          "B. Paggamit ng salitang 'pamahalaang lungsod' para sa konseptong 'ayuntamiento'.",
-          "C. Paggamit ng salitang 'gobernador' para sa pinuno ng lalawigan.",
-          "D. Paggamit ng salitang 'kumpisal' mula sa salitang 'confesar'."]),
+          "B. Paggamit ng salitang 'gobernador' para sa pinuno ng lalawigan.",
+          "C. Paggamit ng salitang 'kumpisal' mula sa salitang 'confesar'.",
+          "D. Paggamit ng salitang 'pamahalaang lungsod' para sa konseptong 'ayuntamiento'."]),
         ("6. Ano ang tinutukoy ng konseptong 'presentismo' na dapat iwasan sa pagsusuri ng mga lumang akda?",
-         ["A. Ang pagbibigay ng regalo sa mga guro tuwing araw ng pagsusulit.",
-          "B. Ang paghuhusga sa mga pangyayari sa nakaraan gamit lamang ang makabagong pamantayan nang hindi inuunawa ang konteksto.",
+         ["A. Ang paghuhusga sa mga pangyayari sa nakaraan gamit lamang ang makabagong pamantayan nang hindi inuunawa ang konteksto.",
+          "B. Ang pagbibigay ng regalo sa mga guro tuwing araw ng pagsusulit.",
           "C. Ang pagiging huli sa pagpasok sa klase sa panahon ng talakayan.",
           "D. Ang labis na paggamit ng pandiwang pangkasalukuyan sa pagsulat ng balita."]),
         ("7. Paano nakatutulong ang caption sa isang comic book brochure upang mapalalim ang kahulugan ng larawan?",
          ["A. Inuulit lamang nito ang eksaktong nakikita na sa drowing upang humaba ang teksto.",
-          "B. Nagbibigay ito ng kontekstong pangkasaysayan at damdamin na hindi kayang ipakita ng biswal lamang.",
-          "C. Tinatakpan nito ang mukha ng mga tauhan upang maging misteryoso ang tagpo.",
+          "B. Tinatakpan nito ang mukha ng mga tauhan upang maging misteryoso ang tagpo.",
+          "C. Nagbibigay ito ng kontekstong pangkasaysayan at damdamin na hindi kayang ipakita ng biswal lamang.",
           "D. Pinapalitan nito ang pangangailangan sa pagguhit ng background."]),
         ("8. Bakit mapanganib ang paggamit ng mapanlahatang stereotype sa paglalarawan ng mga pangkat-etniko sa komiks?",
          ["A. Dahil nagiging mas madaling basahin ang komiks para sa mga bata.",
@@ -549,14 +535,14 @@ def build_yunit3_aralin13(doc):
 
     mcq_items_13_p2 = [
         ("9. Sa pagbuo ng isang responsableng balita, ano ang unang dapat gawin kapag nakatanggap ng ulat na may magkasalungat na pahayag?",
-         ["A. Piliin agad ang pahayag ng may pinakamataas na katungkulan at balewalain ang iba.",
-          "B. Beripikahin ang impormasyon sa iba pang mapagkakatiwalaang batis at ilahad ang magkakaibang panig nang patas.",
+         ["A. Beripikahin ang impormasyon sa iba pang mapagkakatiwalaang batis at ilahad ang magkakaibang panig nang patas.",
+          "B. Piliin agad ang pahayag ng may pinakamataas na katungkulan at balewalain ang iba.",
           "C. Huwag nang isulat ang balita upang maiwasan ang gulo.",
           "D. Gumawa ng sariling kuwento na magugustuhan ng mga mambabasa."]),
         ("10. Alin sa mga sumusunod ang nagpapakita ng ahensiya at katatagan ng mga katutubong Pilipino sa kabila ng pananakop?",
          ["A. Ang ganap na pagtalikod sa lahat ng katutubong kaugalian nang walang pagtutol.",
-          "B. Ang paglalangkap ng sariling ritmo, talinghaga, at damdamin sa loob ng mga ipinakilalang anyong banyaga.",
-          "C. Ang pagtanggap sa lahat ng banyagang batas nang hindi nagtatanong.",
+          "B. Ang pagtanggap sa lahat ng banyagang batas nang hindi nagtatanong.",
+          "C. Ang paglalangkap ng sariling ritmo, talinghaga, at damdamin sa loob ng mga ipinakilalang anyong banyaga.",
           "D. Ang paglimot sa sariling wika upang magsalita lamang ng Espanyol."])
     ]
 
