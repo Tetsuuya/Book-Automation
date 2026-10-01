@@ -190,6 +190,7 @@ def add_callout_box(doc, title, items, bg_color="FAFAFA", border_color="1B365D")
     doc.add_paragraph()
 
 def add_prompt_box(doc, title, role, prompt, aspect_ratio="16:9"):
+    """Render a dedicated, fully self-contained image container box."""
     tbl = doc.add_table(rows=1, cols=1)
     tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
     cell = tbl.cell(0, 0)
@@ -197,9 +198,17 @@ def add_prompt_box(doc, title, role, prompt, aspect_ratio="16:9"):
     set_dashed_border(cell, "CCCCCC", "12")
     set_cell_margins(cell, top=140, bottom=140, left=180, right=180)
     
+    # Clean title from any legacy 'Visual Prompt' or 'IMAGE PLACEHOLDER' labels
+    clean_title = title.replace("Visual Prompt 1:", "").replace("Visual Prompt 2:", "").replace("Visual Prompt 3:", "").strip()
+    clean_title = clean_title.replace("[IMAGE PLACEHOLDER:", "").replace("]", "").strip()
+    if not clean_title.startswith("Larawan:") and not clean_title.startswith("Figure:"):
+        display_title = f"🖼️ Larawan: {clean_title}"
+    else:
+        display_title = f"🖼️ {clean_title}"
+        
     p = cell.paragraphs[0]
     format_paragraph(p, space_before=2, space_after=2)
-    r1 = p.add_run(f"🖼️ [IMAGE PLACEHOLDER: {title}]")
+    r1 = p.add_run(display_title)
     r1.font.name = 'Cambria'
     r1.font.size = Pt(10.5)
     r1.font.bold = True
@@ -207,7 +216,7 @@ def add_prompt_box(doc, title, role, prompt, aspect_ratio="16:9"):
     
     p2 = cell.add_paragraph()
     format_paragraph(p2, space_before=1, space_after=2)
-    r2 = p2.add_run(f"Layunin: {role}")
+    r2 = p2.add_run(f"Pedagohikal na Layunin: {role}")
     r2.font.name = 'Cambria'
     r2.font.size = Pt(9.5)
     r2.font.color.rgb = RGBColor(0x55, 0x55, 0x55)
@@ -228,7 +237,8 @@ def add_prompt_box(doc, title, role, prompt, aspect_ratio="16:9"):
     r4.font.color.rgb = RGBColor(0x77, 0x77, 0x77)
     doc.add_paragraph()
 
-def add_youtube_module(doc, title, channel, timestamps, questions, search_url="", search_keywords=""):
+def add_youtube_module(doc, title, channel, key_concepts=None, questions=None, video_url="", search_keywords="", timestamps=None, search_url=""):
+    """Render a dedicated, fully self-contained YouTube multimedia container box with direct video link (https://www.youtube.com/watch?v=...) and key concepts."""
     tbl = doc.add_table(rows=1, cols=1)
     tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
     cell = tbl.cell(0, 0)
@@ -236,9 +246,10 @@ def add_youtube_module(doc, title, channel, timestamps, questions, search_url=""
     set_callout_border(cell, "CC0000", "36")
     set_cell_margins(cell, top=140, bottom=140, left=180, right=180)
     
+    clean_title = title.replace("🎥 INTERAKTIBONG MULTIMEDIA:", "").replace("🎥 INTERACTIVE MULTIMEDIA:", "").strip()
     p = cell.paragraphs[0]
     format_paragraph(p, space_before=2, space_after=2)
-    r = p.add_run(f"🎥 INTERAKTIBONG MULTIMEDIA: {title}")
+    r = p.add_run(f"🎥 INTERAKTIBONG MULTIMEDIA: {clean_title}")
     r.font.name = 'Cambria'
     r.font.size = Pt(10.5)
     r.font.bold = True
@@ -246,16 +257,17 @@ def add_youtube_module(doc, title, channel, timestamps, questions, search_url=""
     
     pm = cell.add_paragraph()
     format_paragraph(pm, space_before=1, space_after=2)
-    rm = pm.add_run(f"Opisyal na Channel: {channel} | [📱 QR Code Box: Scan to Watch]")
+    rm = pm.add_run(f"Opisyal na Channel: {channel}")
     rm.font.name = 'Cambria'
     rm.font.size = Pt(9.5)
     rm.font.bold = True
     rm.font.color.rgb = RGBColor(0x33, 0x33, 0x33)
     
-    if search_url:
+    final_url = video_url if video_url else search_url
+    if final_url:
         pu = cell.add_paragraph()
         format_paragraph(pu, space_before=1, space_after=1)
-        ru = pu.add_run(f"Direct Search Link: {search_url}")
+        ru = pu.add_run(f"Direktang Link sa Panonood: {final_url}")
         ru.font.name = 'Cambria'
         ru.font.size = Pt(9.0)
         ru.font.color.rgb = RGBColor(0x1B, 0x36, 0x5D)
@@ -269,29 +281,42 @@ def add_youtube_module(doc, title, channel, timestamps, questions, search_url=""
         rk.font.italic = True
         rk.font.color.rgb = RGBColor(0x55, 0x55, 0x55)
     
-    for ts in timestamps:
-        pts = cell.add_paragraph()
-        format_paragraph(pts, space_before=1, space_after=1)
-        rts = pts.add_run(f"⏱️ {ts}")
-        rts.font.name = 'Cambria'
-        rts.font.size = Pt(9.0)
-        rts.font.color.rgb = RGBColor(0x55, 0x55, 0x55)
+    # Render Key Concepts (no hallucinated timestamps)
+    concepts_list = key_concepts if key_concepts else timestamps
+    if concepts_list:
+        p_c = cell.add_paragraph()
+        format_paragraph(p_c, space_before=2, space_after=1)
+        r_c = p_c.add_run("🎯 Mga Tampok na Konsepto at Araling Dapat Obserbahan:")
+        r_c.font.name = 'Cambria'
+        r_c.font.size = Pt(9.5)
+        r_c.font.bold = True
+        r_c.font.color.rgb = RGBColor(0x1B, 0x36, 0x5D)
         
-    pq_h = cell.add_paragraph()
-    format_paragraph(pq_h, space_before=3, space_after=1)
-    rq_h = pq_h.add_run("Mga Gabay na Tanong sa Panonood:")
-    rq_h.font.name = 'Cambria'
-    rq_h.font.size = Pt(9.5)
-    rq_h.font.bold = True
-    rq_h.font.color.rgb = RGBColor(0x1B, 0x36, 0x5D)
-    
-    for q in questions:
-        pq = cell.add_paragraph()
-        format_paragraph(pq, space_before=1, space_after=1)
-        rq = pq.add_run(f"• {q}")
-        rq.font.name = 'Cambria'
-        rq.font.size = Pt(9.0)
-        rq.font.color.rgb = RGBColor(0x22, 0x22, 0x22)
+        for item in concepts_list:
+            pts = cell.add_paragraph()
+            format_paragraph(pts, space_before=1, space_after=1)
+            clean_item = item.lstrip("•⏱️ ").strip()
+            rts = pts.add_run(f"• {clean_item}")
+            rts.font.name = 'Cambria'
+            rts.font.size = Pt(9.0)
+            rts.font.color.rgb = RGBColor(0x44, 0x44, 0x44)
+        
+    if questions:
+        pq_h = cell.add_paragraph()
+        format_paragraph(pq_h, space_before=3, space_after=1)
+        rq_h = pq_h.add_run("Mga Gabay na Tanong sa Panonood:")
+        rq_h.font.name = 'Cambria'
+        rq_h.font.size = Pt(9.5)
+        rq_h.font.bold = True
+        rq_h.font.color.rgb = RGBColor(0x1B, 0x36, 0x5D)
+        
+        for q in questions:
+            pq = cell.add_paragraph()
+            format_paragraph(pq, space_before=1, space_after=1)
+            rq = pq.add_run(f"• {q.lstrip('• ')}")
+            rq.font.name = 'Cambria'
+            rq.font.size = Pt(9.0)
+            rq.font.color.rgb = RGBColor(0x22, 0x22, 0x22)
     doc.add_paragraph()
 
 def initialize_document(subject="Filipino", grade="7", unit="III"):

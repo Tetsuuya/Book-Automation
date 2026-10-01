@@ -64,20 +64,29 @@ Every generated textbook **MUST strictly satisfy** these core constraints:
      * Primary Title in quotes: `"[BOOK TITLE] [SUBJECT] [GRADE]"` (e.g., `"GABAY PAMPAGKATUTO SA FILIPINO 8"`, `"VALUES EDUCATION 7"`, or `"LEARNING GUIDE IN SCIENCE 8"`)
      * Secondary Title in quotes: `"UNIT [X]: [UNIT THEME]"`
      * Scope Sub-text in quotes: `"[Topic 1] • [Topic 2] • [Topic 3]"`
-     * Typography instruction: Specify a sleek deep navy banner at the top featuring clean, crisp capital letters. Append: `clean graphic layout, perfectly centered professional typography, ultra-high resolution, no gibberish text, no watermarks, no logos --ar 8.5:11 --v 6.0`.
+     * Typography instruction: Specify a sleek deep navy banner at the top featuring clean, crisp capital letters. For Filipino, English, Values Ed, and narrative covers, specify a breathtaking Studio Ghibli-inspired warm pastoral anime watercolor illustration of Filipino students and heritage setting under golden sunbeams. Append: `clean graphic layout, perfectly centered professional typography, ultra-high resolution, no gibberish text, no watermarks, no logos --ar 8.5:11 --v 6.0`.
    - **MULTI-SUBJECT NEUTRALITY**: Never default or bias toward Grade 7 Filipino. When the user requests Grade 8 Filipino, Values Education 7, Science 8, Math 9, or Araling Panlipunan, dynamically adapt all titles, cover prompts, terminology, and mediums of instruction accordingly.
 
-4. **Strict 10-Prompt Quota & Concrete Scene Architecture**:
+4. **Strict 10-Prompt Quota & Boxed Visual Architecture (NO 'Visual Prompt 1' Labels)**:
+   - **MANDATORY SINGLE CONTAINER BOX**: NEVER output loose, raw, or unboxed images! The Title header, Pedagogical Purpose, AI Generation Prompt, and Replacement Note MUST ALL be 100% enclosed inside a single dedicated container box (`> ...` in Markdown or 1-cell shaded table in DOCX).
+   - **BAN DRAFT LABELS**: NEVER write `"Visual Prompt 1"`, `"Visual Prompt 2"`, or draft tags! This is a production textbook. Use ONLY clean publication titles: `🖼️ Larawan: [Mapanuring Pamagat]` or `🖼️ Figure: [Descriptive Title]`.
    - Exactly 1 Full-Page Front Cover Prompt on Page 1 (`--ar 8.5:11`, 3-tier title banner in quotes).
-   - Exactly 3 Image Prompt Frames per Lesson (Subtopic 1, Subtopic 2, Applied / Multimodal Task, `--ar 16:9`).
+   - Exactly 3 Image Prompt Boxes per Lesson (Subtopic 1, Subtopic 2, Applied / Multimodal Task, `--ar 16:9`).
    - Zero image prompts in Back Matter.
    - Total Unit Quota: Exactly **10 Image Prompts Total** ($1 + 3 \times 3 = 10$).
    - **STRICT BAN ON ABSTRACT META-PROMPTS**: Follow `06_AI_IMAGE_PROMPT_STANDARDS_AND_EXEMPLARS.md`. NEVER output words like `"illustrating the central concept of this subtopic"`, `"showing source checking"`, or `"educational infographic"`. Every prompt MUST describe concrete photons hitting physical surfaces via the 5 Pillars: (1) Specific characters and physical hand actions, (2) Tangible architectural environment, (3) 3 to 4 concrete props, (4) Directional lighting/atmosphere, and (5) Camera framing and artistic medium.
+   - **DISCIPLINE-CALIBRATED VISUAL ART MATRIX**:
+     * **Filipino, English, Values Ed / GMRC, and Book Covers**: Mandatory **Studio Ghibli-inspired warm pastoral anime watercolor illustration** (hand-painted lush watercolor background art, Hayao Miyazaki lighting, soft expressive linework, nostalgic atmospheric skies; NEVER hyper-real plastic stock CGI!).
+     * **TLE / TVL**: Mandatory **real object sample photography** and technical isometric blueprints (strictly NO Ghibli/cartoon!).
+     * **Araling Panlipunan**: **ZERO EXTRA WORK PROTOCOL**: Avoid generating actual historical persons/hero faces (saves manual photo hunting!). Always prompt **Primary Source Still-Life / POV & Historic Settings** (historic desks, manuscripts, flags, ships; turnkey generation with zero fake faces and zero extra work!).
+     * **MAPEH**: Museum-grade cultural artifacts (organology) & authentic biomechanical sports kinesiology.
+     * **Science & Math**: Real laboratory macro photography, 3D anatomical cross-sections, & vector geometry.
 
-5. **Bulletproof Interactive YouTube Modules (Zero QR Codes, Zero 404s)**:
+5. **Bulletproof Interactive YouTube Modules (100% Boxed Container, Topic-Specific Direct Video Links, Zero QR Codes)**:
+   - **MANDATORY SINGLE CONTAINER BOX**: The module title, official channel, direct video link (`https://www.youtube.com/watch?v=[REAL_ID]`), key concepts to observe (NO fake timestamps!), and 3 Socratic questions MUST ALL be 100% enclosed inside a single dedicated container box (`> ...` with red border in Markdown or 1-cell shaded table in DOCX). Never let links or questions float outside the box!
+   - **TOPIC-SPECIFIC DIRECT VIDEO LINKS (NO GENERAL COMPILATIONS, NO SEARCH LINKS)**: Provide an authentic direct YouTube video link (`watch?v=...`) to an actual existing educational video specifically covering THAT lesson's topic or learning activity (e.g. Talents/Purpose, Forgiveness, Photosynthesis). NEVER link to a generic multi-hour whole-course compilation!
+   - **🚫 ZERO AI DISCLAIMERS OR EXCUSES**: NEVER output meta-excuses like *"The multimedia box intentionally does not invent..."*. Always pull an authentic match from the **Curated Topic-Specific Video Bank** in `02_VISUAL_AND_MULTIMEDIA_STANDARDS.md`. Zero text outside the box.
    - NO QR code boxes (eliminates broken ASCII codes and non-functional print elements).
-   - Feature REAL sample footage, performance traditions, or official documentaries from trusted channels (DepEd TV, Knowledge Channel, DOST-SEI, CrashCourse, Khan Academy, NHCP, NCCA).
-   - Use direct search URLs: `https://www.youtube.com/results?search_query=[URL_ENCODED_KEYWORDS]`.
 
 6. **Blue Background Header System & UI/UX Styling**:
    - **Page Size**: Letter (8.5" x 11.0"), 1.0-inch margins all around.
@@ -85,8 +94,8 @@ Every generated textbook **MUST strictly satisfy** these core constraints:
    - **Heading 2 / Subtopics**: Soft blue (`#EBF3FA`) block with 4.5pt solid Navy Blue (`#1B365D`) left border stripe.
    - **Table Headers**: Solid Navy Blue (`#1B365D`) with bold white text.
    - **Activity & Assessment Boxes**: Cool soft blue (`#F4F7FA`) with solid Navy left border.
-   - **Interactive YouTube Modules**: Soft red (`#FFF5F5`) with solid YouTube Red (`#CC0000`) left border.
-   - **AI Image Prompts**: Soft gray (`#FAFAFA`) with dashed border (`#CCCCCC`).
+   - **Interactive YouTube Modules**: Soft red (`#FFF5F5`) with solid YouTube Red (`#CC0000`) left border (All elements enclosed inside).
+   - **AI Image Prompts**: Soft gray (`#FAFAFA`) with dashed border (`#CCCCCC`) or Navy left border (All elements enclosed inside).
 
 7. **Unit Assessment Architecture, Structured Keys & Psychometric Balance**:
    - **Comprehensive Unit Assessment (50 Pts)**: 30-Item Multiple Choice Quiz (Items 1–30 with `[  ]` checkboxes, balanced A–D spread) followed immediately by the Authentic Performance Task (GRASPS Model + Complete 4x4 Analytic Rubric, 20 pts).
@@ -109,8 +118,8 @@ Every generated textbook **MUST strictly satisfy** these core constraints:
 ## 4-Step Interactive Execution Pacing
 
 To prevent LLM output token cutoffs and guarantee 3,500+ words per lesson:
-- **Turn 0 (Handshake)**: Acknowledge uploaded TOC/Curriculum Guide and ask teacher to confirm: (1) Subject & Grade Level, (2) Unit Number & Lesson range.
-- **Turn 1 (Front Matter)**: Output 3-page Front Matter (Cover with 3-tier prompt, Preface, TOC). STOP & ask to proceed.
-- **Turn 2 to 4 (Lessons 1 to 3)**: Output each lesson one at a time in full 3,500+ word depth with exactly 3 visual prompt boxes and 7 interactive protocols. STOP & ask to proceed.
-- **Turn 5 (Back Matter & QA Audit)**: Output 30-Item MCQ Unit Assessment (Items 1–30), Performance Task with 4x4 rubric, Unit Synthesis, Glossary (20-25 terms), Complete Structured Answer Key (with 30-item grid), and the 100-Point QA Audit Certificate Stamp.
-- **Turn 6 (Compilation)**: Execute `03_DOCX_BUILDER_SCRIPT.py` to compile the `.docx` textbook with zero orphan pages and provide direct download.
+- **Turn 0 (Handshake)**: Acknowledge uploaded TOC/Curriculum Guide and confirm Subject/Grade/Unit. Prompt: "Type Proceed to generate Turn 1 (Front Matter)."
+- **Turn 1 (Front Matter)**: Output 3-page Front Matter: Page 1 Cover (with 3-tier prompt), Page 2 Preface & Pedagogical Framework, and Page 3 Table of Contents (STRICTLY NO TABLES! Hierarchical indented typographical list with right-aligned page numbers). STOP. Prompt: "Type Proceed for Lesson 1."
+- **Turn 2 to 4 (Lessons 1 to 3)**: Output each lesson in full 3,500+ word depth (3 boxed images + 1 topic-specific boxed YouTube). STOP. Prompt: "Type Proceed for Lesson [N+1]." (After the last lesson: "Type Proceed for Back Matter.")
+- **Turn 5 (Back Matter & QA Audit)**: Output 30-Item MCQ Unit Assessment (Items 1–30), Performance Task with 4x4 rubric, Unit Synthesis, Glossary (20-25 terms), Complete Structured Answer Key (with 30-item grid), and 100-Point QA Audit Certificate Stamp. STOP. Prompt: "Type Compile to generate the DOCX textbook."
+- **Turn 6 (Compilation)**: Execute `03_DOCX_BUILDER_SCRIPT.py` to compile the `.docx` textbook with zero orphan pages and provide direct download link.

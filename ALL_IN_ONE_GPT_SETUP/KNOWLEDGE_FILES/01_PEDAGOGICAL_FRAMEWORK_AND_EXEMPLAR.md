@@ -51,9 +51,12 @@ Every unit strictly follows the DepEd MATATAG instructional balance:
 `[PAGE BREAK]`
 
 ### Page 3: Table of Contents & Learning Framework (Talaan ng Nilalaman)
-- Banner: Full-width table banner with solid Navy Blue (`#1B365D`) background and bold white centered text: `TABLE OF CONTENTS & LEARNING FRAMEWORK` (or `TALAAN NG NILALAMAN AT BALANGKAS NG PAGKATUTO`).
-- Container: Single-cell callout table with `#FAFAFA` fill and a 4.5pt solid Navy Blue (`#1B365D`) left border.
-- Content: Compact, clean listing of every Lesson, Anchor Text/Lab, Subtopics, Learning Tasks, Formative Quizzes, Unit Assessment, Summary, and Answer Key with dot leaders and page numbers. Engineered to fit completely on Page 3 with comfortable margins.
+- **STRICT PROHIBITION: NEVER USE TABLE GRIDS FOR THE TOC!** Zero markdown table pipes (`| ... |`), zero bordered cells.
+- **Banner**: Solid Navy Blue (`#1B365D`) banner cell with bold white text: `Table of Contents` (or `Talaan ng Nilalaman`).
+- **Subtitle**: 10.5pt Bold Navy text directly beneath banner: `[Subject] [Grade] • [Unit #] • [Lesson Range]`.
+- **Layout**: Clean hierarchical indented typographic list with right-aligned page numbers:
+  * Bold flush-left milestones: Preface (p. 2), Lessons (p. 4, 18, 32), Unit Assessment (p. 46), Synthesis (p. 52), Teacher Answer Keys (p. 54), QA Audit (p. 63).
+  * 2-space indented subtopics: Introduction, Topic 1, Topic 2, Anchor Selection / Socratic Seminar, Topic 3, Guided Practice, Performance Task, Reflection & Summary, Formative Assessment.
 `[PAGE BREAK]`
 
 ---
@@ -66,20 +69,20 @@ Every lesson must contain all 10 sections written out in continuous, unbroken se
 - Lesson Title & Number (Heading 1, 17pt Bold Navy `#1B365D`)
 - DepEd MATATAG Learning Competencies & Domain Codes
 - 3 Essential Questions (Mga Mahahalagang Tanong) challenging higher-order cognitive processing
-- `[MULTIMEDIA: Video introduction module]`
+- `[DEDICATED YOUTUBE MULTIMEDIA MODULE BOX: 100% enclosed inside container box with red border; official channel, search link, timestamps, and 3 Socratic questions]`
 - Historical / Conceptual Context Background (300+ words of rich academic orientation)
 
 ### Section 2: Subtopic 1 - Foundational Theory & Concepts
 - Heading 2 (13.5pt Bold Navy)
 - 5 to 7 dense academic paragraphs (80–120 words each) exploring fundamental origins, historical/scientific context, core definitions, and structural principles.
-- `[VISUAL: Technical cross-section, historical artifact, or conceptual diagram]`
+- `[DEDICATED IMAGE CONTAINER BOX 1: 100% enclosed inside container box; clean production title (e.g., 'Larawan: ...' or 'Figure: ...'), Layunin/Pedagogical Purpose, 5-Pillar Scene Description, Replacement Note. NO 'Visual Prompt 1' draft labels!]`
 - Concept Matrix Table (3 columns: `[Term / Konsepto | Akademikong Kahulugan | Kongkretong Konteksto / Halimbawa]`).
 - Quick Check (Munting Pagsasanay): 3 targeted diagnostic questions.
 
 ### Section 3: Subtopic 2 - In-Depth Analytical Dimensions
 - Heading 2 (13.5pt Bold Navy)
 - 5 to 7 dense academic paragraphs (80–120 words each) exploring sociocultural, comparative, or advanced theoretical mechanisms.
-- `[VISUAL: Comparative thematic illustration or infographic]`
+- `[DEDICATED IMAGE CONTAINER BOX 2: 100% enclosed inside container box; clean production title, Layunin, 5-Pillar Scene Description, Replacement Note. NO 'Visual Prompt 2' draft labels!]`
 - Comparative / Data Matrix Table (3 to 4 columns with comprehensive data in every row).
 - Quick Check (Munting Pagsasanay): 3 targeted analytical questions.
 
@@ -97,7 +100,7 @@ Every lesson must contain all 10 sections written out in continuous, unbroken se
 ### Section 6: Subtopic 3 - Linguistic / Technical / Applied Mastery
 - Heading 2 (13.5pt Bold Navy)
 - 5 to 7 dense academic paragraphs (80–120 words each) on grammatical mechanisms, stylistic conventions, laboratory safety, or mathematical algorithms.
-- `[VISUAL: Procedural flowchart or technical diagram]`
+- `[DEDICATED IMAGE CONTAINER BOX 3: 100% enclosed inside container box; clean production title, Layunin, 5-Pillar Scene Description, Replacement Note. NO 'Visual Prompt 3' draft labels!]`
 - Procedural / Structural Matrix Table (3 columns with exhaustive, practical examples).
 - Quick Check (Munting Pagsasanay): 3 targeted application questions.
 

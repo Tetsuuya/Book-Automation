@@ -48,6 +48,27 @@ BANNED: "Filipino students in a classroom learning about the lesson with happy f
 **Why it Fails**:
 - Generic stock photo feel with zero subject-matter connection.
 
+### ❌ BANNED PROMPT 4: The "Faking Real Historical Heroes / Specific Persons" Blunder
+```text
+BANNED: "A portrait of Dr. Jose Rizal writing Noli Me Tangere in Berlin --ar 16:9"
+BANNED: "Andres Bonifacio shouting in the Cry of Pugad Lawin holding a bolo with angry face --ar 16:9"
+```
+**Why it Fails**:
+- AI image models (Midjourney, DALL-E) **cannot** accurately reproduce the true facial likeness of real historical persons. They hallucinate distorted faces, alien-looking eyes, inaccurate Westernized features, or disrespectful caricatures.
+- In national educational publishing, generating a fake AI face of a revered historical figure (Dr. Jose Rizal, Andres Bonifacio, Apolinario Mabini, Tandang Sora, Emilio Aguinaldo) is an unacceptable historical distortion and violates DepEd textbook standards.
+
+### 🏛️ THE NATIONAL HERO INTEGRITY RULE (ZERO EXTRA WORK PROTOCOL):
+> **NEVER generate AI faces of specific historical persons, and AVOID assigning manual photo-hunting homework to the user!**
+> Asking authors or teachers to manually search government archives for historical photos creates unnecessary extra work.
+> 
+> **The Turnkey Golden Standard**: Always generate a 100% ready-to-run AI prompt using the **Primary Source Artifact / Historic Setting / POV Technique** (desks, manuscripts, flags, ships, trade goods):
+> - **Studying Rizal & Literature?** ➔ Prompt the 1887 Berlin writing desk, handwritten draft manuscript of *Noli Me Tangere*, steel dip-pen, dark inkwell, vintage wire spectacles, and brass lamp.
+> - **Studying the Katipunan & Revolution?** ➔ Prompt the rustic table with the red Katipunan flag (white KKK sun), oil lamp, goose feather quill, oath ledger, and bolo scabbard in candlelit shadows.
+> - **Studying Pre-Colonial Society?** ➔ Prompt the ancient wooden balangay boat docked on a pristine shore with woven baskets of spices, native gold ornaments, and porcelain jars at golden sunrise.
+> - **Studying Maritime Trade?** ➔ Prompt the 17th-century Spanish galleon cargo deck loaded with silk bolts and spice crates in Manila Bay.
+> 
+> **Result**: Generates breathtaking, dignified, historically rich visuals in Midjourney/DALL-E with **ZERO distorted hero faces** and **ZERO extra manual search work** for the user!
+
 ---
 
 # PART 2.5: THE 3-STEP DYNAMIC TRANSLATION PIPELINE
@@ -81,7 +102,50 @@ When generating an image prompt for a subtopic, the AI must NEVER summarize the 
 
 ---
 
-# PART 3: THE 5 MANDATORY CINEMATOGRAPHIC PILLARS
+# PART 3: THE SUBJECT-CALIBRATED ARTISTIC MEDIUM & VISUAL MATRIX
+
+Image generation in an educational textbook must **never look like generic AI plastic or eerie uncanny-valley stock photography**. Furthermore, different subjects demand fundamentally different visual languages:
+
+```text
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                   SUBJECT-CALIBRATED VISUAL ART MATRIX & MEDIUM                        │
+├──────────────────────────┬─────────────────────────────┬───────────────────────────────┤
+│ DISCIPLINE / SUBJECT     │ MANDATORY VISUAL STYLE      │ KEY AESTHETIC MARKERS         │
+├──────────────────────────┼─────────────────────────────┼───────────────────────────────┤
+│ • FILIPINO               │ Studio Ghibli-Inspired      │ Hand-painted lush watercolor  │
+│ • ENGLISH                │ Pastoral Anime &            │ background art, warm Hayao    │
+│ • VALUES ED / GMRC       │ High-Detail Storybook       │ Miyazaki lighting, soft       │
+│ • TEXTBOOK FRONT COVERS  │ Illustration Aesthetic      │ expressive linework, nostalgic│
+│                          │                             │ atmospheric skies, tropical   │
+│                          │ (NOT hyper-real stock CGI!) │ flora, cultural warmth.       │
+├──────────────────────────┼─────────────────────────────┼───────────────────────────────┤
+│ • TLE / TVL              │ Real Object Sample /        │ Authentic workshop product    │
+│   (Technical-Vocational) │ Technical Engineering       │ photography, crisp isometric  │
+│                          │ Photography & Blueprints    │ drafting, real hand tools,    │
+│                          │                             │ clean workbench schematics,   │
+│                          │ (STRICT: NO GHIBLI/CARTOON!)│ OHS safety gear in action.    │
+├──────────────────────────┼─────────────────────────────┼───────────────────────────────┤
+│ • ARALING PANLIPUNAN     │ ZERO EXTRA WORK PROTOCOL:   │ Primary Source Still-Life &   │
+│   (Philippine History &  │ NO AI HERO FACES &          │ Tangible Period Settings:     │
+│    Historical Events)    │ NO MANUAL SEARCH HOMEWORK!  │ Historic desks, draft         │
+│                          │                             │ manuscripts, flags, ships,    │
+│                          │ 100% turnkey generatable    │ artifacts. Ready to generate; │
+│                          │ still-life / POV scenes.    │ zero fake faces, zero hunting!│
+├──────────────────────────┼─────────────────────────────┼───────────────────────────────┤
+│ • MAPEH                  │ Museum Cultural Artifact    │ Authentic cultural organology │
+│   (Music, Arts, PE,      │ Documentation & Precise     │ (Kulintang, Okir carvings),   │
+│    Health)               │ Biomechanical Kinesiology   │ museum-grade folk art, real   │
+│                          │                             │ athletic human kinesiology.   │
+├──────────────────────────┼─────────────────────────────┼───────────────────────────────┤
+│ • SCIENCE & MATHEMATICS  │ Real Laboratory Photography,│ Crisp compound optical slides,│
+│                          │ 3D Anatomical Cross-Section,│ specimen wet-mounts, clean    │
+│                          │ Vector Blueprint Geometry   │ apparatus, Cartesian grids.   │
+└──────────────────────────┴─────────────────────────────┴───────────────────────────────┘
+```
+
+---
+
+# PART 3.5: THE 5 MANDATORY CINEMATOGRAPHIC PILLARS
 
 Every single image prompt in the textbook MUST be built upon these **5 concrete physical layers**:
 
@@ -91,20 +155,26 @@ Every single image prompt in the textbook MUST be built upon these **5 concrete 
 ├────────────────────────────────────────────────────────────────────────┤
 │ 1. SPECIFIC CHARACTERS & TANGIBLE ACTION                               │
 │    Who is physically present? What exact action are their hands and    │
-│    eyes performing right now?                                          │
+│    eyes performing right now? (Filipino students, craftsmen, writers). │
 ├────────────────────────────────────────────────────────────────────────┤
 │ 2. PHYSICAL ENVIRONMENT & ARCHITECTURAL SETTING                        │
 │    Where is the scene? Room type, wall material, window style, floor.  │
+│    (Capiz-shell windows, bamboo dulang, science lab, workshop).        │
 ├────────────────────────────────────────────────────────────────────────┤
 │ 3. 3 TO 4 CONCRETE TANGIBLE PROPS / ARTIFACTS                          │
 │    Name physical objects sitting on tables, held in hands, or mounted. │
+│    (Mimeograph, mortar and tenon joint, sliding calipers, slides).     │
 ├────────────────────────────────────────────────────────────────────────┤
 │ 4. DIRECTIONAL LIGHTING, ATMOSPHERE & COLOR PALETTE                   │
-│    Where does light enter? What shadows fall? What are the key tones?  │
+│    Where does light enter? (Warm golden hour, dappled acacia leaves,   │
+│    nostalgic Studio Ghibli amber lantern glow, cool fluorescent lab).  │
 ├────────────────────────────────────────────────────────────────────────┤
-│ 5. CAMERA FRAMING, DEPTH OF FIELD & ARTISTIC MEDIUM                    │
-│    Shot type (medium shot, macro close-up), lens bokeh, art style      │
-│    (museum archival photography, classical oil painting realism).      │
+│ 5. DISCIPLINE-CALIBRATED ARTISTIC MEDIUM & CAMERA OPTICS               │
+│    - Filipino / English / Values / Covers: Studio Ghibli anime style,  │
+│      hand-painted lush watercolor background, soft expressive lines.   │
+│    - TLE: Real object sample photography, crisp macro detail, studio.  │
+│    - History (AP): Classical museum historical painting, archival oil. │
+│    - Science/Math: Macro lab photography, 3D anatomical render.        │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -127,86 +197,119 @@ To prevent visual clutter and maintain high editorial density:
 
 ---
 
-# PART 5: MULTI-SUBJECT GOLD-STANDARD EXEMPLARS
+# PART 5: MULTI-SUBJECT GOLD-STANDARD BOXED EXEMPLARS
 
-### EXEMPLAR 1: GRADE 8 FILIPINO (Panitikan sa Panahon ng Hapon)
+> **CRITICAL PRODUCTION DIRECTIVE:**  
+> 1. **BAN DRAFT LABELS:** NEVER write `"Visual Prompt 1"`, `"Visual Prompt 2"`, or `"Prompt 1"`! Use ONLY clean production titles: `🖼️ Larawan: [Mapanuring Pamagat]` or `🖼️ Figure: [Descriptive Title]`.  
+> 2. **MANDATORY SINGLE CONTAINER BOX:** The title, pedagogical purpose, AI prompt, and replacement note MUST ALL be enclosed inside ONE single container box (Markdown callout `> ...` or shaded 1-cell table). Never leave loose or unboxed lines outside!
 
-#### Bad / Generic Prompt (DO NOT DO THIS):
-`"A publication-grade Grade 8 Filipino infographic illustrating literature during the Japanese period with historical elements --ar 16:9"`
+### EXEMPLAR 1: GRADE 8 FILIPINO — GHIBLI / STORYBOOK STYLE
+#### (Panitikan sa Panahon ng Hapon: Tagong Palimbagan)
 
-#### Good / Publication-Grade Prompt (DO THIS):
-```text
-[IMAGE PLACEHOLDER: Tagong Palimbagan ng Panitikan sa Panahon ng Hapon (1943)]
-Layunin: Magbigay ng kongkretong historikal na konteksto sa lihim na pagsulat at paglilimbag ng mga maikling kuwento at tula sa gitna ng sensura noong 1943.
-
-AI Prompt: An evocative, dramatic historical scene set in 1943 Manila during the Japanese occupation. Inside a dimly lit clandestine printing cellar, two Filipino writers—a young man in a rolled-up Barong Tagalog and an older editor wearing vintage round wire spectacles—quietly inspect newly inked mimeograph sheets of wartime Tagalog short stories. On the heavy weathered wooden table rests an antique hand-cranked mimeograph machine, dark ink bottles, stacks of rough brown Manila paper, and a pair of brass tweezers. In the background, wooden shelves stacked with hidden manuscripts, and faint moonlight filtering through a high, barred basement grate. Chiaroscuro lighting with warm amber lantern glow illuminating their focused faces, cinematic historical realism, rich atmospheric textures, no text, no logos, no watermark, no branding --ar 16:9 --v 6.0
-```
-
----
-
-### EXEMPLAR 2: GRADE 8 FILIPINO (Pagsusuri sa Tanaga at Katutubong Tula)
-
-#### Good / Publication-Grade Prompt:
-```text
-[IMAGE PLACEHOLDER: Pagsulat at Pagbigkas ng Tanaga sa Ilalim ng Katutubong Bahay]
-Layunin: Ipakita ang tradisyong oral at nakalimbag na anyo ng Tanaga (7-7-7-7 pantig) bilang salamin ng katatagan at talinghaga ng mga karaniwang mamamayan.
-
-AI Prompt: A warm, authentic rural scene in 1940s Bulacan, Philippines. On the wide bamboo-slatted floor of a traditional bahay kubo balcony, an elderly Filipina poet in a simple vintage floral kimona recites traditional 7-syllable Tanaga verses to two attentive teenage students (a 14-year-old Filipino boy and girl in neat cotton daily school attire). On a low wooden dulang table between them lie a handwritten ink diary with neatly lined stanzas, an opened clay palayok cup with native tea, and dried tobacco leaves. Soft tropical morning sunbeams stream through sliding capiz-shell window panels, casting gentle lattice shadows across the polished bamboo slats. Lush banana groves and mango foliage in the background. Masterful watercolor and gouache realism, fine line art, warm earthy tones, no text, no logos, no watermark, no branding --ar 16:9 --v 6.0
-```
+> ### 🖼️ Larawan: Tagong Palimbagan ng Panitikan sa Panahon ng Hapon (1943)
+> **Pedagohikal na Layunin:** Magbigay ng madamdaming historikal na konteksto sa lihim na pagsulat ng panitikan sa ilalim ng sensura noong 1943 sa estilong Studio Ghibli.  
+> **AI Prompt (Midjourney v6 / DALL-E 3):**  
+> `A warm, evocative, beautifully hand-painted Studio Ghibli anime aesthetic scene set in 1943 Manila during the Japanese occupation. Inside a dimly lit clandestine wooden attic, two Filipino writers—a young man with rolled-up white cotton sleeves and an elder editor wearing round wire spectacles—quietly inspect newly inked mimeograph sheets of wartime Tagalog short stories. On the heavy weathered acacia wood table rests a vintage hand-cranked mimeograph machine, dark ink bottles, stacks of warm brown paper, and a brass kerosene lantern casting a soft golden glow over their determined faces. In the background, wooden shelves stacked with hidden manuscripts, and a window opening to twilight rooftop silhouettes under a deep indigo sky. Lush hand-painted watercolor background art, Hayao Miyazaki pastoral warmth, gentle line art, rich nostalgic atmosphere, no text, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
+>  
+> *Paunawa sa Guro at Mag-aaral: Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures).*
 
 ---
 
-### EXEMPLAR 3: GRADE 7 SCIENCE (Microscopy & Plant vs. Animal Cells)
+### EXEMPLAR 2: GRADE 7 FILIPINO / ENGLISH — GHIBLI / STORYBOOK STYLE
+#### (Pagbigkas ng Tanaga sa Ilalim ng Katutubong Bahay)
 
-#### Bad / Generic Prompt (DO NOT DO THIS):
-`"An educational infographic showing cell biology and students analyzing cells --ar 16:9"`
-
-#### Good / Publication-Grade Prompt (DO THIS):
-```text
-[IMAGE PLACEHOLDER: Comparative Laboratory Examination of Onion and Cheek Cells]
-Layunin: Ilarawan ang aktuwal na proseso ng paghahanda ng wet-mount slide at paghahambing sa estruktura ng plant cell (may cell wall) laban sa animal cell.
-
-AI Prompt: A crisp, professional laboratory scene in a modern Philippine school science laboratory. In the foreground, an authentic compound optical light microscope stands on a clean black lab counter. Resting beside it on a white ceramic tray are prepared glass slides: one clearly showing a translucent purple-stained Allium cepa (onion epidermal) wet mount with a thin square coverslip, alongside a blue methylene-stained human cheek epithelial smear. A stainless steel dissection needle, a plastic dropper with iodine reagent bottle, and an open student laboratory observation notebook with clean hand-drawn pencil diagrams of hexagonal plant cell walls. Soft directional LED laboratory lighting, macro photography aesthetic, crisp glass reflections, shallow depth of field with blurred classroom background, no text, no logos, no watermark, no branding --ar 16:9 --v 6.0
-```
+> ### 🖼️ Larawan: Pagbigkas ng Katutubong Tula sa Balkonahe ng Bahay Kubo
+> **Pedagohikal na Layunin:** Ipakita ang tradisyong oral at kultural na init ng pagpapasa ng panitikan sa nakababatang henerasyon.  
+> **AI Prompt (Midjourney v6 / DALL-E 3):**  
+> `A breathtaking Studio Ghibli inspired anime illustration of a peaceful rural afternoon in Bulacan, Philippines. On the polished bamboo-slatted balcony of a traditional bahay kubo, a gentle elderly Filipina grandmother in a floral vintage kimona recites traditional 7-syllable Tanaga verses to two attentive teenage students (a 13-year-old Filipino boy and girl in neat school uniforms). On a low wooden dulang table between them sit a clay tea pot with steaming cups and an open handwritten journal. Golden tropical sunlight filters through sliding capiz-shell window panels, casting intricate diamond light patterns across the floor. In the lush background, wind gently sways emerald banana groves, tall mango trees, and billowy painted cumulus clouds in an azure summer sky. Masterful watercolor anime scenery, Makoto Shinkai and Hayao Miyazaki aesthetic, warm heartfelt emotions, fine hand-drawn details, no text, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
+>  
+> *Paunawa sa Guro at Mag-aaral: Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures).*
 
 ---
 
-### EXEMPLAR 4: GRADE 9 MATHEMATICS (Quadratic Functions & Parabolic Bridge Architecture)
+### EXEMPLAR 3: GRADE 7 VALUES EDUCATION / GMRC — GHIBLI / STORYBOOK STYLE
+#### (Pagpapatawad at Pagkakasundo sa Hardin ng Paaralan)
 
-#### Bad / Generic Prompt (DO NOT DO THIS):
-`"A mathematical diagram illustrating quadratic functions with real-world context --ar 16:9"`
-
-#### Good / Publication-Grade Prompt (DO THIS):
-```text
-[IMAGE PLACEHOLDER: Real-World Parabolic Arch Engineering of Marcelo Fernan Bridge]
-Layunin: Ipakita ang kongkretong aplikasyon ng quadratic equation at vertex form sa estruktura ng suspension bridge cables at parabolic arch geometry.
-
-AI Prompt: A breathtaking architectural and civil engineering photograph of a major Philippine modern cable-stayed bridge spanning across a calm coastal strait at sunset. The massive steel-reinforced parabolic suspension cables sweep downward in a mathematically perfect quadratic curve, tethered to tall concrete pylons against a luminous twilight sky of amber, violet, and deep indigo. In the foreground, an engineering blueprint clipboard with clean white line drawings of a coordinate Cartesian plane overlaid along the bridge curve, marking the vertex (h, k) and axis of symmetry. Golden hour directional lighting reflecting on the water below, ultra-wide 24mm architectural photography, razor-sharp structural steel details, no text, no logos, no watermark, no branding --ar 16:9 --v 6.0
-```
+> ### 🖼️ Larawan: Taos-Pusong Pagkakasundo ng Magkaibigan sa Ilalim ng Puno ng Acacia
+> **Pedagohikal na Layunin:** Magbigay ng positibo, makatao, at emosyonal na representasyon ng pagpapatawad at pagtutulungan ng mga kabataan.  
+> **AI Prompt (Midjourney v6 / DALL-E 3):**  
+> `A heartwarming, emotionally resonant Studio Ghibli style anime illustration capturing sincere reconciliation between two 13-year-old Filipino Grade 7 students. Seated side-by-side on a rustic wooden bench under a sprawling, canopy-rich acacia tree in a quiet school courtyard, one boy smiles gently while placing a reassuring hand on his friend's shoulder, who looks up with humble relief. Between them, an open sketchbook with colorful drawings rests on their knees. Dappled golden morning sunlight dances through leaves, illuminating floating pollen and warm gentle breezes. Surrounding the courtyard are vibrant potted tropical flowers, blooming yellow kalachuchi, and retro school hallways. Soft hand-painted watercolor textures, heartfelt anime aesthetic, warm nostalgic color palette, no text, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
+>  
+> *Paunawa sa Guro at Mag-aaral: Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures).*
 
 ---
 
-### EXEMPLAR 5: GRADE 7 VALUES EDUCATION (Forgiveness & Kapuwa Reconciliation)
+### EXEMPLAR 4: TLE / TVL — STRICT REAL OBJECT SAMPLE EXCEPTION
+#### (Woodworking Mortise and Tenon Joint & Workshop Tools)
 
-#### Bad / Generic Prompt (DO NOT DO THIS):
-`"An infographic showing values education and reconciliation concept among teenagers --ar 16:9"`
+> ### 🖼️ Figure: Actual Wooden Mortise and Tenon Joint Sample & Hand Tools
+> **Pedagogical Purpose:** Ipakita ang aktuwal na estruktura at precision craftsmanship ng mortise and tenon joint para sa gawaing-kahoy.  
+> **AI Prompt (Midjourney v6 / DALL-E 3):**  
+> `A crisp, professional real-object product sample photograph of a finely crafted wooden mortise and tenon joint on a heavy carpenter's workbench. The joint is shown partially disassembled, revealing the precise rectangular tenon tongue fitting perfectly into the clean chiseled mortise hole in solid Narra hardwood with rich natural wood grain. Lying neatly beside the wooden joint are real authentic carpentry tools: a vintage steel marking gauge, an oiled hand-chisel with polished wooden handle, a brass sliding caliper, and fresh curly wood shavings scattered on the scarred wooden tabletop. Bright natural daylight from an overhead workshop window, macro commercial tool photography, sharp focus across wood fibers, authentic technical craftsmanship, no text, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
+>  
+> *Paunawa sa Guro at Mag-aaral: Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures).*
 
-#### Good / Publication-Grade Prompt (DO THIS):
-```text
-[IMAGE PLACEHOLDER: Sincere Peer Reconciliation in a School Courtyard]
-Layunin: Magbigay ng positibo at makataong representasyon sa pagpapatawad, pagpapakumbaba, at panunumbalik ng tiwala sa pagitan ng magkaibigan.
+---
 
-AI Prompt: A heartwarming, emotionally authentic interaction between two 13-year-old Filipino Grade 7 students (two boys wearing clean, badge-free navy blue and white school uniforms) seated side-by-side on a rustic wooden bench in a quiet school courtyard garden. One student looks down with an expression of honest sincerity and humility, while the other places a reassuring hand on his shoulder with an open, forgiving smile, holding a shared school sketchbook between them. Surrounding them are potted native tropical plants, blooming yellow calachuchi blossoms, and gentle dappled morning sunlight filtering through broad acacia tree branches. Natural candid portrait photography, 85mm portrait lens, creamy soft-focus background bokeh, warm uplifting natural tones, no text, no logos, no watermark, no branding --ar 16:9 --v 6.0
-```
+### EXEMPLAR 5A: ARALING PANLIPUNAN — REAL HISTORICAL HERO (ARCHIVAL PHOTO FRAME)
+#### (Method 1: Authentic Historical Portrait — STRICTLY NO AI GENERATION!)
+
+> ### 🏛️ Larawang Pangkasaysayan: Dr. Jose Rizal (1896 Archival Collection)
+> **Pedagohikal na Layunin:** Magpakita ng tunay at hindi gawa-gawang (authentic, non-AI) historikal na larawan ng pambansang bayani bilang paggalang sa kanyang tunay na mukha at kasaysayan.  
+> *Paunawa sa Guro/Editor: HUWAG gamitin ang AI para iguhit o gawin ang mukha ni Rizal! I-insert sa Microsoft Word ang opisyal na public-domain archival photograph mula sa Pambansang Komisyong Pangkasaysayan ng Pilipinas (NHCP) o Pambansang Aklatan ng Pilipinas.*  
+> **Sanggunian:** National Historical Commission of the Philippines (NHCP) Digital Archival Collection.
+
+---
+
+### EXEMPLAR 5B: ARALING PANLIPUNAN — PRIMARY SOURCE STILL LIFE / POV
+#### (Method 2: Atmospheric Historical Reconstruction — Desk, Artifacts, Zero Hero Faces!)
+
+> ### 🖼️ Larawan: Pagsulat ng Noli Me Tangere: Ang Mesa ng Manunulat sa Berlin (1887)
+> **Pedagohikal na Layunin:** Ilarawan ang kongkretong atmospera at mga kagamitan sa pagsulat ng Noli Me Tangere sa Berlin nang hindi gumagawa ng pekeng mukha ng bayani.  
+> **AI Prompt (Midjourney v6 / DALL-E 3):**  
+> `An authentic 1887 historical still life and point-of-view scene inside a cold, modest attic room in Berlin, Germany. Focus on a heavy oak writing desk: open handwritten draft manuscripts of "Noli Me Tangere" with neat Spanish cursive script in sepia ink, a dark glass ink bottle, a slender steel dip pen resting on an inkstand, and vintage round wire-rimmed reading spectacles lying beside an unfolded letter addressed to Ferdinand Blumentritt. On the corner of the table sits an antique brass kerosene lamp casting a warm amber pool of light over the paper, alongside a small, half-eaten loaf of dark rye bread. In the background, tall wooden windowpanes with frost patterns overlooking dim European cobblestone streets under a snowy twilight sky. Classical museum oil painting realism, rich canvas textures, dignified historical atmosphere, NO human faces, no text, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
+>  
+> *Paunawa sa Guro at Mag-aaral: Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures).*
+
+---
+
+### EXEMPLAR 6: GRADE 7 SCIENCE — REAL LABORATORY & MACRO SPECIMEN EXCEPTION
+#### (Compound Optical Microscope & Plant Cell Wet-Mount)
+
+> ### 🖼️ Figure: Real Laboratory Microscope & Wet-Mount Slide Examination
+> **Pedagogical Purpose:** Ilarawan ang aktuwal na proseso ng paghahanda ng wet-mount slide at paghahambing sa estruktura ng plant cell.  
+> **AI Prompt (Midjourney v6 / DALL-E 3):**  
+> `A crisp, professional laboratory scene in a modern Philippine school science laboratory. In the foreground, an authentic compound optical light microscope stands on a clean black chemical-resistant lab counter. Resting beside it on a white ceramic tray are prepared glass slides: one clearly showing a translucent purple-stained Allium cepa (onion epidermal) wet mount with a thin square coverslip, alongside a blue methylene-stained human cheek epithelial smear. A stainless steel dissection needle, a plastic dropper with iodine reagent bottle, and an open student laboratory observation notebook with clean hand-drawn pencil diagrams of hexagonal plant cell walls. Soft directional LED laboratory lighting, macro photography aesthetic, crisp glass reflections, shallow depth of field with blurred classroom background, no text, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
+>  
+> *Paunawa sa Guro at Mag-aaral: Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures).*
+
+---
+
+### EXEMPLAR 7: GRADE 9 MATHEMATICS — GEOMETRIC & ARCHITECTURAL CURVE EXCEPTION
+#### (Parabolic Bridge Cable Suspension Architecture)
+
+> ### 🖼️ Figure: Real-World Parabolic Arch Engineering of Marcelo Fernan Bridge
+> **Pedagogical Purpose:** Ipakita ang kongkretong aplikasyon ng quadratic equation at vertex form sa estruktura ng suspension bridge cables.  
+> **AI Prompt (Midjourney v6 / DALL-E 3):**  
+> `A breathtaking architectural and civil engineering photograph of a major Philippine modern cable-stayed bridge spanning across a calm coastal strait at sunset. The massive steel-reinforced parabolic suspension cables sweep downward in a mathematically perfect quadratic curve, tethered to tall concrete pylons against a luminous twilight sky of amber, violet, and deep indigo. In the foreground, an engineering blueprint clipboard with clean white line drawings of a coordinate Cartesian plane overlaid along the bridge curve, marking the vertex (h, k) and axis of symmetry. Golden hour directional lighting reflecting on the water below, ultra-wide 24mm architectural photography, razor-sharp structural steel details, no text, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
+>  
+> *Paunawa sa Guro at Mag-aaral: Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures).*
 
 ---
 
 # PART 6: PRE-GENERATION AUDIT CHECKLIST FOR IMAGE PROMPTS
 
-Before outputting ANY image prompt frame in the textbook, verify that it passes all 5 checkpoints:
+Before outputting ANY image prompt frame in the textbook, verify that it passes all 8 checkpoints:
 
-- [ ] **Check 1: Zero Meta-Words**: Does it completely avoid words like *"infographic"*, *"illustrating the concept"*, *"showing textual analysis"*, or *"central concept"*?
-- [ ] **Check 2: Physical People & Action**: Are the subjects physically described with specific postures, hands, or eye focus?
-- [ ] **Check 3: Concrete Physical Setting**: Is the room, building, landscape, or environment explicitly named?
-- [ ] **Check 4: 3 to 4 Tangible Artifacts/Props**: Are there real physical objects mentioned (mimeograph, quill, slide, microscope, cables, bench)?
-- [ ] **Check 5: Strict Zero Branding & Proper Parameters**: Are all brand acronyms (`DepEd`, `MATATAG`) completely omitted, and does it end with `--ar 16:9 --v 6.0` (or `--ar 8.5:11` for covers)?
+- [ ] **Check 1: Clean Production Title Only (BAN "Visual Prompt 1")**: Does it use ONLY `🖼️ Larawan: [Title]` or `🖼️ Figure: [Title]`? Is `"Visual Prompt 1"` or any draft number strictly banned?
+- [ ] **Check 2: 100% Inside Dedicated Container Box**: Are the title, purpose, prompt, and note ALL completely enclosed inside the container box (`> ...` in Markdown or 1-cell shaded table in DOCX) with NO loose text outside?
+- [ ] **Check 3: Style Calibration**: 
+      - Is it **English, Filipino, Values Ed / GMRC, or Book Cover**? -> Must be **Studio Ghibli-inspired warm pastoral anime watercolor illustration**!
+      - Is it **TLE / TVL**? -> Must be **real object sample photography / engineering schematics**!
+      - Is it **History / AP (real heroes/events)**? -> **STRICT BAN on AI-generating hero faces!** Use Archival Photo Frame (NHCP) OR Primary Source Still-Life / POV (desks, manuscripts, artifacts; NO fake hero faces)!
+      - Is it **Science / Math**? -> Must be **macro lab photography, 3D anatomical render, or vector geometry**!
+- [ ] **Check 4: Zero Meta-Words**: Does it completely avoid words like *"infographic"*, *"illustrating the concept"*, *"showing textual analysis"*, or *"central concept"*?
+- [ ] **Check 5: Physical People & Action**: Are the subjects physically described with specific postures, hands, or eye focus?
+- [ ] **Check 6: Concrete Physical Setting**: Is the room, building, landscape, or environment explicitly named?
+- [ ] **Check 7: 3 to 4 Tangible Artifacts/Props**: Are there real physical objects mentioned (mimeograph, dulang, joint, tools, microscope, slides)?
+- [ ] **Check 8: Strict Zero Branding & Proper Parameters**: Are all brand acronyms (`DepEd`, `MATATAG`) completely omitted, and does it end with `--ar 16:9 --v 6.0` (or `--ar 8.5:11` for covers)?

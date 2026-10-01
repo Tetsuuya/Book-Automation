@@ -96,18 +96,28 @@ The AI must NEVER fabricate data, dates, laws, historical figures, or mathematic
 1. **Cover Typography & Title Banner**:
    - Deep Navy Blue banner at the top specifying 3 tiers of text in quotes: `"[BOOK TITLE] [SUBJECT] [GRADE]"`, `"UNIT [X]: [THEME]"`, and `"[Scope 1] • [Scope 2]"`.
    - Never use generic `[IMAGE PLACEHOLDER]` on Page 1.
-2. **Zero Branding in Image Prompts & Strict 10-Prompt Quota**:
-   - NO `"DepEd"`, `"MATATAG"`, or publisher logos inside AI image prompts. Institutional identity belongs ONLY in running headers and footers.
+2. **Dedicated Visual Container Boxes & Strict Ban on Draft Labels**:
+   - **BAN DRAFT LABELS**: Strict zero-tolerance for `"Visual Prompt 1"`, `"Visual Prompt 2"`, `"sample visual prompt"`, or internal notes in the document! Use ONLY production titles: `🖼️ Larawan: [Mapanuring Pamagat]` or `🖼️ Figure: [Descriptive Title]`.
+   - **100% Boxed Containment**: Title, Pedagogical Purpose, AI Prompt, and Replacement Note MUST ALL be cleanly enclosed inside ONE dedicated container box (`> ...` in Markdown or 1-cell shaded table in DOCX). No loose text outside the box.
+   - **Zero Branding in Image Prompts**: NO `"DepEd"`, `"MATATAG"`, or publisher logos inside AI image prompts. Institutional identity belongs ONLY in running headers and footers.
    - **Strict 10-Prompt Quota**: Exactly 1 Cover Prompt on Page 1 (`--ar 8.5:11`) + 3 Image Prompts per Lesson (`--ar 16:9`) = Exactly **10 image prompts total per unit** ($1 + 3 \times 3 = 10$). Zero image prompts in Back Matter.
-3. **YouTube Search Links**:
-   - Zero QR codes. All interactive media modules MUST use guaranteed search query URLs: `https://www.youtube.com/results?search_query=[URL_ENCODED_KEYWORDS]`.
-4. **Navy Header System**:
+3. **Bulletproof YouTube Multimedia Modules (Topic-Specific Direct Video Links, Zero Fake Timestamps, Zero Disclaimers)**:
+   - **Legitimate & Verified Media**: Video module must cite legitimate, active channels (*DepEd TV Official, Knowledge Channel, CrashCourse, Khan Academy, DOST-SEI, GMA Public Affairs, TED-Ed, SoulPancake*).
+   - **Topic-Specific Direct Real Video Link**: Must provide the authentic direct video URL (`https://www.youtube.com/watch?v=[REAL_VIDEO_ID]`) specifically covering THAT lesson's topic or activity. **NO SEARCH LINKS** (`results?search_query=...`) and **NO GENERIC WHOLE-COURSE COMPILATIONS**.
+   - **🚫 ZERO AI DISCLAIMERS OR EXCUSES**: Strict ban on publishing meta-excuses like *"The multimedia box intentionally does not invent a direct video address..."* or *"link should be inserted during publication verification"*. Always pull an authentic verified video from the **Curated Topic-Specific Video Bank** in `02_VISUAL_AND_MULTIMEDIA_STANDARDS.md`. Zero text outside the box.
+   - **BAN HALLUCINATED TIMESTAMPS**: Never invent fake minutes and seconds (e.g. `02:15 - 04:30`). Instead, provide 2–3 **Key Concepts & Themes to Observe** in the video, followed by 3 Socratic Viewing Questions.
+   - **Zero QR Codes**: Banned to prevent broken ASCII boxes.
+4. **Editorial Purity & Lesson Content Fit (Zero Draft Residue)**:
+   - Zero meta-commentary, conversational filler ("Sure, here is Lesson 1", "In this section we will"), or developer placeholders.
+   - Prose must flow with seamless academic authority and continuity across all 10 lesson sections.
+5. **Navy Header System & Non-Table Table of Contents**:
    - Heading 1 in solid Navy Blue (`#1B365D`) banner cell with white text.
    - Heading 2 in soft blue (`#EBF3FA`) block with 4.5pt solid Navy left border.
-5. **Unit Assessment Architecture & Structured Table Keys**:
+   - **Page 3 Table of Contents**: Formatted strictly as a hierarchical indented typographic list with right-aligned page numbers. **STRICTLY NO TABLE GRIDS** (`| ... |`)!
+6. **Unit Assessment Architecture & Structured Table Keys**:
    - **Unit Assessment (50 Pts)**: Comprehensive 30-Item Multiple Choice Quiz (Items 1–30 with `[  ]` checkboxes, balanced A–D spread) followed immediately by the Authentic Performance Task (GRASPS Model + Complete 4x4 Analytic Rubric).
    - **Structured Table Answer Keys**: Rendered in clean table grids (10-col for lessons, two 15-col grids for 30-item Unit Assessment, plus 2-col rationale tables). **ZERO paragraph blobs!**
-6. **Psychometric Option Balance & Anti-'Mostly B' Bias**:
+7. **Psychometric Option Balance & Anti-'Mostly B' Bias**:
    - Correct answers MUST be evenly distributed across options `A`, `B`, `C`, and `D` (~25% each; 2 to 3 per 10 items).
    - Strict ban on letter-clustering bias (never default to 'B' or any single letter).
    - Zero consecutive runs of >2 identical letters (e.g. `A-A-C` is allowed, `B-B-B` is prohibited).
@@ -121,27 +131,29 @@ At the conclusion of Back Matter (Turn 5), the generator evaluates the textbook 
 
 | Audit Dimension | Evaluation Criteria | Maximum Points | Verification Checklist |
 | :--- | :--- | :---: | :--- |
-| **1. MATATAG Alignment** | Explicit competency codes, 3 Essential Questions mapped to subtopics, strict 70/30 instructional-to-activity balance. | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
+| **1. MATATAG Alignment & Content Fit** | Explicit competency codes, 3 Essential Questions mapped to subtopics, seamless academic prose, zero draft artifacts or conversational residue. | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
 | **2. Developmental Appropriateness** | Cognitive demand matched to grade band (DOK 1-4), age-appropriate readability, gender-fair and inclusive language. | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
 | **3. Zero-Hallucination & Accuracy** | 100% verified historical dates, authentic literary selections, sound scientific laws, zero math calculation errors. | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
 | **4. Pedagogical Rigor & Density** | 3,500+ words per lesson, 8-10 turn scholarly Socratic dialogue, complete 4x4 analytic rubrics (all 16 cells filled), continuous flow. | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
-| **5. Layout, Visuals & Answer Keys** | 3-tier Cover banner, zero branding in prompts, active YouTube search links, structured table answer keys (no paragraph blobs), balanced choices (~25% each, zero 'mostly B' bias). | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
+| **5. Layout, Visuals, TOC & Keys** | 100% boxed visuals (zero "Visual Prompt" draft labels), non-table hierarchical TOC, topic-specific direct video links (zero disclaimers/notes outside box), structured table keys (no paragraph blobs), balanced choices (~25% each, zero 'mostly B' bias). | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
 | **TOTAL SCORE** | **Comprehensive DepEd MATATAG Unit Rating** | **100 pts** | **Target: 95–100 pts** |
 
 ---
 
 ### QA Audit Certificate Stamp (Rendered at End of Unit):
 ```text
-═══════════════════════════════════════════════════════════════════════
+═══════════════════════════════════════════════════════════════════════════════
         DEPED MATATAG CURRICULUM QUALITY ASSURANCE CERTIFICATE
-═══════════════════════════════════════════════════════════════════════
+═══════════════════════════════════════════════════════════════════════════════
 SUBJECT & GRADE: [Subject] Grade [X] • Unit [Y]
 COMPETENCY ALIGNMENT: 100% Verified against MATATAG Curriculum Standards
-PEDAGOGICAL RATIO: 70% Masterclass Lesson Content / 30% Formative Practice
+CONTENT & EDITORIAL FIT: Pure Masterclass Prose (Zero Draft / Placeholder Residue)
+PEDAGOGICAL RATIO: 70% Lesson Content / 30% Formative Practice (3,500+ w/lesson)
 READABILITY & LEVEL: Grade-Level Appropriate (DOK 1-4 Cognitive Progression)
 FACTUAL AUDIT: Zero Hallucinations • Historical, Scientific & Math Verified
+VISUAL & MEDIA INTEGRITY: 100% Boxed Containers • Production Titles • No Fake Timestamps
 ANSWER KEY FORMAT: Clean Structured Tables (MCQ Grid + Rationale Matrix)
 OPTION DISTRIBUTION: Balanced Psychometric Spread across A, B, C, D (~25% each, max 2 consecutive)
 OVERALL QA AUDIT SCORE: [98/100] • STATUS: PASSED FOR CLASSROOM DEPLOYMENT
-═══════════════════════════════════════════════════════════════════════
+═══════════════════════════════════════════════════════════════════════════════
 ```

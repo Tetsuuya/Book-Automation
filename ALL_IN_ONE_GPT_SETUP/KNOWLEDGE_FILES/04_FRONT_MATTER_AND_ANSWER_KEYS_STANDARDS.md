@@ -72,7 +72,101 @@ AI IMAGE PROMPT: A prestigious, high-end educational textbook cover layout. At t
 
 ---
 
-# PART 2: PAGE 44 STRUCTURED TABLE ANSWER KEY ARCHITECTURE
+# PART 2: PAGE 3 TABLE OF CONTENTS ARCHITECTURE (STRICTLY NO TABLES)
+
+### 🚫 STRICT PROHIBITION: NEVER USE TABLE GRIDS FOR THE TABLE OF CONTENTS
+- **FORBIDDEN (Never do this)**:
+  ```markdown
+  | Aralin / Bahagi | Pahina |
+  | :--- | :---: |
+  | Aralin 15: ... | 4 |
+  ```
+  *Reason: Table grids, borders, and Markdown pipes look like database records rather than a world-class publication textbook.*
+
+### ✅ MANDATORY TYPOGRAPHICAL TABLE OF CONTENTS LAYOUT:
+The Table of Contents MUST ALWAYS follow this exact typographic architecture:
+1. **Solid Navy Blue Banner Cell (`#1B365D`)**: Bold white centered/left-aligned text: `Table of Contents` (English) or `Talaan ng Nilalaman` (Filipino).
+2. **Unit Scope Subtitle Line**: 10.5pt Bold Navy text directly beneath banner: `[Subject] [Grade] • [Unit Number & Theme] • [Lesson Range]`.
+3. **Hierarchical Indented Typographic List**:
+   - **Major Structural Milestones (Bold, Flush Left)**: Preface, Lesson Headings, Unit Assessment, Unit Synthesis, Teacher Keys, and QA Audit with right-aligned bold page numbers.
+   - **Internal Lesson Subtopics (Indented 2–4 spaces, Regular weight)**: Introduction, Topic 1, Topic 2, Anchor Selection / Socratic Seminar, Topic 3, Guided Practice, Performance Task, Reflection & Summary, Formative Assessment with right-aligned page numbers.
+4. **Clean Right-Aligned Page Numbers**: Use tab stops or right justification, NEVER table columns!
+
+### 📚 GOLD-STANDARD TOC EXEMPLAR (EXACT BENCHMARK MATCH):
+
+#### English-Medium Exemplar (Values Education 7 / Science / Math):
+```text
+Table of Contents
+[Solid Navy Blue Banner #1B365D with Bold White Text: "Table of Contents"]
+Values Education 7 • Unit III • Lessons 15–17
+
+Preface and Pedagogical Framework                                  2
+Lesson 15 — Developing Abilities and Interests                     4
+  Introduction and Curriculum Alignment                            4
+  Topic 1 and Quick Check                                          5
+  Topic 2 and Quick Check                                          7
+  Case Study and Socratic Inquiry                                  9
+  Topic 3 and Quick Check                                         11
+  Guided and Independent Practice                                 13
+  Performance Task and Rubric                                     14
+  Reflection and Summary                                          15
+  Formative Assessment                                            16
+Lesson 16 — Forgiving and Reconciling                             18
+  Introduction and Curriculum Alignment                           18
+  Topic 1 and Quick Check                                         19
+  Topic 2 and Quick Check                                         21
+  Case Study and Socratic Inquiry                                 23
+  Topic 3 and Quick Check                                         25
+  Guided and Independent Practice                                 27
+  Performance Task and Rubric                                     28
+  Reflection and Summary                                          29
+  Formative Assessment                                            30
+Lesson 17 — Being a Good and Honest Friend                        32
+  Introduction and Curriculum Alignment                           32
+  Topic 1 and Quick Check                                         33
+  Topic 2 and Quick Check                                         35
+  Case Study and Socratic Inquiry                                 37
+  Topic 3 and Quick Check                                         39
+  Guided and Independent Practice                                 41
+  Performance Task and Rubric                                     42
+  Reflection and Summary                                          43
+  Formative Assessment                                            43
+Comprehensive Unit Assessment                                     46
+Unit Synthesis and Glossary                                       52
+Teacher Answer Keys and Guidance                                  54
+Editorial Quality and Curriculum Audit                            63
+```
+
+#### Filipino-Medium Exemplar (Filipino 7–10 / Araling Panlipunan):
+```text
+Talaan ng Nilalaman
+[Solid Navy Blue Banner #1B365D na may Puting Titik: "Talaan ng Nilalaman"]
+Filipino 8 • Yunit III: Panitikan sa Panahon ng Hapon • Aralin 13–15
+
+Paunang Salita at Balangkas ng Kurikulum                           2
+Aralin 13 — Maiikling Tula ng Buhay (Tanaga at Haiku)              4
+  Panimula at Paghahanay sa MATATAG                                4
+  Paksa 1: Estruktura at Sukat ng Tanaga                           5
+  Paksa 2: Pilosopiya at Kaisipan ng Haiku                         7
+  Pangunahing Akda at Mapanuring Socratic Seminar                  9
+  Paksa 3: Paglalapat at Pagsulat ng Sariling Tanaga              11
+  Ginabayang Pagsasanay at Mapanuring Pagsusuri                   13
+  Gawaing Pagganap at 4x4 Analitikong Rubrik                      14
+  Metakognitibong Pagninilay (3-2-1) at Buod                      15
+  Formatibong Pagtataya (15 Aytem)                                16
+Aralin 14 — Tekstong Pampahayagan at Editoryal                    18
+  ...
+Aralin 15 — Mapanuring Pagsusuri sa Tuluyang Akda                32
+  ...
+Pangkalahatang Pagtataya sa Yunit (50 Puntos)                     46
+Sintesis ng Yunit at Talasalitaan                                 52
+Susi sa Pagwawasto at Gabay sa Pagtuturo                          54
+Sertipiko ng Pagsusuring Pangkurikulum (QA Audit)                 63
+```
+
+---
+
+# PART 3: PAGE 44 STRUCTURED TABLE ANSWER KEY ARCHITECTURE
 
 ### 🚫 STRICT PROHIBITION: NEVER OUTPUT ANSWER KEYS IN PARAGRAPHS
 - **FORBIDDEN (Never do this)**:
