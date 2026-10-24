@@ -108,12 +108,10 @@ Every lesson must contain all 10 sections written out in continuous, unbroken se
 - Task X.1 (Pagsasanay sa Pag-unawa): Recall and conceptual identification drill.
 - Task X.2 (Mapanuring Pagsusuri): Comprehensive analytical matrix table with 5–6 items for students to complete.
 
-### Section 8: Authentic Performance Task & Full 4x4 Analytic Rubric
-- Task X.3 (Paglalapat at Paglikha): Differentiated, real-world performance task grounded in the MATATAG curriculum competencies.
-- Complete 4x4 Analytic Rubric Table:
-  - Criteria rows (e.g., Nilalaman, Organisasyon, Wika/Teknikal, Pagkamalikhain).
-  - Performance columns: Napakahusay (4), Mahusay (3), Umuunlad (2), Nagsisimula (1).
-  - **MANDATORY**: Every single cell (all 16 cells) must contain a detailed 2 to 3 sentence descriptive performance standard. NO empty or generic cells.
+### Section 8: Contextual Application & Real-World Problem Solving (Gawaing Paglalapat)
+- Task X.3 (Paglalapat at Paglutas ng Suliranin): Authentic, real-world application, investigation, or scenario-based problem solving grounded in lesson competencies.
+- Practical Task Structure: Clear Goal, Realistic Context, Step-by-Step Procedure, and a Focused Scoring Guide (e.g., 10–15 points, 3–4 bulleted criteria).
+- **CRITICAL CURRICULUM POLICY (1 PERFORMANCE TASK PER QUARTER)**: NEVER generate a full 16-cell 4x4 analytic rubric in daily lessons! Per DepEd MATATAG assessment policy (DO 8, s. 2015), the giant Summative Performance Task with a complete GRASPS framework and 4x4 Analytic Rubric occurs **EXCLUSIVELY ONCE PER QUARTER** in the Culminating Assessment (Back Matter). Daily lessons feature contextual application activities without heavy grading matrices.
 
 ### Section 9: Metacognitive Reflection & Lesson Summary Box
 - 3 reflective exit-ticket questions connecting learning to personal ethics and character building.

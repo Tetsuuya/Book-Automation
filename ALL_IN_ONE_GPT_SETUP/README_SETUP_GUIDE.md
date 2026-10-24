@@ -14,7 +14,7 @@ This setup consolidates everything into **ONE single powerful Custom GPT** that 
    - **`00_REFERENCE_TEXTBOOK_BENCHMARK.docx`**: The physical 20,300+ word benchmark `.docx` file demonstrating 123 blue header blocks, 4x4 rubrics, structured table answer keys, 30-item MCQ quiz, and natural continuous flow.
    - **`01_PEDAGOGICAL_FRAMEWORK_AND_EXEMPLAR.md`**: Universal 70/30 model, 10-section blueprint, 7 interactivity protocols, and subject adaptations across ALL 8 DepEd disciplines (Science, Math, English, Filipino, AP, MAPEH, TLE, GMRC).
    - **`02_VISUAL_AND_MULTIMEDIA_STANDARDS.md`**: Zero-branding AI prompts with 3-tier title banners and real YouTube video standards (no QR codes, guaranteed search query URLs).
-   - **`03_DOCX_BUILDER_SCRIPT.py`**: The complete Python `python-docx` compilation engine that Code Interpreter runs to generate the final `.docx` file.
+   - **`docx_builder.py`** (or **`03_DOCX_BUILDER_SCRIPT.py`**): The complete Python `python-docx` compilation engine that Code Interpreter runs to generate the final `.docx` file.
    - **`04_FRONT_MATTER_AND_ANSWER_KEYS_STANDARDS.md`**: Dedicated architectural blueprint for Page 1 (3-tier Cover title banners across all subjects) and Page 44 (Structured Table Answer Keys with strict ban on paragraph blobs).
    - **`05_QUALITY_ASSURANCE_AND_CURRICULUM_AUDIT.md`**: Zero-hallucination fact checking (history, science, math, literature), grade-level readiness (DOK 1-4), and the 100-point DepEd MATATAG QA Audit Scorecard.
    - **`06_AI_IMAGE_PROMPT_STANDARDS_AND_EXEMPLARS.md`**: Zero-abstract physical scene architecture, "Wall of Shame" banning meta-prompts, the 5 Cinematographic Pillars, strict 10-prompt unit quota, and gold-standard exemplars for Filipino, Science, Math, and Values Ed.

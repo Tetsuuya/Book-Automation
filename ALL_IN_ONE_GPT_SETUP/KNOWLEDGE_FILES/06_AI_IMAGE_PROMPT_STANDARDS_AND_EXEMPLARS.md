@@ -7,6 +7,10 @@ This document is the mandatory standard for generating **all AI image prompts** 
 
 # PART 1: THE CORE PHILOSOPHY — PHYSICAL SCENES VS. ABSTRACT CONCEPTS
 
+> ### 🛑 THE MANDATORY "PROMPT-ONLY / PLACEHOLDER" LAW:
+> The AI generator must **NEVER** attempt to generate, scrape, fetch, or embed actual image files or web URLs in the manuscript!
+> In every lesson, the AI outputs **ONLY THE TEXT PROMPT INSIDE THE BOXED CONTAINER FRAME**. This serves as a clean, styled placeholder so the author/educator can generate the images themselves in Midjourney v6 or DALL-E 3 and manually insert them into the Word document via `Insert > Pictures`.
+
 Image generation models (Midjourney v6, DALL-E 3) **do NOT understand abstract curriculum concepts**, "subtopics", "pedagogical competencies", or mental activities like "analyzing" or "source checking". 
 
 When a prompt says *"illustrating the central concept of this subtopic"* or *"showing textual analysis"*, the AI generator hallucinates:
@@ -174,7 +178,11 @@ Every single image prompt in the textbook MUST be built upon these **5 concrete 
 │      hand-painted lush watercolor background, soft expressive lines.   │
 │    - TLE: Real object sample photography, crisp macro detail, studio.  │
 │    - History (AP): Classical museum historical painting, archival oil. │
-│    - Science/Math: Macro lab photography, 3D anatomical render.        │
+│    - Science & Mathematics (STEM): PROBLEM-RELATED FIGURES & DIAGRAMS  │
+│      (number lines with jumps, zero-pair counter models, coordinate    │
+│      planes, balance scales, lab glassware apparatus). Rendered in     │
+│      clean Studio Ghibli hand-drawn textbook watercolor diagram style. │
+│      STRICT BAN on generic classroom stock photos!                     │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -273,27 +281,39 @@ To prevent visual clutter and maintain high editorial density:
 
 ---
 
-### EXEMPLAR 6: GRADE 7 SCIENCE — REAL LABORATORY & MACRO SPECIMEN EXCEPTION
-#### (Compound Optical Microscope & Plant Cell Wet-Mount)
+### EXEMPLAR 6: GRADE 7 MATHEMATICS — GHIBLI TEXTBOOK MATHEMATICAL FIGURE
+#### (Integer Addition on a Horizontal Number Line: -4 + 7 = +3)
 
-> ### 🖼️ Figure: Real Laboratory Microscope & Wet-Mount Slide Examination
-> **Pedagogical Purpose:** Ilarawan ang aktuwal na proseso ng paghahanda ng wet-mount slide at paghahambing sa estruktura ng plant cell.  
+> ### 🖼️ Figure: Integer Addition on a Number Line Model (-4 + 7 = +3)
+> **Pedagogical Purpose:** Ipakita ang direksyonal na paggalaw ng mga integer gamit ang horizontal number line sa malinaw at kaakit-akit na estilong Studio Ghibli.  
 > **AI Prompt (Midjourney v6 / DALL-E 3):**  
-> `A crisp, professional laboratory scene in a modern Philippine school science laboratory. In the foreground, an authentic compound optical light microscope stands on a clean black chemical-resistant lab counter. Resting beside it on a white ceramic tray are prepared glass slides: one clearly showing a translucent purple-stained Allium cepa (onion epidermal) wet mount with a thin square coverslip, alongside a blue methylene-stained human cheek epithelial smear. A stainless steel dissection needle, a plastic dropper with iodine reagent bottle, and an open student laboratory observation notebook with clean hand-drawn pencil diagrams of hexagonal plant cell walls. Soft directional LED laboratory lighting, macro photography aesthetic, crisp glass reflections, shallow depth of field with blurred classroom background, no text, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
+> `A clean, charming, hand-crafted Studio Ghibli inspired anime textbook mathematical diagram illustrating integer addition on a horizontal number line. In the center, a crisp horizontal number line with clear integer tick marks from -8 to +8 on a warm parchment-textured background, with zero (0) highlighted with a soft golden star marker. A graceful curved amber watercolor arrow starts at 0 and leaps 4 units left to -4 (labeled "-4 units"). From -4, a bright emerald-turquoise curved watercolor arrow leaps 7 units to the right, landing precisely on positive 3 (labeled "+7 units", landing at "+3"). In the corner, a gentle Studio Ghibli traveler with a backpack takes a step along the path, mirroring the mathematical distance. Beautiful hand-painted watercolor aesthetic, Hayao Miyazaki storybook warmth, crisp clear numerical typography, no text gibberish, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
 >  
-> *Paunawa sa Guro at Mag-aaral: Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures).*
+> *Paunawa sa Guro at Mag-aaral: Placeholder lamang. Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures).*
 
 ---
 
-### EXEMPLAR 7: GRADE 9 MATHEMATICS — GEOMETRIC & ARCHITECTURAL CURVE EXCEPTION
-#### (Parabolic Bridge Cable Suspension Architecture)
+### EXEMPLAR 7: GRADE 7 MATHEMATICS — GHIBLI ZERO-PAIR COUNTER MODEL
+#### (Zero-Pair Cancellation of Positive and Negative Counters)
 
-> ### 🖼️ Figure: Real-World Parabolic Arch Engineering of Marcelo Fernan Bridge
-> **Pedagogical Purpose:** Ipakita ang kongkretong aplikasyon ng quadratic equation at vertex form sa estruktura ng suspension bridge cables.  
+> ### 🖼️ Figure: Zero-Pair Cancellation Model for Integers (-3 + 5 = +2)
+> **Pedagogical Purpose:** Ilarawan ang kongkretong konsepto ng zero pairs (neutral cancellation) gamit ang dalawang magkaibang kulay ng counter chips.  
 > **AI Prompt (Midjourney v6 / DALL-E 3):**  
-> `A breathtaking architectural and civil engineering photograph of a major Philippine modern cable-stayed bridge spanning across a calm coastal strait at sunset. The massive steel-reinforced parabolic suspension cables sweep downward in a mathematically perfect quadratic curve, tethered to tall concrete pylons against a luminous twilight sky of amber, violet, and deep indigo. In the foreground, an engineering blueprint clipboard with clean white line drawings of a coordinate Cartesian plane overlaid along the bridge curve, marking the vertex (h, k) and axis of symmetry. Golden hour directional lighting reflecting on the water below, ultra-wide 24mm architectural photography, razor-sharp structural steel details, no text, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
+> `A warm, beautifully illustrated Studio Ghibli watercolor textbook diagram showing the zero-pair model of integer addition on a rustic wooden study desk. Three circular terracotta-red counters marked with crisp minus signs (-) are aligned horizontally directly above three soft sky-blue circular counters marked with plus signs (+), visually grouped inside three vertical dashed watercolor ovals labeled "Zero Pair = 0". To the right, two remaining unpaired sky-blue positive counters (+2) sit cleanly, illuminated by a gentle golden sunlight glow to represent the final net answer of +2. Beside the counters lie an open student math notebook with soft pencil calculations and a wooden ruler. Lush Studio Ghibli watercolor texture, warm pastoral anime palette, hand-drawn precision, no text gibberish, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
 >  
-> *Paunawa sa Guro at Mag-aaral: Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures).*
+> *Paunawa sa Guro at Mag-aaral: Placeholder lamang. Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures).*
+
+---
+
+### EXEMPLAR 8: GRADE 7 SCIENCE — GHIBLI LABORATORY APPARATUS SETUP
+#### (Laboratory Filtration Setup and Mixture Separation)
+
+> ### 🖼️ Figure: Laboratory Filtration Apparatus & Separation Setup
+> **Pedagogical Purpose:** Ipakita ang tamang pagkakaayos ng mga kagamitang panlaboratoryo para sa pagsasala (filtration) ng heterogeneous mixture sa kaakit-akit na estilong Ghibli.  
+> **AI Prompt (Midjourney v6 / DALL-E 3):**  
+> `A charming, meticulously detailed Studio Ghibli anime style watercolor textbook scientific illustration of a school laboratory filtration workstation. On a sturdy dark wooden lab bench, a clear glass conical funnel lined with folded white fluted filter paper sits atop an Erlenmeyer flask, capturing clear dripping liquid filtrate. Standing nearby is a glass beaker containing a cloudy indigo precipitate mixture, a glass stirring rod, an iron stand with an adjustable ring clamp, and an open student laboratory notebook showing neat hand-drawn pencil diagrams. Morning sunlight streams through tall laboratory windows illuminating tiny dust motes in the air, with potted green ferns on the windowsill. Warm hand-painted watercolor scenery, Hayao Miyazaki scientific warmth, clean outlines, no text, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
+>  
+> *Paunawa sa Guro at Mag-aaral: Placeholder lamang. Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures).*
 
 ---
 
@@ -305,11 +325,11 @@ Before outputting ANY image prompt frame in the textbook, verify that it passes 
 - [ ] **Check 2: 100% Inside Dedicated Container Box**: Are the title, purpose, prompt, and note ALL completely enclosed inside the container box (`> ...` in Markdown or 1-cell shaded table in DOCX) with NO loose text outside?
 - [ ] **Check 3: Style Calibration**: 
       - Is it **English, Filipino, Values Ed / GMRC, or Book Cover**? -> Must be **Studio Ghibli-inspired warm pastoral anime watercolor illustration**!
+      - Is it **Science or Mathematics (STEM)**? -> Must be **PROBLEM-RELATED FIGURES & DIAGRAMS** (number lines, zero-pair models, coordinate planes, balance scales, lab glassware apparatus) in clean **Studio Ghibli hand-drawn textbook watercolor diagram style**! Strictly ban generic classroom stock photos!
       - Is it **TLE / TVL**? -> Must be **real object sample photography / engineering schematics**!
       - Is it **History / AP (real heroes/events)**? -> **STRICT BAN on AI-generating hero faces!** Use Archival Photo Frame (NHCP) OR Primary Source Still-Life / POV (desks, manuscripts, artifacts; NO fake hero faces)!
-      - Is it **Science / Math**? -> Must be **macro lab photography, 3D anatomical render, or vector geometry**!
 - [ ] **Check 4: Zero Meta-Words**: Does it completely avoid words like *"infographic"*, *"illustrating the concept"*, *"showing textual analysis"*, or *"central concept"*?
-- [ ] **Check 5: Physical People & Action**: Are the subjects physically described with specific postures, hands, or eye focus?
-- [ ] **Check 6: Concrete Physical Setting**: Is the room, building, landscape, or environment explicitly named?
-- [ ] **Check 7: 3 to 4 Tangible Artifacts/Props**: Are there real physical objects mentioned (mimeograph, dulang, joint, tools, microscope, slides)?
+- [ ] **Check 5: Physical People & Action / Diagram Elements**: Are the subjects physically described with specific postures, hands, or exact diagram markers/arrows?
+- [ ] **Check 6: Concrete Physical Setting**: Is the room, desk, background, or paper texture explicitly named?
+- [ ] **Check 7: 3 to 4 Tangible Artifacts/Props**: Are there real physical objects mentioned (mimeograph, dulang, number line tick marks, counters, beaker, funnel)?
 - [ ] **Check 8: Strict Zero Branding & Proper Parameters**: Are all brand acronyms (`DepEd`, `MATATAG`) completely omitted, and does it end with `--ar 16:9 --v 6.0` (or `--ar 8.5:11` for covers)?

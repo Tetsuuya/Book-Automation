@@ -8,6 +8,9 @@ This document specifies the exact format and styling for all visual placeholders
 
 Whenever a visual placeholder is embedded into the textbook, it must be structured as a dedicated, fully self-contained visual prompt callout frame:
 
+### 🛑 MANDATORY "PROMPTS ONLY (PLACEHOLDER FRAME)" LAW:
+The AI generator must **NEVER** generate, scrape, fetch, or embed actual image files or external web URLs! Output **ONLY** the text prompt inside the styled boxed container as a placeholder frame so that the author can generate the image in Midjourney v6 / DALL-E 3 and manually insert it into the Word document via `Insert > Pictures`.
+
 ### Strict Production Rules (No Draft Labels & Mandatory Box):
 - **NO DRAFT LABELS (BAN "Visual Prompt 1", "Prompt 2")**: This is a publication-ready textbook. Never output draft labels like `"Visual Prompt 1:"` or `"Prompt 1:"`! Use ONLY clean production titles: `🖼️ Larawan: [Mapanuring Pamagat ng Larawan]` or `🖼️ Figure: [Descriptive Image Title]`.
 - **100% INSIDE A DEDICATED CONTAINER BOX**: The Title, Pedagogical Purpose, AI Prompt, and Replacement Note MUST ALL BE ENCLOSED INSIDE ONE SINGLE CONTAINER BOX (using Markdown callouts `> ...` or a 1-cell shaded table in DOCX). Never let titles or purpose statements float outside as loose text!
@@ -17,10 +20,10 @@ Whenever a visual placeholder is embedded into the textbook, it must be structur
 - **Pedagogical Purpose (Layunin)**: 1–2 sentences explaining how this visual supports the learning competency.
 - **Reference**: Follow [`06_AI_IMAGE_PROMPT_STANDARDS_AND_EXEMPLARS.md`](file:///c:/Users/Rhenel%20Jhon%20Sajol/Documents/CERE_BOOK/ALL_IN_ONE_GPT_SETUP/KNOWLEDGE_FILES/06_AI_IMAGE_PROMPT_STANDARDS_AND_EXEMPLARS.md) for the 5 Physical Cinematographic Pillars, banned abstract prompts, and the Subject-Calibrated Visual Art Matrix:
   * **Filipino, English, Values Ed / GMRC, and Book Covers**: Mandatory **Studio Ghibli-inspired warm pastoral anime watercolor illustration** (hand-painted lush watercolor background art, Hayao Miyazaki lighting, expressive warmth, gentle linework, nostalgic atmospheric skies; NEVER hyper-real plastic stock CGI).
+  * **Science & Mathematics (STEM)**: **PROBLEM-RELATED FIGURES & DIAGRAMS** (number lines with directional hops, zero-pair counter models, coordinate planes, balance scale equation models, laboratory apparatus glassware). Rendered in clean **Studio Ghibli hand-drawn textbook watercolor diagram style**! Strictly ban generic classroom stock photos!
   * **TLE / TVL**: Mandatory **real object sample photography** and technical isometric blueprints (strict NO Ghibli/cartoon).
   * **Araling Panlipunan**: **ZERO EXTRA WORK PROTOCOL (NO AI HERO FACES & NO MANUAL PHOTO HUNTING)**: To save authors from manual photo-hunting work, always prompt **Primary Source Still-Life / POV & Historic Settings** (historic desks, draft manuscripts, flags, ships, trade goods). 100% turnkey generatable in Midjourney/DALL-E with zero fake faces!
   * **MAPEH**: Museum-grade cultural artifacts (organology) & authentic biomechanical sports kinesiology.
-  * **Science & Math**: Real laboratory macro photography, 3D anatomical cross-sections, & vector geometry.
 - **Strict Zero-Branding Rule for Prompts**:
   * **NEVER** include publisher names, brand names, or government acronyms (`DepEd`, `MATATAG`, `CERE`) inside ANY AI image prompt.
   * AI image generators (Midjourney, DALL-E) try to render acronyms as distorted text, fake badges, or watermark artifacts.
