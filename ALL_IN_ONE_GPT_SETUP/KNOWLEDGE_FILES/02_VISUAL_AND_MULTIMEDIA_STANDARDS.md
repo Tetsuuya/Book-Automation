@@ -20,7 +20,7 @@ The AI generator must **NEVER** generate, scrape, fetch, or embed actual image f
 - **Pedagogical Purpose (Layunin)**: 1–2 sentences explaining how this visual supports the learning competency.
 - **Reference**: Follow [`06_AI_IMAGE_PROMPT_STANDARDS_AND_EXEMPLARS.md`](file:///c:/Users/Rhenel%20Jhon%20Sajol/Documents/CERE_BOOK/ALL_IN_ONE_GPT_SETUP/KNOWLEDGE_FILES/06_AI_IMAGE_PROMPT_STANDARDS_AND_EXEMPLARS.md) for the 5 Physical Cinematographic Pillars, banned abstract prompts, and the Subject-Calibrated Visual Art Matrix:
   * **Filipino, English, Values Ed / GMRC, and Book Covers**: Mandatory **Studio Ghibli-inspired warm pastoral anime watercolor illustration** (hand-painted lush watercolor background art, Hayao Miyazaki lighting, expressive warmth, gentle linework, nostalgic atmospheric skies; NEVER hyper-real plastic stock CGI).
-  * **Science & Mathematics (STEM)**: **PROBLEM-RELATED FIGURES & DIAGRAMS** (number lines with directional hops, zero-pair counter models, coordinate planes, balance scale equation models, laboratory apparatus glassware). Rendered in clean **Studio Ghibli hand-drawn textbook watercolor diagram style**! Strictly ban generic classroom stock photos!
+  * **Mathematics & Science (STEM)**: **TECHNICAL 2D VECTOR DIAGRAMS & SCHEMATICS** (horizontal number lines, 2-color integer discs, coordinate Cartesian grids, geometric figures, balance scales, laboratory cross-sections). Rendered in crisp **flat 2D vector educational textbook schematic style** on pure white or subtle grid. Straight-on orthographic view. STRICT BANS FOR STEM: NO wooden desks, NO pencils/rulers, NO hands/people, NO room windows/sunlight beams, NO 3D perspective clutter!
   * **TLE / TVL**: Mandatory **real object sample photography** and technical isometric blueprints (strict NO Ghibli/cartoon).
   * **Araling Panlipunan**: **ZERO EXTRA WORK PROTOCOL (NO AI HERO FACES & NO MANUAL PHOTO HUNTING)**: To save authors from manual photo-hunting work, always prompt **Primary Source Still-Life / POV & Historic Settings** (historic desks, draft manuscripts, flags, ships, trade goods). 100% turnkey generatable in Midjourney/DALL-E with zero fake faces!
   * **MAPEH**: Museum-grade cultural artifacts (organology) & authentic biomechanical sports kinesiology.
@@ -41,14 +41,12 @@ The AI generator must **NEVER** generate, scrape, fetch, or embed actual image f
 > *Paunawa sa Guro at Mag-aaral: Palitan ang kahong ito ng aktuwal na nabuong larawan sa Microsoft Word (Insert > Pictures).*
 ```
 
-### Mandatory 10-Prompt Quota per Unit:
-To maintain clean typography and prevent visual clutter, every generated textbook unit has a strict ceiling of **exactly 10 image prompts**:
+### Mandatory Image-Prompt Quota (Scales with Lesson Count):
+To maintain clean typography and prevent visual clutter, every generated textbook follows a fixed per-lesson quota:
 - **Page 1 (Front Cover)**: Exactly 1 Full-Page Cover AI Prompt Box (3-tier title banner, `--ar 8.5:11`).
-- **Lesson 1**: Exactly 3 Image Prompt Boxes (Subtopic 1, Subtopic 2, Applied / Multimodal Task, `--ar 16:9`).
-- **Lesson 2**: Exactly 3 Image Prompt Boxes (Subtopic 1, Subtopic 2, Applied / Multimodal Task, `--ar 16:9`).
-- **Lesson 3**: Exactly 3 Image Prompt Boxes (Subtopic 1, Subtopic 2, Applied / Multimodal Task, `--ar 16:9`).
+- **Every Lesson**: Exactly 3 Image Prompt Boxes (Subtopic 1, Subtopic 2, Applied / Multimodal Task, `--ar 16:9`).
 - **Unit Assessment & Back Matter**: Zero image prompts (focused purely on 1-30 MCQ quiz, Performance Task, Synthesis, and Answer Keys).
-- **Total Unit Quota**: Exactly **10 Image Prompts Total** ($1 + 3 \times 3 = 10$).
+- **Total Quota = 1 + (3 × number of lessons)**: 3-lesson unit = **10 prompts**; 5-lesson quarter = **16 prompts**; 6-lesson quarter = **19 prompts**.
 
 ---
 
@@ -110,7 +108,7 @@ Use these permanent, active, high-authority educational videos tailored specific
 ### Required Module Layout & Styling (100% Boxed, Direct Video Link):
 - **Box Shading**: Soft Red (`#FFF5F5`)
 - **Left Border**: Solid YouTube Red (`#CC0000`, 4.5pt / `sz="36"`)
-- **Title**: `🎥 INTERAKTIBONG MULTIMEDIA: [MODULE TITLE]` (10.5pt Bold YouTube Red)
+- **Title (match the book's language of instruction)**: `🎥 INTERACTIVE MULTIMEDIA: [MODULE TITLE]` for English-medium subjects (Math, Science, English, MAPEH, TLE); `🎥 INTERAKTIBONG MULTIMEDIA: [MODULE TITLE]` for Filipino-medium subjects (Filipino, AP, Values Ed). 10.5pt Bold YouTube Red.
 - **Verified Channels**: Must cite recognized channels (*DepEd TV Official, Knowledge Channel, CrashCourse, Khan Academy, DOST-SEI, GMA Public Affairs*).
 - **Direct Video Link**: `https://www.youtube.com/watch?v=[REAL_VIDEO_ID]` (Must be a real, working video!).
 - **Key Concepts to Observe**: 2–3 conceptual bullet points on what to look for.

@@ -141,48 +141,53 @@ Image generation in an educational textbook must **never look like generic AI pl
 │    Health)               │ Biomechanical Kinesiology   │ museum-grade folk art, real   │
 │                          │                             │ athletic human kinesiology.   │
 ├──────────────────────────┼─────────────────────────────┼───────────────────────────────┤
-│ • SCIENCE & MATHEMATICS  │ Real Laboratory Photography,│ Crisp compound optical slides,│
-│                          │ 3D Anatomical Cross-Section,│ specimen wet-mounts, clean    │
-│                          │ Vector Blueprint Geometry   │ apparatus, Cartesian grids.   │
+│ • MATHEMATICS & SCIENCE  │ Clean 2D Vector Educational │ High-contrast 2D schematics,  │
+│   (STEM Disciplines)     │ Technical Diagrams &        │ Cartesian grids, number lines,│
+│                          │ Publication Schematics      │ 2-color integer discs, proofs.│
+│                          │                             │ Pure white/graph background.  │
+│                          │ (STRICT: NO DESK CLUTTER,   │ Zero tables, zero pencils,    │
+│                          │  NO SUNLIGHT/ROOM SCENES!)  │ zero hands, pure schematics!  │
 └──────────────────────────┴─────────────────────────────┴───────────────────────────────┘
 ```
 
 ---
 
-# PART 3.5: THE 5 MANDATORY CINEMATOGRAPHIC PILLARS
+# PART 3.5: DISCIPLINE-ISOLATED PROMPT ARCHITECTURES
 
-Every single image prompt in the textbook MUST be built upon these **5 concrete physical layers**:
+### TRACK A: HUMANITIES, VALUES ED, AP & COVERS (5 Narrative Scene Pillars)
+For Filipino, English, Values Education / GMRC, Araling Panlipunan, and Book Covers:
+1. **Characters & Tangible Action**: Filipino students, historical figures, craftsmen in active human moments.
+2. **Physical Environment**: Capiz windows, heritage veranda, classroom, ancestral courtyard, provincial landscape.
+3. **Tangible Period Props**: Handcrafted wooden dulang, books, oil lamps, woven baskets, historical letters.
+4. **Directional Lighting**: Golden afternoon sunbeams, amber lantern glow, dappled acacia leaves.
+5. **Artistic Medium**: Studio Ghibli-inspired warm watercolor anime background art, Hayao Miyazaki warmth.
 
+### TRACK B: MATHEMATICS & SCIENCE STEM (5 Technical Diagram Architecture Pillars)
+For Mathematics, Statistics, Physics, Chemistry, and Biology:
 ```text
 ┌────────────────────────────────────────────────────────────────────────┐
-│                      THE 5 VISUAL PROMPT PILLARS                       │
+│               THE 5 STEM TECHNICAL DIAGRAM PILLARS                     │
 ├────────────────────────────────────────────────────────────────────────┤
-│ 1. SPECIFIC CHARACTERS & TANGIBLE ACTION                               │
-│    Who is physically present? What exact action are their hands and    │
-│    eyes performing right now? (Filipino students, craftsmen, writers). │
+│ 1. PRECISE MATHEMATICAL OBJECT & GEOMETRY                              │
+│    The exact mathematical construct: horizontal number line, Cartesian │
+│    plane, 2-color counter discs, geometric polygon, statistical graph. │
 ├────────────────────────────────────────────────────────────────────────┤
-│ 2. PHYSICAL ENVIRONMENT & ARCHITECTURAL SETTING                        │
-│    Where is the scene? Room type, wall material, window style, floor.  │
-│    (Capiz-shell windows, bamboo dulang, science lab, workshop).        │
+│ 2. GEOMETRIC TICKS, COORDINATES & ARROWS                               │
+│    Evenly spaced unit ticks, origin node (0), directional vector hops, │
+│    vertex letters (A, B, C), degree angle arcs, dashed cancel loops.   │
 ├────────────────────────────────────────────────────────────────────────┤
-│ 3. 3 TO 4 CONCRETE TANGIBLE PROPS / ARTIFACTS                          │
-│    Name physical objects sitting on tables, held in hands, or mounted. │
-│    (Mimeograph, mortar and tenon joint, sliding calipers, slides).     │
+│ 3. HIGH-CONTRAST FLAT VECTOR PALETTE                                   │
+│    Clean publication colors: Navy (#1B365D), Cyan-Blue, Coral-Red      │
+│    (negative), Emerald (positive). Dashed rounded groupings.           │
 ├────────────────────────────────────────────────────────────────────────┤
-│ 4. DIRECTIONAL LIGHTING, ATMOSPHERE & COLOR PALETTE                   │
-│    Where does light enter? (Warm golden hour, dappled acacia leaves,   │
-│    nostalgic Studio Ghibli amber lantern glow, cool fluorescent lab).  │
+│ 4. BACKGROUND & PROJECTION                                             │
+│    Pure flat white background (#FFFFFF) or subtle light graph grid.     │
+│    Straight-on 2D flat orthographic projection (NO 3D tilt!).          │
 ├────────────────────────────────────────────────────────────────────────┤
-│ 5. DISCIPLINE-CALIBRATED ARTISTIC MEDIUM & CAMERA OPTICS               │
-│    - Filipino / English / Values / Covers: Studio Ghibli anime style,  │
-│      hand-painted lush watercolor background, soft expressive lines.   │
-│    - TLE: Real object sample photography, crisp macro detail, studio.  │
-│    - History (AP): Classical museum historical painting, archival oil. │
-│    - Science & Mathematics (STEM): PROBLEM-RELATED FIGURES & DIAGRAMS  │
-│      (number lines with jumps, zero-pair counter models, coordinate    │
-│      planes, balance scales, lab glassware apparatus). Rendered in     │
-│      clean Studio Ghibli hand-drawn textbook watercolor diagram style. │
-│      STRICT BAN on generic classroom stock photos!                     │
+│ 5. TECHNICAL MEDIUM & STRICT NEGATIVE BANS                             │
+│    Publication 2D vector technical textbook diagram, crisp line art.   │
+│    STRICT BANS: NO wooden desks, NO pencils/rulers lying around, NO     │
+│    hands/fingers, NO people/travelers, NO windows/sunbeams, NO 3D tilt!│
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -193,15 +198,13 @@ Always end with clean negative prompts and aspect ratio:
 
 ---
 
-# PART 4: STRICT 10-PROMPT UNIT ALLOCATION QUOTA
+# PART 4: STRICT IMAGE-PROMPT ALLOCATION QUOTA (1 COVER + 3 PER LESSON)
 
 To prevent visual clutter and maintain high editorial density:
-- **Page 1 (Front Cover)**: Exactly 1 Full-Page Cover AI Prompt Box (`--ar 8.5:11`).
-- **Lesson 1**: Exactly 3 Image Prompt Boxes (Subtopic 1, Subtopic 2, Applied Task, `--ar 16:9`).
-- **Lesson 2**: Exactly 3 Image Prompt Boxes (Subtopic 1, Subtopic 2, Applied Task, `--ar 16:9`).
-- **Lesson 3**: Exactly 3 Image Prompt Boxes (Subtopic 1, Subtopic 2, Applied Task, `--ar 16:9`).
-- **Unit Assessment & Back Matter**: Exactly 0 prompts (focused purely on 1–30 MCQ quiz, Performance Task, and Answer Keys).
-- **TOTAL UNIT QUOTA**: **EXACTLY 10 IMAGE PROMPTS PER 40+ PAGE UNIT**.
+- **Page 1 (Front Cover)**: Exactly 1 Full-Page Cover AI Prompt Box (3-tier title banner, `--ar 8.5:11`).
+- **Every Lesson**: Exactly 3 Image Prompt Boxes (Subtopic 1, Subtopic 2, Applied / Multimodal Task, `--ar 16:9`).
+- **Unit Assessment & Back Matter**: Zero image prompts (focused purely on 1-30 MCQ quiz, Performance Task, Synthesis, and Answer Keys).
+- **Total Quota = 1 + (3 × number of lessons)**: 3-lesson unit = **10 prompts**; 5-lesson quarter = **16 prompts**; 6-lesson quarter = **19 prompts**.
 
 ---
 
@@ -281,25 +284,25 @@ To prevent visual clutter and maintain high editorial density:
 
 ---
 
-### EXEMPLAR 6: GRADE 7 MATHEMATICS — GHIBLI TEXTBOOK MATHEMATICAL FIGURE
+### EXEMPLAR 6: GRADE 7 MATHEMATICS — 2D VECTOR NUMBER LINE SCHEMATIC
 #### (Integer Addition on a Horizontal Number Line: -4 + 7 = +3)
 
 > ### 🖼️ Figure: Integer Addition on a Number Line Model (-4 + 7 = +3)
-> **Pedagogical Purpose:** Ipakita ang direksyonal na paggalaw ng mga integer gamit ang horizontal number line sa malinaw at kaakit-akit na estilong Studio Ghibli.  
+> **Pedagogical Purpose:** Ipakita ang direksyonal na paggalaw ng mga integer gamit ang horizontal number line sa malinaw na 2D vector schematic.  
 > **AI Prompt (Midjourney v6 / DALL-E 3):**  
-> `A clean, charming, hand-crafted Studio Ghibli inspired anime textbook mathematical diagram illustrating integer addition on a horizontal number line. In the center, a crisp horizontal number line with clear integer tick marks from -8 to +8 on a warm parchment-textured background, with zero (0) highlighted with a soft golden star marker. A graceful curved amber watercolor arrow starts at 0 and leaps 4 units left to -4 (labeled "-4 units"). From -4, a bright emerald-turquoise curved watercolor arrow leaps 7 units to the right, landing precisely on positive 3 (labeled "+7 units", landing at "+3"). In the corner, a gentle Studio Ghibli traveler with a backpack takes a step along the path, mirroring the mathematical distance. Beautiful hand-painted watercolor aesthetic, Hayao Miyazaki storybook warmth, crisp clear numerical typography, no text gibberish, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
+> `A clean, publication-grade 2D vector technical textbook diagram illustrating integer addition on a horizontal number line. Set centered on a pure white background with subtle light gray grid lines. A bold horizontal coordinate axis with sharp arrowheads at both ends and evenly spaced integer tick marks clearly numbered from -8 to +8 in crisp modern sans-serif typography. Zero (0) is marked with a distinct solid circular origin node. A smooth curved directional vector arrow in bold burnt-orange (#D9534F) arches from 0 to -4 (labeled "-4"). Above it, a second smooth directional vector arrow in vibrant cobalt blue (#1B365D) arches 7 units right from -4 and lands cleanly on +3 (labeled "+7"). A bold vertical indicator points to the final endpoint at +3. Flat 2D vector graphics, high-contrast educational schematic, clean crisp line art, publication vector illustration style, perfectly straight orthographic projection. STRICT BANS: NO wooden desks, NO pencils, NO rulers, NO hands, NO people, NO room backgrounds, NO 3D perspective, no text gibberish, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
 >  
 > *Paunawa sa Guro at Mag-aaral: Placeholder lamang. Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures).*
 
 ---
 
-### EXEMPLAR 7: GRADE 7 MATHEMATICS — GHIBLI ZERO-PAIR COUNTER MODEL
+### EXEMPLAR 7: GRADE 7 MATHEMATICS — 2D VECTOR ZERO-PAIR COUNTER MODEL
 #### (Zero-Pair Cancellation of Positive and Negative Counters)
 
 > ### 🖼️ Figure: Zero-Pair Cancellation Model for Integers (-3 + 5 = +2)
-> **Pedagogical Purpose:** Ilarawan ang kongkretong konsepto ng zero pairs (neutral cancellation) gamit ang dalawang magkaibang kulay ng counter chips.  
+> **Pedagogical Purpose:** Ilarawan ang kongkretong konsepto ng zero pairs (neutral cancellation) gamit ang malinis na 2D vector discrete counter model.  
 > **AI Prompt (Midjourney v6 / DALL-E 3):**  
-> `A warm, beautifully illustrated Studio Ghibli watercolor textbook diagram showing the zero-pair model of integer addition on a rustic wooden study desk. Three circular terracotta-red counters marked with crisp minus signs (-) are aligned horizontally directly above three soft sky-blue circular counters marked with plus signs (+), visually grouped inside three vertical dashed watercolor ovals labeled "Zero Pair = 0". To the right, two remaining unpaired sky-blue positive counters (+2) sit cleanly, illuminated by a gentle golden sunlight glow to represent the final net answer of +2. Beside the counters lie an open student math notebook with soft pencil calculations and a wooden ruler. Lush Studio Ghibli watercolor texture, warm pastoral anime palette, hand-drawn precision, no text gibberish, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
+> `A crisp, publication-grade 2D vector mathematics textbook diagram illustrating the zero-pair model of integer addition. Set against a pure flat white background. In the upper row, three solid circular negative counters in flat coral-red (#EF4444), each with a crisp white minus sign (-) centered inside. In the lower row, five solid circular positive counters in flat cyan-blue (#0284C7), each with a crisp white plus sign (+) centered inside, perfectly aligned under the counters above. The first three vertical columns of (+)/(-) pairs are neatly enclosed inside vertical dashed gray rounded capsules labeled "Zero Pair = 0" with small diagonal cancel slash lines. To the right, the two remaining positive blue counters (+2) are grouped inside a solid rounded highlight box labeled "Net Result = +2". Flat 2D vector graphic design, clean geometric symmetry, high-contrast textbook schematic, straight-on orthographic view. STRICT BANS: NO wooden tables, NO pencils, NO paper textures, NO hands, NO room lighting, NO 3D shadows, no text gibberish, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
 >  
 > *Paunawa sa Guro at Mag-aaral: Placeholder lamang. Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures).*
 

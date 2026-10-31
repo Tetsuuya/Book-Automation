@@ -228,6 +228,11 @@ In poorly authored tests, AI models often fall into the trap of defaulting to **
 2. **Maximum Consecutive Identical Answers = 2**:
    - Never repeat the same letter more than two (2) times in a row (e.g., `A, A, C...` is permissible, but `A, A, A...` or `B, B, B...` is strictly forbidden).
 
+2b. **No Predictable Cycles or Reused Sequences**:
+   - The key must never form a repeating pattern (`A, B, C, D, A, B, C, D...`, `D, C, B, A...`, or a mirrored copy of another quiz). A learner who guesses the pattern must score no better than chance.
+   - No two quizzes in the same book may share an identical 10-item answer sequence.
+   - Method: write each item, randomly place the correct option, then re-check the finished key against every item.
+
 3. **Parallel Distractor Length, Grammar, & Plausibility**:
    - The correct choice MUST NOT be noticeably longer, more elaborate, or more technically detailed than the distractors (a classic clue that reveals the answer).
    - Distractors must represent plausible misconceptions, not absurd non-sequiturs.

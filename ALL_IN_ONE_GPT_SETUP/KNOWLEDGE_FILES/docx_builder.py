@@ -20,8 +20,9 @@ from docx import Document
 from docx.shared import Inches, Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
-from docx.oxml import parse_xml
-from docx.oxml.ns import nsdecls
+from docx.oxml import parse_xml, OxmlElement
+from docx.oxml.ns import nsdecls, qn
+from docx.opc.constants import RELATIONSHIP_TYPE as RT
 
 if sys.stdout and hasattr(sys.stdout, 'reconfigure'):
     try:
@@ -165,6 +166,45 @@ def format_paragraph(p, space_before=0, space_after=4, line_spacing=1.15, align=
     p.paragraph_format.line_spacing = line_spacing
     p.alignment = align
 
+def set_outline_level(p, level):
+    """Marks a paragraph as a heading level (0 = H1) without changing its banner styling."""
+    p._p.get_or_add_pPr().append(parse_xml(f'<w:outlineLvl {nsdecls("w")} w:val="{level}"/>'))
+
+def add_page_number_field(paragraph, size=8.5):
+    """Appends a live PAGE field so printed page numbers match the TOC."""
+    run = paragraph.add_run()
+    run.font.name = 'Cambria'
+    run.font.size = Pt(size)
+    run.font.color.rgb = RGBColor(0x77, 0x77, 0x77)
+    for kind, text in (("begin", None), (None, "PAGE"), ("end", None)):
+        if kind:
+            el = OxmlElement('w:fldChar')
+            el.set(qn('w:fldCharType'), kind)
+        else:
+            el = OxmlElement('w:instrText')
+            el.set(qn('xml:space'), 'preserve')
+            el.text = text
+        run._r.append(el)
+
+def add_hyperlink(paragraph, text, url, size=10.5, bold=False, italic=False):
+    """Adds a clickable external hyperlink run (used for YouTube Direct Links and sources)."""
+    r_id = paragraph.part.relate_to(url, RT.HYPERLINK, is_external=True)
+    link = OxmlElement('w:hyperlink')
+    link.set(qn('r:id'), r_id)
+    r = OxmlElement('w:r')
+    rPr = parse_xml(
+        f'<w:rPr {nsdecls("w")}><w:rFonts w:ascii="Cambria" w:hAnsi="Cambria"/>'
+        f'{"<w:b/>" if bold else ""}{"<w:i/>" if italic else ""}'
+        f'<w:color w:val="0563C1"/><w:sz w:val="{int(size * 2)}"/><w:u w:val="single"/></w:rPr>'
+    )
+    r.append(rPr)
+    t = OxmlElement('w:t')
+    t.set(qn('xml:space'), 'preserve')
+    t.text = text
+    r.append(t)
+    link.append(r)
+    paragraph._p.append(link)
+
 def add_heading_1(doc, text):
     t = doc.add_table(rows=1, cols=1)
     t.alignment = WD_TABLE_ALIGNMENT.CENTER
@@ -174,6 +214,7 @@ def add_heading_1(doc, text):
     set_table_no_borders(t)
     p = c.paragraphs[0]
     format_paragraph(p, space_before=2, space_after=2, align=WD_ALIGN_PARAGRAPH.CENTER)
+    set_outline_level(p, 0)
     run = p.add_run(clean_math_text(text).upper())
     run.font.name = 'Cambria'
     run.font.size = Pt(13.5)
@@ -193,6 +234,7 @@ def add_heading_2(doc, text):
     set_table_no_borders(t)
     p = c.paragraphs[0]
     format_paragraph(p, space_before=2, space_after=2, align=WD_ALIGN_PARAGRAPH.LEFT)
+    set_outline_level(p, 1)
     run = p.add_run(clean_math_text(text))
     run.font.name = 'Cambria'
     run.font.size = Pt(11.5)
@@ -382,11 +424,16 @@ def add_worked_example_box(doc, example_title, problem_text, given_items, formul
 def format_inline_runs(paragraph, text, default_size=10.5, default_color=None, default_bold=False, default_italic=False):
     """Parses inline bold, italic, code, and symbols within a paragraph run."""
     text = clean_math_text(text)
-    pattern = r'(\*\*[^*]+\*\*|\*[^*]+\*|_[^_]+_|`[^`]+`)'
+    pattern = r'(\[[^\]]+\]\(https?://[^)\s]+\)|https?://[^\s)|]+|\*\*[^*]+\*\*|\*[^*]+\*|_[^_]+_|`[^`]+`)'
     parts = re.split(pattern, text)
     
     for part in parts:
         if not part:
+            continue
+        link = re.fullmatch(r'\[([^\]]+)\]\((https?://[^)\s]+)\)', part)
+        if link or re.fullmatch(r'https?://[^\s)|]+', part):
+            label, url = (link.group(1), link.group(2)) if link else (part, part)
+            add_hyperlink(paragraph, label, url, size=default_size, bold=default_bold, italic=default_italic)
             continue
         if part.startswith('**') and part.endswith('**') and len(part) >= 4:
             r = paragraph.add_run(part[2:-2])
@@ -663,7 +710,7 @@ def initialize_document(subject="Mathematics", grade="7", quarter="Quarter 3"):
         # Running header on pages 2+
         hp = s.header.paragraphs[0]
         hp.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-        hr = hp.add_run(f"DepEd MATATAG Curriculum • {subject} {grade} | {quarter}")
+        hr = hp.add_run(f"{subject} {grade} | {quarter}")
         hr.font.name = 'Cambria'
         hr.font.size = Pt(8.5)
         hr.font.color.rgb = RGBColor(0x77, 0x77, 0x77)
@@ -671,10 +718,11 @@ def initialize_document(subject="Mathematics", grade="7", quarter="Quarter 3"):
         # Running footer on pages 2+
         fp = s.footer.paragraphs[0]
         fp.alignment = WD_ALIGN_PARAGRAPH.LEFT
-        fr = fp.add_run(f"DepEd MATATAG Curriculum • Public Edition • Grade {grade} {subject}")
+        fr = fp.add_run(f"Grade {grade} {subject} • {quarter} • Page ")
         fr.font.name = 'Cambria'
         fr.font.size = Pt(8.5)
         fr.font.color.rgb = RGBColor(0x77, 0x77, 0x77)
+        add_page_number_field(fp)
 
     return doc
 

@@ -17,10 +17,12 @@ Every unit must strictly demonstrate 100% fidelity to the official DepEd MATATAG
 2. **The 3 Essential Questions (Mahahalagang Tanong)**:
    - Must frame overarching inquiry, not trivial factual recall.
    - Each of the 3 subtopics in the lesson MUST explicitly answer one of the Essential Questions.
-3. **Strict 70/30 Instructional Ratio & 40-Page Student Floor**:
-   - **70% Instructional Depth**: Lessons must be masterclasses of deep, contextualized prose (minimum 3,500+ words per lesson floor, totaling 15,000–18,000+ words per unit). Summaries, bulleted outlines, and shorthand placeholders (`...`) are strictly prohibited.
-   - **30% Formative Practice**: Guided practice, authentic GRASPS performance tasks with complete 4x4 analytic rubrics, 15-item formative quizzes, and unit assessments.
-   - **40-Page Student Core Minimum Floor (Excluding Answer Keys)**: The 40-page requirement covers **STRICTLY student instructional material** (Cover, Lessons 1–3, Unit Assessment, Summary). Susi sa Pagwawasto (Answer Keys) and Teacher's Guides are **strictly EXCLUDED** from this floor and begin on Page 44+ (bringing the total complete publication to 50–54+ pages).
+3. **Strict 70/30 Instructional Ratio & 45-70 Page Publication Target**:
+   - **70% Instructional Depth**: Lessons must be masterclasses of deep, contextualized prose. Paced strictly by quarter scope:
+     * *3-Lesson Units (Filipino, English, Values Ed, AP)*: 4,000–4,500 words per lesson floor (~18,000 words total across unit -> 48–55 pages in Word).
+     * *5–6 Lesson Quarters (Mathematics, Science STEM)*: Calibrated to 2,200–2,600 words per lesson (6 lessons × 2,400 = 14.4k + 4.5k Back Matter = 18.9k words total -> 50–60 pages in Word, strictly <= 70 pages max). Summaries, bulleted outlines, and shorthand placeholders (`...`) are strictly prohibited.
+   - **30% Formative Practice**: Guided practice, authentic contextual tasks, 15-item formative quizzes, and culminating quarter assessment.
+   - **Strict 45 to 70 Page Publication Range**: The complete compiled publication (Front Matter, Lessons, Culminating Assessment, Synthesis, Glossary, and Structured Answer Keys) MUST land squarely between 45 and 70 pages in Microsoft Word.
 4. **Spiral Progression Principle**:
    - Concepts must build systematically on prior grade competencies without regressing to elementary simplifications or making un-scaffolded leaps into collegiate theory.
 
@@ -99,8 +101,8 @@ The AI must NEVER fabricate data, dates, laws, historical figures, or mathematic
 2. **Dedicated Visual Container Boxes & Strict Ban on Draft Labels**:
    - **BAN DRAFT LABELS**: Strict zero-tolerance for `"Visual Prompt 1"`, `"Visual Prompt 2"`, `"sample visual prompt"`, or internal notes in the document! Use ONLY production titles: `🖼️ Larawan: [Mapanuring Pamagat]` or `🖼️ Figure: [Descriptive Title]`.
    - **100% Boxed Containment**: Title, Pedagogical Purpose, AI Prompt, and Replacement Note MUST ALL be cleanly enclosed inside ONE dedicated container box (`> ...` in Markdown or 1-cell shaded table in DOCX). No loose text outside the box.
-   - **Zero Branding in Image Prompts**: NO `"DepEd"`, `"MATATAG"`, or publisher logos inside AI image prompts. Institutional identity belongs ONLY in running headers and footers.
-   - **Strict 10-Prompt Quota**: Exactly 1 Cover Prompt on Page 1 (`--ar 8.5:11`) + 3 Image Prompts per Lesson (`--ar 16:9`) = Exactly **10 image prompts total per unit** ($1 + 3 \times 3 = 10$). Zero image prompts in Back Matter.
+   - **Zero Branding in Image Prompts**: NO `"DepEd"`, `"MATATAG"`, or publisher logos inside AI image prompts. NO DepEd/MATATAG marks anywhere in the book either (cover, running headers, footers); the curriculum is cited only in lesson alignment lines and the sources table.
+   - **Strict Image-Prompt Quota**: Exactly 1 Cover Prompt on Page 1 (`--ar 8.5:11`) + 3 Image Prompts per Lesson (`--ar 16:9`) = **1 + 3 × lessons** (10 for a 3-lesson unit, 19 for a 6-lesson quarter). Zero image prompts in Back Matter.
 3. **Bulletproof YouTube Multimedia Modules (Topic-Specific Direct Video Links, Zero Fake Timestamps, Zero Disclaimers)**:
    - **Legitimate & Verified Media**: Video module must cite legitimate, active channels (*DepEd TV Official, Knowledge Channel, CrashCourse, Khan Academy, DOST-SEI, GMA Public Affairs, TED-Ed, SoulPancake*).
    - **Topic-Specific Direct Real Video Link**: Must provide the authentic direct video URL (`https://www.youtube.com/watch?v=[REAL_VIDEO_ID]`) specifically covering THAT lesson's topic or activity. **NO SEARCH LINKS** (`results?search_query=...`) and **NO GENERIC WHOLE-COURSE COMPILATIONS**.
@@ -121,6 +123,7 @@ The AI must NEVER fabricate data, dates, laws, historical figures, or mathematic
    - Correct answers MUST be evenly distributed across options `A`, `B`, `C`, and `D` (~25% each; 2 to 3 per 10 items).
    - Strict ban on letter-clustering bias (never default to 'B' or any single letter).
    - Zero consecutive runs of >2 identical letters (e.g. `A-A-C` is allowed, `B-B-B` is prohibited).
+   - **Zero predictable cycles**: A key must never follow a repeating pattern such as `A-B-C-D-A-B-C-D…` or `D-C-B-A…`, and no two quizzes in the same book may share an identical answer sequence. Shuffle option order per item, then re-verify the key against every item.
    - Parallel distractor length and plausibility so the correct option is not consistently the longest or most detailed.
 
 ---
@@ -134,7 +137,7 @@ At the conclusion of Back Matter (Turn 5), the generator evaluates the textbook 
 | **1. MATATAG Alignment & Content Fit** | Explicit competency codes, 3 Essential Questions mapped to subtopics, seamless academic prose, zero draft artifacts or conversational residue. | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
 | **2. Developmental Appropriateness** | Cognitive demand matched to grade band (DOK 1-4), age-appropriate readability, gender-fair and inclusive language. | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
 | **3. Zero-Hallucination & Accuracy** | 100% verified historical dates, authentic literary selections, sound scientific laws, zero math calculation errors. | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
-| **4. Pedagogical Rigor & Density** | 3,500+ words per lesson, 8-10 turn scholarly Socratic dialogue, complete 4x4 analytic rubrics (all 16 cells filled), continuous flow. | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
+| **4. Pedagogical Rigor & Density** | Calibrated to 45-70 page range: 2,200-2,600 words/lesson (5-6 lesson quarters) or 4,000-4,500 words/lesson (3-lesson units), continuous flow, high-yield technical rigor. | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
 | **5. Layout, Visuals, TOC & Keys** | 100% boxed visuals (zero "Visual Prompt" draft labels), non-table hierarchical TOC, topic-specific direct video links (zero disclaimers/notes outside box), structured table keys (no paragraph blobs), balanced choices (~25% each, zero 'mostly B' bias). | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
 | **TOTAL SCORE** | **Comprehensive DepEd MATATAG Unit Rating** | **100 pts** | **Target: 95–100 pts** |
 
@@ -143,17 +146,17 @@ At the conclusion of Back Matter (Turn 5), the generator evaluates the textbook 
 ### QA Audit Certificate Stamp (Rendered at End of Unit):
 ```text
 ═══════════════════════════════════════════════════════════════════════════════
-        DEPED MATATAG CURRICULUM QUALITY ASSURANCE CERTIFICATE
+        EDITORIAL QUALITY ASSURANCE CERTIFICATE (MATATAG-ALIGNED)
 ═══════════════════════════════════════════════════════════════════════════════
 SUBJECT & GRADE: [Subject] Grade [X] • Unit [Y]
 COMPETENCY ALIGNMENT: 100% Verified against MATATAG Curriculum Standards
 CONTENT & EDITORIAL FIT: Pure Masterclass Prose (Zero Draft / Placeholder Residue)
-PEDAGOGICAL RATIO: 70% Lesson Content / 30% Formative Practice (3,500+ w/lesson)
+PEDAGOGICAL RATIO: 70% Lesson Content / 30% Formative Practice (Paced for 45-70 Pages)
 READABILITY & LEVEL: Grade-Level Appropriate (DOK 1-4 Cognitive Progression)
 FACTUAL AUDIT: Zero Hallucinations • Historical, Scientific & Math Verified
 VISUAL & MEDIA INTEGRITY: 100% Boxed Containers • Production Titles • No Fake Timestamps
 ANSWER KEY FORMAT: Clean Structured Tables (MCQ Grid + Rationale Matrix)
 OPTION DISTRIBUTION: Balanced Psychometric Spread across A, B, C, D (~25% each, max 2 consecutive)
-OVERALL QA AUDIT SCORE: [98/100] • STATUS: PASSED FOR CLASSROOM DEPLOYMENT
+OVERALL QA AUDIT SCORE: [sum of verified rubric rows]/100 • STATUS: [PASSED only if ≥95 AND page count verified in the rendered DOCX; otherwise PENDING + list of open checks]
 ═══════════════════════════════════════════════════════════════════════════════
 ```
