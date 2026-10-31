@@ -205,6 +205,14 @@ def add_hyperlink(paragraph, text, url, size=10.5, bold=False, italic=False):
     link.append(r)
     paragraph._p.append(link)
 
+def add_spacer(container, space_after=3):
+    """Thin blank line after a table or box. Only whitespace is tightened; text sizes are untouched."""
+    p = container.add_paragraph()
+    format_paragraph(p, space_before=0, space_after=space_after)
+    p.paragraph_format.line_spacing = Pt(6)
+    p._p.get_or_add_pPr().append(parse_xml(f'<w:rPr {nsdecls("w")}><w:sz w:val="12"/></w:rPr>'))
+    return p
+
 def add_heading_1(doc, text):
     t = doc.add_table(rows=1, cols=1)
     t.alignment = WD_TABLE_ALIGNMENT.CENTER
@@ -220,8 +228,7 @@ def add_heading_1(doc, text):
     run.font.size = Pt(13.5)
     run.font.bold = True
     run.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
-    p_sp = doc.add_paragraph()
-    format_paragraph(p_sp, space_before=0, space_after=4)
+    add_spacer(doc, 4)
     return p
 
 def add_heading_2(doc, text):
@@ -240,8 +247,7 @@ def add_heading_2(doc, text):
     run.font.size = Pt(11.5)
     run.font.bold = True
     run.font.color.rgb = RGBColor(0x1B, 0x36, 0x5D)
-    p_sp = doc.add_paragraph()
-    format_paragraph(p_sp, space_before=0, space_after=3)
+    add_spacer(doc, 3)
     return p
 
 def add_heading_3(doc, text):
@@ -298,8 +304,7 @@ def add_callout_box(doc, title, items, bg_color="FAFAFA", border_color="1B365D")
         ri.font.name = 'Cambria'
         ri.font.size = Pt(9.5)
         ri.font.color.rgb = RGBColor(0x33, 0x33, 0x33)
-    p_sp = doc.add_paragraph()
-    format_paragraph(p_sp, space_before=0, space_after=3)
+    add_spacer(doc, 3)
 
 def add_formula_box(doc, title, formula, where_items=None):
     tbl = doc.add_table(rows=1, cols=1)
@@ -340,8 +345,7 @@ def add_formula_box(doc, title, formula, where_items=None):
             rw2.font.name = 'Cambria'
             rw2.font.size = Pt(9.0)
             rw2.font.color.rgb = RGBColor(0x44, 0x44, 0x44)
-    p_sp = doc.add_paragraph()
-    format_paragraph(p_sp, space_before=0, space_after=3)
+    add_spacer(doc, 3)
 
 def add_worked_example_box(doc, example_title, problem_text, given_items, formula_used, solution_steps, final_answer, verification=""):
     tbl = doc.add_table(rows=1, cols=1)
@@ -414,42 +418,32 @@ def add_worked_example_box(doc, example_title, problem_text, given_items, formul
         rv_txt.font.name = 'Cambria'
         rv_txt.font.size = Pt(9.0)
         rv_txt.font.italic = True
-    p_sp = doc.add_paragraph()
-    format_paragraph(p_sp, space_before=0, space_after=3)
+    add_spacer(doc, 3)
 
 # ==========================================
 # 4. MARKDOWN TO DOCX PARSER ENGINE
 # ==========================================
 
 INLINE_MATH = re.compile(r'(\$\$.+?\$\$|\\\(.+?\\\)|\\\[.+?\\\]|\$(?=\S)[^$\n]+?(?<=\S)\$)')
-
-def _is_inline_math(seg):
-    if seg.startswith(('$$', '\\(', '\\[')):
-        return True
-    inner = seg[1:-1]
-    return bool(re.search(r'[\\^_{}=+\-−×÷·<>≤≥()|]', inner) or re.fullmatch(r'[A-Za-z]', inner))  # plain "$5 and $10" money stays text
+SIGN_MINUS = re.compile(r'(?<![\w)\]−-])-(?=\d)')   # "-2" in prose becomes "−2"; "x-intercept" and "2023-2024" stay
 
 def format_inline_runs(paragraph, text, default_size=10.5, default_color=None, default_bold=False, default_italic=False):
-    # Inline TeX ($...$, \(...\), \[...\]) becomes a real Word equation; other text keeps the normal run formatting.
-    if '$' in text or '\\(' in text or '\\[' in text:
-        for seg in INLINE_MATH.split(text):
-            if not seg:
-                continue
-            if INLINE_MATH.fullmatch(seg) and _is_inline_math(seg):
-                inner = seg[2:-2] if seg.startswith(('$$', '\\(', '\\[')) else seg[1:-1]
-                add_inline_math(paragraph, inner, default_size + 0.5)
-            else:
-                _format_text_runs(paragraph, seg, default_size, default_color, default_bold, default_italic)
-        return
-    _format_text_runs(paragraph, text, default_size, default_color, default_bold, default_italic)
+    """Parses inline bold, italic, code, links, and inline math ($...$, \\(...\\), \\[...\\]) within a paragraph.
+    Math spans are set aside first so that bold/italic markers around them still pair up."""
+    maths = []
 
-def _format_text_runs(paragraph, text, default_size=10.5, default_color=None, default_bold=False, default_italic=False):
-    """Parses inline bold, italic, code, and symbols within a paragraph run."""
-    text = clean_math_text(text)
-    pattern = r'(\[[^\]]+\]\(https?://[^)\s]+\)|https?://[^\s)|]+|\*\*[^*]+\*\*|\*[^*]+\*|_[^_]+_|`[^`]+`)'
-    parts = re.split(pattern, text)
-    
-    for part in parts:
+    def stash(m):
+        seg = m.group(0)
+        maths.append(seg[2:-2] if seg.startswith(('$$', '\\(', '\\[')) else seg[1:-1])
+        return f'\x01{len(maths) - 1}\x02'
+
+    if '$' in text or '\\(' in text or '\\[' in text:
+        text = INLINE_MATH.sub(stash, text)
+    # _italic_ only when the underscores hug a word, so answer blanks like "____" stay intact
+    bold_rx = r'\*\*[^*]+\*\*'
+    italic_rx = r'\*(?=\S)[^*]+?(?<=\S)\*|(?<![\w_])_(?=[^\s_])[^_]+?(?<=[^\s_])_(?![\w_])'
+    pattern = rf'(\[[^\]]+\]\(https?://[^)\s]+\)|https?://[^\s)|]+|{bold_rx}|{italic_rx}|`[^`]+`)'
+    for part in re.split(pattern, text):
         if not part:
             continue
         link = re.fullmatch(r'\[([^\]]+)\]\((https?://[^)\s]+)\)', part)
@@ -457,30 +451,34 @@ def _format_text_runs(paragraph, text, default_size=10.5, default_color=None, de
             label, url = (link.group(1), link.group(2)) if link else (part, part)
             add_hyperlink(paragraph, label, url, size=default_size, bold=default_bold, italic=default_italic)
             continue
-        if part.startswith('**') and part.endswith('**') and len(part) >= 4:
-            r = paragraph.add_run(part[2:-2])
-            r.bold = True
-            r.italic = default_italic
-        elif ((part.startswith('*') and part.endswith('*')) or (part.startswith('_') and part.endswith('_'))) and len(part) >= 2:
-            r = paragraph.add_run(part[1:-1])
-            r.bold = default_bold
-            r.italic = True
-        elif part.startswith('`') and part.endswith('`') and len(part) >= 2:
-            r = paragraph.add_run(part[1:-1])
+        if part.startswith('`') and part.endswith('`') and len(part) >= 2:
+            code = re.sub(r'\x01(\d+)\x02', lambda m: '$' + maths[int(m.group(1))] + '$', part[1:-1])
+            r = paragraph.add_run(code)
             r.font.name = 'Consolas'
             r.font.size = Pt(default_size - 1)
             continue
-        else:
-            r = paragraph.add_run(part)
-            r.bold = default_bold
-            r.italic = default_italic
-            
+        bold, italic, inner = default_bold, default_italic, part
+        if re.fullmatch(bold_rx, part):
+            bold, inner = True, part[2:-2]
+        elif re.fullmatch(italic_rx, part):
+            italic, inner = True, part[1:-1]
+        _emit_runs(paragraph, inner, bold, italic, default_size, default_color, maths)
+
+def _emit_runs(paragraph, text, bold, italic, size, color, maths):
+    """Adds styled text runs, putting each stashed math span back as a real Word equation."""
+    for piece in re.split(r'(\x01\d+\x02)', text):
+        if not piece:
+            continue
+        m = re.fullmatch(r'\x01(\d+)\x02', piece)
+        if m:
+            add_inline_math(paragraph, maths[int(m.group(1))], size + 0.5, str(color) if color else '1A1A1A')
+            continue
+        r = paragraph.add_run(SIGN_MINUS.sub('−', clean_math_text(piece)))
+        r.bold = bold
+        r.italic = italic
         r.font.name = 'Cambria'
-        r.font.size = Pt(default_size)
-        if default_color:
-            r.font.color.rgb = default_color
-        else:
-            r.font.color.rgb = RGBColor(0x22, 0x22, 0x22)
+        r.font.size = Pt(size)
+        r.font.color.rgb = color if color else RGBColor(0x22, 0x22, 0x22)
 
 def render_callout_box(doc, lines):
     """Renders blockquote callouts: YouTube modules, Figure specs, Formula cards, Worked examples."""
@@ -537,8 +535,91 @@ def render_callout_box(doc, lines):
         else:
             format_inline_runs(p, clean_l, default_size=9.5)
             
-    p_sp = doc.add_paragraph()
-    format_paragraph(p_sp, space_before=0, space_after=3)
+    add_spacer(doc, 3)
+
+def _fit_row(cells, ncols):
+    """A row with too many cells usually has bare tally marks (|||| ||) that were split as separators.
+    Merge the longest run of blank pieces back into one cell of pipes until the row fits the header."""
+    cells = list(cells)
+    while len(cells) > ncols:
+        best, start = 0, -1
+        k = 0
+        while k < len(cells):
+            if cells[k].strip() == '':
+                j = k
+                while j < len(cells) and cells[j].strip() == '':
+                    j += 1
+                if j - k > best:
+                    best, start = j - k, k
+                k = j
+            else:
+                k += 1
+        if best < 2:
+            break
+        take = min(best, len(cells) - ncols + 1)
+        cells[start:start + take] = ['|'.join(cells[start:start + take])]
+    # a pipe touching text on both sides is content, e.g. a stem-and-leaf key "1|4 = 14"
+    i = 0
+    while len(cells) > ncols and i < len(cells) - 1:
+        a, b = cells[i], cells[i + 1]
+        if a and b and not a[-1].isspace() and not b[0].isspace():
+            cells[i:i + 2] = [a + '|' + b]
+        else:
+            i += 1
+    # a piece with no space inside its bars is an absolute value, e.g. "|−12| and |−4|"
+    while len(cells) > ncols:
+        k = next((k for k in range(1, len(cells) - 1) if cells[k] and cells[k] == cells[k].strip()), None)
+        if k is None:
+            break
+        cells[k - 1:k + 2] = [cells[k - 1] + '|' + cells[k] + '|' + cells[k + 1]]
+    return [c.strip() for c in cells]
+
+def _split_table_row(line, keep_space=False):
+    """Splits a markdown row on '|' separators, but not on pipes inside `code`, $math$, \\(math\\), or escaped \\|."""
+    s = line.strip()
+    cells, buf, i, mode = [], '', 0, None
+    while i < len(s):
+        ch = s[i]
+        if ch == '\\' and i + 1 < len(s) and s[i + 1] == '|':
+            buf += '\x00'; i += 2; continue
+        if mode is None:
+            if ch == '`':
+                mode = '`'
+            elif ch == '$':
+                mode = '$'
+            elif s.startswith('\\(', i):
+                mode = '\\)'
+            elif ch == '|':
+                cells.append(buf); buf = ''; i += 1; continue
+        elif mode == '`' and ch == '`' or mode == '$' and ch == '$' and not s.startswith('$$', i - 1):
+            mode = None
+        elif mode == '\\)' and s.startswith('\\)', i):
+            mode = None
+        buf += ch
+        i += 1
+    cells.append(buf)
+    cells = [c.replace('\x00', '|') for c in cells[1:-1]]
+    return cells if keep_space else [c.strip() for c in cells]
+
+def _set_column_widths(t, rows_data, total_inches):
+    """Columns sized to their content (a short "Item" column, a wide "Question" column) instead of equal
+    widths; equal widths make long columns wrap into very tall rows and waste pages."""
+    ncols = len(t.columns)
+    weights = []
+    for c in range(ncols):
+        longest = max((len(re.sub(r'[*`$\\]', '', r[c])) for r in rows_data if c < len(r)), default=4)
+        weights.append(min(max(longest, 5), 60))
+    total_w = sum(weights)
+    widths = [max(0.55, total_inches * w / total_w) for w in weights]
+    scale = total_inches / sum(widths)
+    widths = [w * scale for w in widths]
+    t.autofit = False
+    grid = t._tbl.tblGrid
+    for gc, w in zip(grid.findall(qn('w:gridCol')), widths):
+        gc.set(qn('w:w'), str(int(w * 1440)))
+    for row in t.rows:
+        for cell, w in zip(row.cells, widths):
+            cell.width = Inches(w)
 
 def render_markdown_table(doc, table_lines):
     """Renders markdown tables with Navy header row, alternating zebra stripes, and clean cell padding."""
@@ -549,19 +630,22 @@ def render_markdown_table(doc, table_lines):
             continue
         if re.match(r'^\|[\s\-:|]+\|$', line_s):
             continue
-        cells = [c.strip() for c in line_s.split('|')[1:-1]]
+        cells = _split_table_row(line_s)
+        if rows_data and len(cells) > len(rows_data[0]):
+            cells = _fit_row(_split_table_row(line_s, keep_space=True), len(rows_data[0]))
         if cells:
             rows_data.append(cells)
-            
+
     if not rows_data:
         return
-        
+
     num_cols = max(len(r) for r in rows_data)
     num_rows = len(rows_data)
     
     t = doc.add_table(rows=num_rows, cols=num_cols)
     t.alignment = WD_TABLE_ALIGNMENT.CENTER
     set_table_grid_borders(t, color_hex="D0D7DE", sz="4")
+    _set_column_widths(t, rows_data, 6.9 if hasattr(doc, 'sections') else 6.1)
     
     for r_idx, row in enumerate(rows_data):
         is_header = (r_idx == 0)
@@ -581,8 +665,7 @@ def render_markdown_table(doc, table_lines):
                 set_cell_shading(cell, bg)
                 format_inline_runs(p, cell_text, default_size=9.0)
                 
-    p_sp = doc.add_paragraph()
-    format_paragraph(p_sp, space_before=0, space_after=3)
+    add_spacer(doc, 3)
 
 def extract_clean_markdown(text):
     """
@@ -664,7 +747,7 @@ def _split_top_level(s, sep=','):
             return s[:i].strip(), s[i + 1:].strip()
     return s.strip(), ''
 
-def _omml_runs(text, size):
+def _omml_runs(text, size, color='1A1A1A'):
     """Plain text -> OMML runs. Single-letter variables are italic; numbers, words and symbols upright."""
     out = []
     for tok in re.findall(r'(?<![A-Za-z])[A-Za-z](?![A-Za-z])|[A-Za-z]{2,}|[^A-Za-z]+', text):
@@ -672,12 +755,12 @@ def _omml_runs(text, size):
         sty = '' if italic else '<m:rPr><m:sty m:val="p"/></m:rPr>'
         out.append(
             f'<m:r>{sty}<w:rPr><w:rFonts w:ascii="Cambria Math" w:hAnsi="Cambria Math"/>'
-            f'<w:color w:val="1A1A1A"/><w:sz w:val="{int(size * 2)}"/></w:rPr>'
+            f'<w:color w:val="{color}"/><w:sz w:val="{int(size * 2)}"/></w:rPr>'
             f'<m:t xml:space="preserve">{_xml_escape(tok)}</m:t></m:r>'
         )
     return ''.join(out)
 
-def _omml(expr, size=12.0):
+def _omml(expr, size=12.0, color='1A1A1A'):
     """Converts plain Unicode math with frac(a, b), abs(x), sqrt(x) and x^(n) into Word OMML."""
     out, buf, i = [], '', 0
     expr = expr.replace('∣', '|')
@@ -685,17 +768,17 @@ def _omml(expr, size=12.0):
         m = re.match(r'(frac|abs|sqrt)\(', expr[i:])
         if m:
             if buf:
-                out.append(_omml_runs(buf, size)); buf = ''
+                out.append(_omml_runs(buf, size, color)); buf = ''
             start = i + len(m.group(1))
             end = _match_paren(expr, start)
             inner = expr[start + 1:end]
             if m.group(1) == 'frac':
                 a, b = _split_top_level(inner)
-                out.append(f'<m:f><m:num>{_omml(a, size)}</m:num><m:den>{_omml(b, size)}</m:den></m:f>')
+                out.append(f'<m:f><m:num>{_omml(a, size, color)}</m:num><m:den>{_omml(b, size, color)}</m:den></m:f>')
             elif m.group(1) == 'abs':
-                out.append(f'<m:d><m:dPr><m:begChr m:val="|"/><m:endChr m:val="|"/></m:dPr><m:e>{_omml(inner, size)}</m:e></m:d>')
+                out.append(f'<m:d><m:dPr><m:begChr m:val="|"/><m:endChr m:val="|"/></m:dPr><m:e>{_omml(inner, size, color)}</m:e></m:d>')
             else:
-                out.append(f'<m:rad><m:radPr><m:degHide m:val="1"/></m:radPr><m:deg/><m:e>{_omml(inner, size)}</m:e></m:rad>')
+                out.append(f'<m:rad><m:radPr><m:degHide m:val="1"/></m:radPr><m:deg/><m:e>{_omml(inner, size, color)}</m:e></m:rad>')
             i = end + 1
             continue
         if expr[i] in '^_' and i + 1 < len(expr) and expr[i + 1] == '(':
@@ -705,15 +788,15 @@ def _omml(expr, size=12.0):
             base = bm.group(1) if bm else ''
             buf = buf[:len(buf) - len(base)]
             if buf:
-                out.append(_omml_runs(buf, size)); buf = ''
+                out.append(_omml_runs(buf, size, color)); buf = ''
             end = _match_paren(expr, i + 1)
-            out.append(f'<{tag}><m:e>{_omml_runs(base, size)}</m:e><{part}>{_omml(expr[i + 2:end], size)}</{part}></{tag}>')
+            out.append(f'<{tag}><m:e>{_omml_runs(base, size, color)}</m:e><{part}>{_omml(expr[i + 2:end], size, color)}</{part}></{tag}>')
             i = end + 1
             continue
         buf += expr[i]
         i += 1
     if buf:
-        out.append(_omml_runs(buf, size))
+        out.append(_omml_runs(buf, size, color))
     return ''.join(out)
 
 TEX_SYMBOLS = {
@@ -803,8 +886,8 @@ def _prep_math(expr):
     expr = tex_to_math(expr.strip()).replace('&', '')
     return _true_minus(clean_math_text(expr))
 
-def add_inline_math(paragraph, expr, size=11.0):
-    paragraph._p.append(parse_xml(f'<m:oMath {nsdecls("m", "w")}>{_omml(_prep_math(expr), size)}</m:oMath>'))
+def add_inline_math(paragraph, expr, size=11.0, color='1A1A1A'):
+    paragraph._p.append(parse_xml(f'<m:oMath {nsdecls("m", "w")}>{_omml(_prep_math(expr), size, color)}</m:oMath>'))
 
 def _display_math_block(lines, i):
     # Returns (expression, next_line_index) when lines[i] opens a $$ or \[ display block, else None.
@@ -895,7 +978,7 @@ def add_steps(container, lines, size=11.0):
         format_paragraph(p, space_before=1, space_after=1)
         if reason:
             format_inline_runs(p, reason, default_size=9.0, default_color=RGBColor(0x5A, 0x62, 0x70), default_italic=True)
-    format_paragraph(container.add_paragraph(), space_before=0, space_after=2)
+    add_spacer(container, 2)
 
 def add_exercises(container, lines, cols=2, start=1, size=10.5):
     """Numbered exercise grid (borderless table) like a math-book practice set."""
@@ -916,7 +999,7 @@ def add_exercises(container, lines, cols=2, start=1, size=10.5):
         r.font.name = 'Cambria'; r.font.size = Pt(size); r.font.bold = True
         r.font.color.rgb = RGBColor(0x1B, 0x36, 0x5D)
         format_inline_runs(p, _true_minus(item), default_size=size)
-    format_paragraph(container.add_paragraph(), space_before=0, space_after=3)
+    add_spacer(container, 3)
 
 BOX_STYLES = {
     'concept':  ("EAF2FB", "1B365D", "📐 "),
@@ -941,7 +1024,7 @@ def add_box(container, kind, title, inner_markdown):
         col = RGBColor(int(border[0:2], 16), int(border[2:4], 16), int(border[4:6], 16))
         format_inline_runs(p, icon + title, default_size=11.0, default_color=col, default_bold=True)
     append_markdown_to_doc(c, inner_markdown)
-    format_paragraph(container.add_paragraph(), space_before=0, space_after=4)
+    add_spacer(container, 4)
 
 def _parse_figure_spec(lines):
     spec = {}
@@ -1005,10 +1088,14 @@ def _fig_numberline(plt, spec, vertical=False):
         pv = float(parts[0].replace('−', '-'))
         ax.plot(*P(pv, 0), 'o', ms=8, color=TEAL_HEX, zorder=5, mec='white', mew=1)
         if len(parts) > 1 and parts[1].strip():
-            off = -5.2 * unit if (n_h or vertical) else 2.4 * unit
-            kw = dict(ha='right', va='center') if vertical else dict(ha='center', va='top' if n_h else 'bottom')
             if vertical:
-                off = -14 * unit
+                # beside the dot, in points, so the label stays close at any scale (right side unless hops use it)
+                ax.annotate(_label(parts[1].strip()), P(pv, 0), textcoords='offset points',
+                            xytext=(-42, 0) if n_h else (9, 0), ha='right' if n_h else 'left', va='center',
+                            fontsize=9, color=TEAL_HEX, fontweight='bold', annotation_clip=False)
+                continue
+            off = -5.2 * unit if n_h else 2.4 * unit
+            kw = dict(ha='center', va='top' if n_h else 'bottom')
             ax.text(*P(pv, off), _label(parts[1].strip()), fontsize=9, color=TEAL_HEX, fontweight='bold', **kw)
     for dtxt in spec.get('distance', []):
         parts = dtxt.split(',', 2)
@@ -1161,6 +1248,10 @@ def _fig_coordinate(plt, spec):
         ax.spines[s].set_position('zero'); ax.spines[s].set_color(NAVY_HEX)
     ax.spines[['top', 'right']].set_visible(False)
     ax.tick_params(labelsize=8)
+    if spec.get('xlabel'):
+        ax.set_xlabel(spec['xlabel'][0], fontsize=9.5, loc='right')
+    if spec.get('ylabel'):
+        ax.set_ylabel(spec['ylabel'][0], fontsize=9.5, loc='top')
     for segtxt in spec.get('segment', []):
         x1, y1, x2, y2 = _nums(segtxt)[:4]
         ax.plot([x1, x2], [y1, y2], color=NAVY_HEX, lw=1.8)
@@ -1206,11 +1297,93 @@ def _fig_polygon(plt, spec):
     ax.set_aspect('equal'); ax.axis('off')
     return fig, 3.2
 
+def _split_items(text):
+    """Items separated by arrows (→, ->) or, if there are none, by commas."""
+    parts = re.split(r'\s*(?:→|->)\s*', text) if ('→' in text or '->' in text) else text.split(',')
+    return [x.strip() for x in parts if x.strip()]
+
+def _wrap(text, width=11):
+    import textwrap
+    return textwrap.fill(text, width, break_long_words=False)
+
+def _box_height(items):
+    return 0.36 + 0.3 * max(_wrap(t).count('\n') + 1 for t in items)
+
+def _box_width(items, base, per_char):
+    longest = max(len(line) for t in items for line in _wrap(t).split('\n'))
+    return max(base, per_char * longest + 0.45)
+
+def _text_box(ax, x, y, w, h, text, fc='#EAF2FB'):
+    from matplotlib.patches import FancyBboxPatch
+    ax.add_patch(FancyBboxPatch((x - w / 2, y - h / 2), w, h, boxstyle='round,pad=0.04,rounding_size=0.15',
+                                fc=fc, ec=NAVY_HEX, lw=1.4, zorder=3))
+    ax.text(x, y, _wrap(text), ha='center', va='center', fontsize=9, color='#1A1A1A', zorder=4, linespacing=1.15)
+
+def _fig_flow(plt, spec):
+    """Food chains, energy transformations, input → process → output, step sequences."""
+    items = _split_items(spec.get('items', [''])[0])
+    arrow_label = spec.get('label', [''])[0]
+    direction = spec.get('direction', ['down' if len(items) > 4 else 'right'])[0].lower()
+    down = direction.startswith('down')
+    w, h, gap = _box_width(items, 1.9, 0.13), _box_height(items), 1.0
+    n = len(items)
+    span = n * (h if down else w) + (n - 1) * gap
+    fig, ax = plt.subplots(figsize=((2.6, span * 0.62 + 0.3) if down else (span * 0.62 + 0.3, 1.5)))
+    centers = [(0, -k * (h + gap)) if down else (k * (w + gap), 0) for k in range(n)]
+    for k, (x, y) in enumerate(centers):
+        _text_box(ax, x, y, w, h, items[k])
+        if k:
+            (px, py) = centers[k - 1]
+            start = (px, py - h / 2) if down else (px + w / 2, py)
+            end = (x, y + h / 2) if down else (x - w / 2, y)
+            ax.annotate('', xy=end, xytext=start, annotation_clip=False,
+                        arrowprops=dict(arrowstyle='-|>', lw=1.8, color=TEAL_HEX, mutation_scale=14))
+            if arrow_label:
+                mx, my = (start[0] + end[0]) / 2, (start[1] + end[1]) / 2
+                ax.text(mx + (0.12 if down else 0), my + (0 if down else 0.12), arrow_label, fontsize=8,
+                        color=GRAY_HEX, style='italic', ha='left' if down else 'center', va='center' if down else 'bottom')
+    xs = [c[0] for c in centers]; ys = [c[1] for c in centers]
+    ax.set_xlim(min(xs) - w / 2 - 0.2, max(xs) + w / 2 + (1.2 if down and arrow_label else 0.2))
+    ax.set_ylim(min(ys) - h / 2 - 0.2, max(ys) + h / 2 + 0.35)
+    ax.set_aspect('equal'); ax.axis('off')
+    return fig, (2.4 if down else min(6.2, span * 0.62 + 0.3))
+
+def _fig_cycle(plt, spec):
+    """Water cycle, rock cycle, life cycles, carbon cycle: stages around a circle with clockwise arrows."""
+    import math
+    from matplotlib.patches import FancyArrowPatch
+    from matplotlib.path import Path
+    items = _split_items(spec.get('items', [''])[0])
+    n = max(len(items), 2)
+    w, h = _box_width(items, 1.75, 0.17), _box_height(items)
+    # radius large enough that each arrow keeps a visible arc between neighbouring boxes
+    R = max(1.9, (w * 0.62) / math.tan(math.radians(max(360 / n - 26, 10) / 2)),
+            w / 2 + 0.13 * len(spec.get('center', [''])[0]) + 0.4)
+    lim = R + w / 2 + 0.2
+    fig, ax = plt.subplots(figsize=(2 * lim * 0.55, 2 * lim * 0.55))
+    angles = [90 - 360 * k / n for k in range(n)]
+    for a, text in zip(angles, items):
+        _text_box(ax, R * math.cos(math.radians(a)), R * math.sin(math.radians(a)), w, h, text)
+    d = math.degrees(math.atan2(w * 0.62, R)) + 4
+    for k in range(n):
+        a0, a1 = angles[k] - d, angles[k] - 360 / n + d
+        if a1 >= a0:
+            continue
+        pts = [(R * math.cos(math.radians(a0 + (a1 - a0) * t / 30)), R * math.sin(math.radians(a0 + (a1 - a0) * t / 30)))
+               for t in range(31)]
+        ax.add_patch(FancyArrowPatch(path=Path(pts), arrowstyle='-|>', lw=1.8, color=TEAL_HEX, mutation_scale=14, zorder=2))
+    if spec.get('center'):
+        ax.text(0, 0, spec['center'][0], ha='center', va='center', fontsize=11, fontweight='bold', color=NAVY_HEX)
+    ax.set_xlim(-lim, lim); ax.set_ylim(-lim, lim)
+    ax.set_aspect('equal'); ax.axis('off')
+    return fig, min(4.4, 3.4 + 0.15 * n)
+
 FIGURE_TYPES = {
     'numberline': lambda plt, s: _fig_numberline(plt, s),
     'vnumberline': lambda plt, s: _fig_numberline(plt, s, vertical=True),
     'counters': _fig_counters, 'groups': _fig_groups, 'bar': _fig_bar, 'line': _fig_line,
     'pie': _fig_pie, 'stemleaf': _fig_stemleaf, 'coordinate': _fig_coordinate, 'polygon': _fig_polygon,
+    'flow': _fig_flow, 'cycle': _fig_cycle,
 }
 
 def add_figure(container, spec_lines, max_width=5.8):
@@ -1241,7 +1414,8 @@ def add_figure(container, spec_lines, max_width=5.8):
     r = cap.add_run(f"Figure {num}")
     r.font.name = 'Cambria'; r.font.size = Pt(9); r.font.bold = True; r.font.color.rgb = RGBColor(0x1B, 0x36, 0x5D)
     if spec.get('caption'):
-        format_inline_runs(cap, '  ' + _true_minus(spec['caption'][0]), default_size=9.0,
+        caption = re.sub(r'^\s*(Figure|Fig\.)\s*\d+(\.\d+)*\s*[:.\-—–]?\s*', '', spec['caption'][0], flags=re.IGNORECASE)
+        format_inline_runs(cap, '  ' + _true_minus(caption), default_size=9.0,
                            default_color=RGBColor(0x5A, 0x62, 0x70), default_italic=True)
 
 def append_markdown_to_doc(doc, markdown_text):
@@ -1433,6 +1607,266 @@ def compile_markdown_to_docx(source_md_path_or_text, output_docx_path, subject="
     doc.save(output_docx_path)
     print(f"Successfully compiled {output_docx_path} ({len(doc.paragraphs)} paragraphs, {len(doc.tables)} tables)")
     return output_docx_path
+
+def check_typography(docx_path):
+    """Run after compiling and report the result. The page limit must never be met by shrinking type:
+    body text stays 10.5 pt, line spacing 1.15, margins 0.8 in (the values this builder sets)."""
+    d = Document(docx_path)
+    problems = []
+    for i, s in enumerate(d.sections, 1):
+        for name in ('left_margin', 'right_margin', 'top_margin', 'bottom_margin'):
+            v = getattr(s, name)
+            if v is not None and v.inches < 0.75:
+                problems.append(f"section {i} {name.replace('_', ' ')} is {v.inches:.2f} in (must be 0.8 in)")
+    normal = d.styles['Normal'].font.size
+    if normal is not None and normal.pt < 10:
+        problems.append(f"Normal style is {normal.pt} pt (must not be reduced)")
+    small = total = tight = paras = 0
+    for p in d.paragraphs:                      # body paragraphs; tables and figure captions are smaller by design
+        if not p.text.strip() or p.text.startswith('Figure '):
+            continue
+        paras += 1
+        ls = p.paragraph_format.line_spacing
+        if isinstance(ls, float) and ls < 1.1:
+            tight += 1
+        for r in p.runs:
+            n = len(r.text.strip())
+            total += n
+            if n and r.font.size is not None and r.font.size.pt < 10:
+                small += n
+    if total and small / total > 0.15:
+        problems.append(f"{small / total:.0%} of body text is under 10 pt (body text must be 10.5 pt)")
+    if paras and tight / paras > 0.25:
+        problems.append(f"{tight / paras:.0%} of body paragraphs have line spacing under 1.15")
+    print('TYPOGRAPHY CHECK: ' + ('PASS' if not problems else 'FAIL: ' + '; '.join(problems)))
+    return not problems, problems
+
+# ==========================================
+# 5B. PAGE ESTIMATOR AND PER-LESSON PAGE BUDGET
+#     Word is not available in Code Interpreter, so pages are estimated from the layout
+#     the builder produces (text lines, tables, figures, page breaks), calibrated against
+#     real Word page counts.
+# ==========================================
+
+PAGE_CALIBRATION = 0.95         # tuned to run slightly high (safer for the 75-page cap); within about 5-10% of Word
+BACK_MATTER_PAGES = 12          # comprehensive assessment + performance task + answer keys + QA page
+COUNTED_MIN, COUNTED_MAX = 45, 75
+
+_W = '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'
+_M = '{http://schemas.openxmlformats.org/officeDocument/2006/math}'
+_WP = '{http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing}'
+
+def _twips_attr(el, path, attr, default=0):
+    node = el.find(path)
+    if node is None or node.get(_W + attr) is None:
+        return default
+    try:
+        return int(node.get(_W + attr)) / 20.0
+    except ValueError:
+        return default
+
+def _para_height(p, width_pt):
+    sizes = [int(s.get(_W + 'val')) / 2 for s in p.iter(_W + 'sz') if s.get(_W + 'val', '').isdigit()]
+    size = max(sizes) if sizes else 10.5
+    text = ''.join(t.text or '' for t in p.iter(_W + 't')) + ''.join(t.text or '' for t in p.iter(_M + 't'))
+    spacing = p.find(f'{_W}pPr/{_W}spacing')
+    ls = 1.0
+    before = after = 0.0
+    if spacing is not None:
+        if spacing.get(_W + 'line') and spacing.get(_W + 'lineRule', 'auto') == 'auto':
+            ls = int(spacing.get(_W + 'line')) / 240.0
+        before = int(spacing.get(_W + 'before', 0)) / 20.0
+        after = int(spacing.get(_W + 'after', 0)) / 20.0
+    images = sum(int(e.get('cy', 0)) / 12700.0 for e in p.iter(_WP + 'extent'))
+    cpl = max(8, width_pt / (size * 0.47))
+    lines = -(-len(text) // int(cpl)) if text.strip() else (0 if images else 1)
+    line_h = size * 1.22 * ls
+    extra = 0.0
+    if p.find(f'.//{_M}oMathPara') is not None:
+        extra += size * 0.6
+    extra += len(list(p.iter(_M + 'f'))) * size * 0.9
+    return lines * line_h + before + after + images + extra
+
+def _cell_height(tc, width_pt):
+    mar = tc.find(f'{_W}tcPr/{_W}tcMar')
+    left = right = 5.4
+    top = bottom = 0.0
+    if mar is not None:
+        left = _twips_attr(mar, f'{_W}left', 'w', 108) or _twips_attr(mar, f'{_W}start', 'w', 108)
+        right = _twips_attr(mar, f'{_W}right', 'w', 108) or _twips_attr(mar, f'{_W}end', 'w', 108)
+        top = _twips_attr(mar, f'{_W}top', 'w', 0)
+        bottom = _twips_attr(mar, f'{_W}bottom', 'w', 0)
+    inner = max(20.0, width_pt - left - right)
+    h = top + bottom
+    for child in tc:
+        if child.tag == _W + 'p':
+            h += _para_height(child, inner)
+        elif child.tag == _W + 'tbl':
+            h += sum(_table_row_heights(child, inner))
+    return h
+
+def _table_row_heights(tbl, width_pt):
+    grid = [int(g.get(_W + 'w', 0)) / 20.0 for g in tbl.iter(_W + 'gridCol')]
+    rows = [tr for tr in tbl if tr.tag == _W + 'tr']
+    ncols = max((len([c for c in tr if c.tag == _W + 'tc']) for tr in rows), default=1)
+    if len(grid) != ncols or sum(grid) <= 0:
+        grid = [width_pt / ncols] * ncols
+    else:
+        scale = width_pt / sum(grid) if sum(grid) > width_pt else 1.0
+        grid = [g * scale for g in grid]
+    heights = []
+    for tr in rows:
+        cells = [c for c in tr if c.tag == _W + 'tc']
+        hs = []
+        for k, tc in enumerate(cells):
+            w = tc.find(f'{_W}tcPr/{_W}tcW')
+            cw = int(w.get(_W + 'w')) / 20.0 if (w is not None and w.get(_W + 'type') == 'dxa' and w.get(_W + 'w', '0').isdigit() and int(w.get(_W + 'w')) > 0) else (grid[k] if k < len(grid) else grid[-1])
+            hs.append(_cell_height(tc, min(cw, width_pt)))
+        heights.append(max(hs or [12.0]) + 1.0)
+    return heights
+
+def estimate_docx_pages(docx_path, start_text=None, stop_texts=()):
+    """Estimated Word page count of a compiled DOCX. With start_text/stop_texts, counts only the pages
+    from the banner containing start_text, skipping sections whose banner contains any stop_texts."""
+    d = Document(docx_path)
+    sec = d.sections[0]
+    usable = (sec.page_height - sec.top_margin - sec.bottom_margin) / 12700.0
+    width = (sec.page_width - sec.left_margin - sec.right_margin) / 12700.0
+    pages, y, counting = 0, 0.0, start_text is None
+    used_pages = set()
+
+    def place(h):
+        nonlocal pages, y
+        if y > 0 and y + h > usable:
+            pages += 1
+            y = 0.0
+        y += h
+        while y > usable:
+            pages += 1
+            y -= usable
+        if counting:
+            used_pages.add(pages)
+
+    for el in d.element.body:
+        tag = el.tag.split('}')[1]
+        if tag == 'tbl':
+            first = ''.join(t.text or '' for t in el.iter(_W + 't'))[:80].upper()
+            rows = [tr for tr in el if tr.tag == _W + 'tr']
+            if len(rows) == 1 and len([c for c in rows[0] if c.tag == _W + 'tc']) == 1:
+                if start_text and start_text.upper() in first:
+                    counting = True
+                if any(s.upper() in first for s in stop_texts):
+                    counting = False
+                elif start_text and counting is False and any(k in first for k in ('LESSON', 'ASSESSMENT', 'ANSWER', 'PERFORMANCE', 'QUALITY', 'AUDIT')) and used_pages:
+                    counting = True
+            for h in _table_row_heights(el, width):
+                place(h)
+        elif tag == 'p':
+            if el.find(f'.//{_W}br[@{_W}type="page"]') is not None or el.find(f'{_W}pPr/{_W}pageBreakBefore') is not None:
+                pages += 1
+                y = 0.0
+                continue
+            place(_para_height(el, width))
+    total = (pages + 1) * PAGE_CALIBRATION
+    counted = len(used_pages) * PAGE_CALIBRATION if start_text else total
+    return round(total, 1), round(counted, 1)
+
+def _estimate_markdown_pages(markdown_text):
+    """Lays the markdown out exactly as the final book would be, then estimates its Word pages."""
+    import tempfile
+    saved = dict(_MATH_STATE)
+    doc = initialize_document()
+    append_markdown_to_doc(doc, markdown_text)
+    _MATH_STATE.update(saved)
+    path = os.path.join(tempfile.mkdtemp(), 'estimate.docx')
+    doc.save(path)
+    return estimate_docx_pages(path)[0]
+
+def _lessons_part(markdown_text):
+    m = re.search(r'^#\s+LESSON\b', markdown_text, re.MULTILINE | re.IGNORECASE)
+    return markdown_text[m.start():] if m else ''
+
+def append_lesson(manuscript_path, lesson_markdown, total_lessons):
+    """PAGE-BUDGET GATE for every lesson turn. Estimates the new lesson's Word pages and appends it to the
+    manuscript ONLY if it fits the remaining budget (75 counted pages minus the back-matter allowance,
+    shared by the lessons still to come). If it is rejected, rewrite the lesson shorter BEFORE showing it,
+    then call append_lesson again. Returns True when appended."""
+    existing = open(manuscript_path, encoding='utf-8').read() if os.path.exists(manuscript_path) else ''
+    done = len(re.findall(r'^#\s+LESSON\b', existing, re.MULTILINE | re.IGNORECASE))
+    used = _estimate_markdown_pages(_lessons_part(existing)) if done else 0.0
+    left = max(1, total_lessons - done)
+    lesson_budget = COUNTED_MAX - BACK_MATTER_PAGES - used
+    cap = lesson_budget / left
+    floor = (COUNTED_MIN - BACK_MATTER_PAGES - used) / left
+    pages = _estimate_markdown_pages(lesson_markdown)
+    words = len(lesson_markdown.split())
+    if pages > cap + 0.5:
+        target = int(words * cap / pages)
+        print(f"PAGE BUDGET: REJECTED, NOTHING APPENDED. This lesson is about {pages} pages, but its cap is {cap:.1f} "
+              f"(lessons so far use {used:.1f} of {COUNTED_MAX - BACK_MATTER_PAGES} lesson pages; {left} lessons left). "
+              f"Rewrite it to about {target} words (currently {words}): shorten prose and trim practice items, keep all "
+              f"10 sections and the figures. Never shrink fonts or spacing. Then call append_lesson again.")
+        return False
+    with open(manuscript_path, 'a', encoding='utf-8') as f:
+        f.write(('\n\n' if existing else '') + lesson_markdown.strip() + '\n')
+    used += pages
+    nxt = (COUNTED_MAX - BACK_MATTER_PAGES - used) / max(1, left - 1)
+    note = ''
+    if pages < floor - 0.5:
+        note = f" Note: below the {floor:.1f}-page floor; later lessons should use their full word budget to reach {COUNTED_MIN} counted pages."
+    print(f"PAGE BUDGET: OK, APPENDED. Lesson {done + 1}/{total_lessons} is about {pages} pages (cap {cap:.1f}). "
+          f"Lesson pages used: {used:.1f}/{COUNTED_MAX - BACK_MATTER_PAGES}."
+          + (f" Next lesson cap: {nxt:.1f} pages." if left > 1 else " All lessons appended.") + note)
+    return True
+
+def append_back_matter(manuscript_path, back_matter_markdown):
+    """PAGE-BUDGET GATE for the Back Matter turn. The assessment, performance task, answer keys and QA page
+    count toward 75; the synthesis and glossary do not. Appends only if the counted total stays at 75 or less."""
+    existing = open(manuscript_path, encoding='utf-8').read()
+    used = _estimate_markdown_pages(_lessons_part(existing))
+    counted_md = re.sub(r'(?ims)^#\s+[^\n]*(SYNTHESIS|GLOSSARY)[^\n]*\n.*?(?=^#\s|\Z)', '', back_matter_markdown)
+    pages = _estimate_markdown_pages(counted_md)
+    if used + pages > COUNTED_MAX + 0.5:
+        print(f"PAGE BUDGET: REJECTED, NOTHING APPENDED. Lessons use {used:.1f} pages and the counted back matter is about "
+              f"{pages} pages, total {used + pages:.1f} > {COUNTED_MAX}. Tighten the answer-key rationales and the "
+              f"performance task (keep all 30 items and every key), then call append_back_matter again.")
+        return False
+    with open(manuscript_path, 'a', encoding='utf-8') as f:
+        f.write('\n\n' + back_matter_markdown.strip() + '\n')
+    print(f"PAGE BUDGET: OK, APPENDED. Counted pages about {used + pages:.1f} (target {COUNTED_MIN}-{COUNTED_MAX}; "
+          f"cover, preface, TOC, synthesis and glossary not counted).")
+    return True
+
+def finalize_book(docx_path):
+    """Run after compiling. Restores locked typography if anything shrank it (margins 0.8 in, body 10.5 pt,
+    tables 9 pt minimum, line spacing 1.15), saves, then reports the typography check and counted pages."""
+    d = Document(docx_path)
+    for s in d.sections:
+        s.left_margin = s.right_margin = s.top_margin = s.bottom_margin = Inches(0.8)
+    if d.styles['Normal'].font.size is not None and d.styles['Normal'].font.size.pt < 10.5:
+        d.styles['Normal'].font.size = Pt(10.5)
+    for p in d.paragraphs:
+        if not p.text.strip() or p.text.startswith('Figure '):
+            continue
+        if isinstance(p.paragraph_format.line_spacing, float) and p.paragraph_format.line_spacing < 1.15:
+            p.paragraph_format.line_spacing = 1.15
+        for r in p.runs:
+            if r.font.size is not None and r.font.size.pt < 10.5 and r.text.strip():
+                r.font.size = Pt(10.5)
+    for t in d.tables:
+        for row in t.rows:
+            for c in row.cells:
+                for p in c.paragraphs:
+                    for r in p.runs:
+                        if r.font.size is not None and r.font.size.pt < 9 and r.text.strip():
+                            r.font.size = Pt(9)
+    d.save(docx_path)
+    ok, _ = check_typography(docx_path)
+    total, counted = estimate_docx_pages(docx_path, start_text='LESSON', stop_texts=('SYNTHESIS', 'GLOSSARY'))
+    status = 'IN RANGE' if COUNTED_MIN <= counted <= COUNTED_MAX else 'OUT OF RANGE'
+    print(f"PAGE REPORT: about {total} pages in the file; about {counted} counted pages (Lesson 1 to the end, "
+          f"excluding synthesis and glossary): {status} ({COUNTED_MIN}-{COUNTED_MAX}).")
+    return ok, counted
 
 def append_markdown_to_docx(doc_path_or_doc, markdown_text, output_docx_path=None):
     """

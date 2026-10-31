@@ -11,18 +11,19 @@ Every unit strictly follows the DepEd MATATAG instructional balance:
 - **70% Deep Foundational Instruction**: Comprehensive theoretical exposition, historical/scientific context, unabridged primary anchor texts/experiments, deep Socratic inquiry seminars, multi-column concept matrices, and applied procedural mechanics.
 - **30% Rigorous Formative & Performance Activities**: Guided recall drills, multi-row analytical matrices, authentic performance tasks, complete 4x4 analytic rubrics, 15-item formative quizzes with rationales, comprehensive 40-point unit assessment, unit synthesis, glossary, and complete answer key.
 
-### Word Density & Page Standards (45 to 70 Pages Target)
+### Word Density & Page Standards (45 to 75 Counted Pages)
+- **Counted pages: 45–75.** Count only from the first page of Lesson 1 through the end of the Answer Keys (lessons, assessment, performance task, answer keys, QA page). The **Cover, Preface, Table of Contents, Unit Synthesis, and Glossary are NOT counted.** **Locked typography:** the builder's 10.5 pt body text, 1.15 line spacing, and 0.8 in margins must never be reduced to fit the limit. If the book runs long, write the remaining lessons more concisely (per the word budgets); never shrink type, and never summarize text that is already written. **Page gate:** every lesson is added to the manuscript only through `docx_builder.append_lesson(manuscript, lesson_md, total_lessons)`, which estimates the lesson's Word pages and REJECTS it if it exceeds its share of the budget (75 counted pages minus about 12 for the back matter, divided among the remaining lessons); a rejected lesson is rewritten shorter before it is shown. The back matter goes through `append_back_matter`. After compiling, run `docx_builder.finalize_book(path)`, which restores any shrunken type and reports the typography check and counted pages.
 - **Calibrated Pacing by Lesson Count**:
   * **3-Lesson Units (Filipino, English, Values Ed, AP)**:
     - Minimum **4,000 to 4,500 words per Lesson** (totaling **~18,000 words per 3-lesson unit**).
     - Lessons span **10 to 12 full pages each**, bringing the complete publication to **48 to 55 pages**.
-  * **5 to 6-Lesson Quarters (Mathematics, Science STEM)**:
+  * **5 to 7-Lesson Quarters (Mathematics, Science STEM)**:
     - Calibrated word budget: **~2,200 to 2,600 words per Lesson** (6 lessons × 2,400 = 14,400 words + 4,500 Back Matter ≈ 18,900 words total across quarter).
-    - Renders cleanly at **50 to 60 pages in Word** (strictly within the **45 to 70 page target**; hard ceiling 70 pages max).
+    - Renders at about **50 to 65 counted pages in Word** (within the **45 to 75 counted-page target**; hard ceiling 75 counted pages).
     - Hard ceiling: Never exceed 25,000 total words, which causes bloated 89-97 page documents!
-- **45 to 70 Page Range Across All Quarters**:
-  * The student instructional core occupies Front Matter, Lessons, Assessment, Synthesis, and Glossary.
-  * Structured Answer Keys, Teacher's Diagnostic Guide, and the QA Audit Certificate complete the publication at **48 to 70 pages maximum**.
+- **45 to 75 Counted Pages Across All Quarters**:
+  * Counted: Lessons, Assessment, Performance Task, Structured Answer Keys, Teacher's Diagnostic Guide, and the QA Audit page.
+  * Not counted: Cover, Preface, Table of Contents, Unit Synthesis, and Glossary.
 - **Paragraph Standard**: Subtopics must NEVER be summarized in single sentences or bullet points.
   * *For 3-Lesson Units*: Every subtopic features **4 to 5 dense academic paragraphs** (80–120 words per paragraph).
   * *For 5–6 Lesson Quarters (Math/Science)*: Every subtopic features **2 to 3 dense, highly technical academic paragraphs** (120–150 words per paragraph) explaining foundational origins, conceptual mechanisms, and analytical problem-solving with zero fluff.
@@ -70,7 +71,7 @@ Every unit strictly follows the DepEd MATATAG instructional balance:
 
 ---
 
-## 3. THE 10-SECTION LESSON BLUEPRINT (CALIBRATED FOR 45 TO 70 PAGES)
+## 3. THE 10-SECTION LESSON BLUEPRINT (CALIBRATED FOR 45 TO 75 COUNTED PAGES)
 
 Every lesson must contain all 10 sections written out in continuous, unbroken sequence:
 

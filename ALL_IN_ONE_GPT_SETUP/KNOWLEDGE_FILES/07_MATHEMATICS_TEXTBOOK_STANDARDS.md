@@ -17,7 +17,7 @@
 | Practice exercises | **20–24** | Graded: Basic (10–12), Intermediate (6–8), Challenge / Word Problems (4). |
 | Formative assessment | 15 items | Unchanged (10 MCQ + 5 open items). |
 
-Page target: about **7–9 Word pages per lesson**; a 6-lesson quarter still lands within **45–70 pages**. The figures and exercises add pages, so the prose is shorter to compensate.
+Page target: about **8–9 Word pages per lesson**, so a 6- or 7-lesson quarter lands within **45–75 counted pages** (Cover, Preface, TOC, Synthesis, and Glossary are not counted). The figures and exercises add pages, so the prose is shorter to compensate. Never shrink type to fit (see the Instructions, Rule 3).
 
 ---
 
@@ -128,7 +128,7 @@ One `key: value` per line. Keys marked "repeatable" may appear several times. Us
 | `line` | line graphs over time | same keys as `bar` |
 | `pie` | pie graphs | `labels:` · `values:` · `angles: yes` (prints each sector's degrees) · `caption:` |
 | `stemleaf` | stem-and-leaf plots | `data:` · `key:` (e.g., 1 / 2 means 12 minutes) · `caption:` |
-| `coordinate` | coordinate plane | `range: min, max` · `point: x, y[, label]` (repeatable) · `segment: x1, y1, x2, y2` (repeatable) · `caption:` |
+| `coordinate` | coordinate plane | `range: min, max` · `point: x, y[, label]` (repeatable) · `segment: x1, y1, x2, y2` (repeatable) · `xlabel:` · `ylabel:` · `caption:` |
 | `polygon` | shapes with labeled sides and angles | `vertices: A(0,0), B(4,0), C(4,3)` · `side: AB, 4 cm` (repeatable) · `right: B` (right-angle mark) · `caption:` |
 
 Example (zero pairs):

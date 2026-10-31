@@ -17,12 +17,13 @@ Every unit must strictly demonstrate 100% fidelity to the official DepEd MATATAG
 2. **The 3 Essential Questions (Mahahalagang Tanong)**:
    - Must frame overarching inquiry, not trivial factual recall.
    - Each of the 3 subtopics in the lesson MUST explicitly answer one of the Essential Questions.
-3. **Strict 70/30 Instructional Ratio & 45-70 Page Publication Target**:
+3. **Strict 70/30 Instructional Ratio & 45-75 Counted-Page Target**:
    - **70% Instructional Depth**: Lessons must be masterclasses of deep, contextualized prose. Paced strictly by quarter scope:
      * *3-Lesson Units (Filipino, English, Values Ed, AP)*: 4,000–4,500 words per lesson floor (~18,000 words total across unit -> 48–55 pages in Word).
-     * *5–6 Lesson Quarters (Mathematics, Science STEM)*: Calibrated to 2,200–2,600 words per lesson (6 lessons × 2,400 = 14.4k + 4.5k Back Matter = 18.9k words total -> 50–60 pages in Word, strictly <= 70 pages max). Summaries, bulleted outlines, and shorthand placeholders (`...`) are strictly prohibited.
+     * *5–7 Lesson Quarters (Mathematics, Science STEM)*: Calibrated to 2,200–2,600 words per lesson (Math and Science follow files 07 and 08) -> about 50–65 counted pages, never more than 75. Summaries, bulleted outlines, and shorthand placeholders (`...`) are strictly prohibited.
    - **30% Formative Practice**: Guided practice, authentic contextual tasks, 15-item formative quizzes, and culminating quarter assessment.
-   - **Strict 45 to 70 Page Publication Range**: The complete compiled publication (Front Matter, Lessons, Culminating Assessment, Synthesis, Glossary, and Structured Answer Keys) MUST land squarely between 45 and 70 pages in Microsoft Word.
+   - **45 to 75 Counted Pages**: **Counted pages: 45–75.** Count only from the first page of Lesson 1 through the end of the Answer Keys (lessons, assessment, performance task, answer keys, QA page). The **Cover, Preface, Table of Contents, Unit Synthesis, and Glossary are NOT counted.** **Locked typography:** the builder's 10.5 pt body text, 1.15 line spacing, and 0.8 in margins must never be reduced to fit the limit. If the book runs long, write the remaining lessons more concisely (per the word budgets); never shrink type, and never summarize text that is already written. **Page gate:** every lesson is added to the manuscript only through `docx_builder.append_lesson(manuscript, lesson_md, total_lessons)`, which estimates the lesson's Word pages and REJECTS it if it exceeds its share of the budget (75 counted pages minus about 12 for the back matter, divided among the remaining lessons); a rejected lesson is rewritten shorter before it is shown. The back matter goes through `append_back_matter`. After compiling, run `docx_builder.finalize_book(path)`, which restores any shrunken type and reports the typography check and counted pages.
+   - **Audit fails** if `finalize_book` reports a typography FAIL or counted pages OUT OF RANGE, or if any lesson was added without passing `append_lesson`.
 4. **Spiral Progression Principle**:
    - Concepts must build systematically on prior grade competencies without regressing to elementary simplifications or making un-scaffolded leaps into collegiate theory.
 
@@ -102,7 +103,7 @@ The AI must NEVER fabricate data, dates, laws, historical figures, or mathematic
    - **BAN DRAFT LABELS**: Strict zero-tolerance for `"Visual Prompt 1"`, `"Visual Prompt 2"`, `"sample visual prompt"`, or internal notes in the document! Use ONLY production titles: `🖼️ Larawan: [Mapanuring Pamagat]` or `🖼️ Figure: [Descriptive Title]`.
    - **100% Boxed Containment**: Title, Pedagogical Purpose, AI Prompt, and Replacement Note MUST ALL be cleanly enclosed inside ONE dedicated container box (`> ...` in Markdown or 1-cell shaded table in DOCX). No loose text outside the box.
    - **Zero Branding in Image Prompts**: NO `"DepEd"`, `"MATATAG"`, or publisher logos inside AI image prompts. NO DepEd/MATATAG marks anywhere in the book either (cover, running headers, footers); the curriculum is cited only in lesson alignment lines and the sources table.
-   - **Strict Image-Prompt Quota**: Exactly 1 Cover Prompt on Page 1 (`--ar 8.5:11`) + 3 Image Prompts per Lesson (`--ar 16:9`) = **1 + 3 × lessons** (10 for a 3-lesson unit, 19 for a 6-lesson quarter). Zero image prompts in Back Matter. **Mathematics:** 1 cover prompt only; lesson figures are code-drawn and audited with the Math QA Checklist in file 07.
+   - **Strict Image-Prompt Quota**: Exactly 1 Cover Prompt on Page 1 (`--ar 8.5:11`) + 3 Image Prompts per Lesson (`--ar 16:9`) = **1 + 3 × lessons** (10 for a 3-lesson unit, 19 for a 6-lesson quarter). Zero image prompts in Back Matter. **Mathematics:** 1 cover prompt only; lesson figures are code-drawn and audited with the Math QA Checklist in file 07. **Science:** audit with the Science QA Checklist in file 08.
 3. **Bulletproof YouTube Multimedia Modules (Topic-Specific Direct Video Links, Zero Fake Timestamps, Zero Disclaimers)**:
    - **Legitimate & Verified Media**: Video module must cite legitimate, active channels (*DepEd TV Official, Knowledge Channel, CrashCourse, Khan Academy, DOST-SEI, GMA Public Affairs, TED-Ed, SoulPancake*).
    - **Topic-Specific Direct Real Video Link**: Must provide the authentic direct video URL (`https://www.youtube.com/watch?v=[REAL_VIDEO_ID]`) specifically covering THAT lesson's topic or activity. **NO SEARCH LINKS** (`results?search_query=...`) and **NO GENERIC WHOLE-COURSE COMPILATIONS**.
@@ -137,7 +138,7 @@ At the conclusion of Back Matter (Turn 5), the generator evaluates the textbook 
 | **1. MATATAG Alignment & Content Fit** | Explicit competency codes, 3 Essential Questions mapped to subtopics, seamless academic prose, zero draft artifacts or conversational residue. | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
 | **2. Developmental Appropriateness** | Cognitive demand matched to grade band (DOK 1-4), age-appropriate readability, gender-fair and inclusive language. | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
 | **3. Zero-Hallucination & Accuracy** | 100% verified historical dates, authentic literary selections, sound scientific laws, zero math calculation errors. | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
-| **4. Pedagogical Rigor & Density** | Calibrated to 45-70 page range: 2,200-2,600 words/lesson (5-6 lesson quarters) or 4,000-4,500 words/lesson (3-lesson units), continuous flow, high-yield technical rigor. | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
+| **4. Pedagogical Rigor & Density** | Calibrated to 45-75 counted pages (typography check PASS): 2,200-2,600 words/lesson (5-6 lesson quarters) or 4,000-4,500 words/lesson (3-lesson units), continuous flow, high-yield technical rigor. | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
 | **5. Layout, Visuals, TOC & Keys** | 100% boxed visuals (zero "Visual Prompt" draft labels), non-table hierarchical TOC, topic-specific direct video links (zero disclaimers/notes outside box), structured table keys (no paragraph blobs), balanced choices (~25% each, zero 'mostly B' bias). | **20 pts** | `[  ] Pass (20) / Fail (<18)` |
 | **TOTAL SCORE** | **Comprehensive DepEd MATATAG Unit Rating** | **100 pts** | **Target: 95–100 pts** |
 
@@ -151,7 +152,7 @@ At the conclusion of Back Matter (Turn 5), the generator evaluates the textbook 
 SUBJECT & GRADE: [Subject] Grade [X] • Unit [Y]
 COMPETENCY ALIGNMENT: 100% Verified against MATATAG Curriculum Standards
 CONTENT & EDITORIAL FIT: Pure Masterclass Prose (Zero Draft / Placeholder Residue)
-PEDAGOGICAL RATIO: 70% Lesson Content / 30% Formative Practice (Paced for 45-70 Pages)
+PEDAGOGICAL RATIO: 70% Lesson Content / 30% Formative Practice (Paced for 45-75 Counted Pages)
 READABILITY & LEVEL: Grade-Level Appropriate (DOK 1-4 Cognitive Progression)
 FACTUAL AUDIT: Zero Hallucinations • Historical, Scientific & Math Verified
 VISUAL & MEDIA INTEGRITY: 100% Boxed Containers • Production Titles • No Fake Timestamps

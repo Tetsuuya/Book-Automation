@@ -206,6 +206,7 @@ To prevent visual clutter and maintain high editorial density:
 - **Unit Assessment & Back Matter**: Zero image prompts (focused purely on 1-30 MCQ quiz, Performance Task, Synthesis, and Answer Keys).
 - **Total Quota = 1 + (3 × number of lessons)**: 3-lesson unit = **10 prompts**; 5-lesson quarter = **16 prompts**; 6-lesson quarter = **19 prompts**.
 - **Mathematics exception**: lesson figures are drawn by code per `07_MATHEMATICS_TEXTBOOK_STANDARDS.md` (no AI prompt boxes inside Math lessons); only the cover uses an AI prompt.
+- **Science rules**: per `08_SCIENCE_TEXTBOOK_STANDARDS.md`, the 3 lesson prompts are 1 phenomenon opener scene + 2 labeled scientific illustrations, all with NO text inside the image (a 'Labels to add in Word' list instead); graphs, scales, cycles, food chains, flowcharts, and anything with values are code-drawn figures, never AI.
 
 ---
 
