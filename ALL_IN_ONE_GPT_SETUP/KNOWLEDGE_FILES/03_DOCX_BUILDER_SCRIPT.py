@@ -153,7 +153,7 @@ def clean_math_text(text):
     
     # Delimiters
     text = text.replace(r"\[", "").replace(r"\]", "")
-    text = text.replace("$$", "").replace("$", "")
+    text = re.sub(r'\$(?!\d)', '', text.replace("$$", ""))   # keep currency like $5
     return text
 
 # ==========================================
@@ -421,7 +421,29 @@ def add_worked_example_box(doc, example_title, problem_text, given_items, formul
 # 4. MARKDOWN TO DOCX PARSER ENGINE
 # ==========================================
 
+INLINE_MATH = re.compile(r'(\$\$.+?\$\$|\\\(.+?\\\)|\\\[.+?\\\]|\$(?=\S)[^$\n]+?(?<=\S)\$)')
+
+def _is_inline_math(seg):
+    if seg.startswith(('$$', '\\(', '\\[')):
+        return True
+    inner = seg[1:-1]
+    return bool(re.search(r'[\\^_{}=+\-−×÷·<>≤≥()|]', inner) or re.fullmatch(r'[A-Za-z]', inner))  # plain "$5 and $10" money stays text
+
 def format_inline_runs(paragraph, text, default_size=10.5, default_color=None, default_bold=False, default_italic=False):
+    # Inline TeX ($...$, \(...\), \[...\]) becomes a real Word equation; other text keeps the normal run formatting.
+    if '$' in text or '\\(' in text or '\\[' in text:
+        for seg in INLINE_MATH.split(text):
+            if not seg:
+                continue
+            if INLINE_MATH.fullmatch(seg) and _is_inline_math(seg):
+                inner = seg[2:-2] if seg.startswith(('$$', '\\(', '\\[')) else seg[1:-1]
+                add_inline_math(paragraph, inner, default_size + 0.5)
+            else:
+                _format_text_runs(paragraph, seg, default_size, default_color, default_bold, default_italic)
+        return
+    _format_text_runs(paragraph, text, default_size, default_color, default_bold, default_italic)
+
+def _format_text_runs(paragraph, text, default_size=10.5, default_color=None, default_bold=False, default_italic=False):
     """Parses inline bold, italic, code, and symbols within a paragraph run."""
     text = clean_math_text(text)
     pattern = r'(\[[^\]]+\]\(https?://[^)\s]+\)|https?://[^\s)|]+|\*\*[^*]+\*\*|\*[^*]+\*|_[^_]+_|`[^`]+`)'
@@ -489,9 +511,15 @@ def render_callout_box(doc, lines):
         set_cell_shading(c, "F4F7FA")
         set_callout_border(c, color_hex="1B365D", sz="36")
         
+    skip_to = 0
     for idx, line in enumerate(lines):
         clean_l = line.lstrip('> ').strip()
-        if not clean_l:
+        if not clean_l or idx < skip_to:
+            continue
+        disp = _display_math_block([l.lstrip('> ') for l in lines], idx)
+        if disp:
+            add_display_math(c, disp[0])
+            skip_to = disp[1]
             continue
         p = c.paragraphs[0] if idx == 0 and len(c.paragraphs) == 1 and not c.paragraphs[0].text else c.add_paragraph()
         format_paragraph(p, space_before=1, space_after=2, line_spacing=1.15)
@@ -597,6 +625,625 @@ def extract_clean_markdown(text):
         return '\n\n[PAGE BREAK]\n\n'.join(content_parts)
     return text
 
+# ==========================================
+# 3B. MATHEMATICS EXTENSIONS (see 07_MATHEMATICS_TEXTBOOK_STANDARDS.md)
+#     $$ display formulas $$, ```steps, ```exercises, ```figure, ::: boxes
+# ==========================================
+
+_MATH_STATE = {'lesson': None, 'fig': 0}
+
+NAVY_HEX, BLUE_HEX, RED_HEX, TEAL_HEX, GRAY_HEX = '#1B365D', '#2F6FDB', '#E04848', '#0F8C7E', '#5A6270'
+
+def _xml_escape(s):
+    return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+
+def _true_minus(s):
+    """Hyphen-minus used as a sign or operator becomes a real minus sign (−)."""
+    s = re.sub(r'(?<![\w)\]])-(?=[\d(a-zA-Z₱])', '−', s)
+    return s.replace(' - ', ' − ')
+
+def _match_paren(s, i):
+    depth = 0
+    for j in range(i, len(s)):
+        if s[j] == '(':
+            depth += 1
+        elif s[j] == ')':
+            depth -= 1
+            if depth == 0:
+                return j
+    return len(s) - 1
+
+def _split_top_level(s, sep=','):
+    depth = 0
+    for i, ch in enumerate(s):
+        if ch == '(':
+            depth += 1
+        elif ch == ')':
+            depth -= 1
+        elif ch == sep and depth == 0:
+            return s[:i].strip(), s[i + 1:].strip()
+    return s.strip(), ''
+
+def _omml_runs(text, size):
+    """Plain text -> OMML runs. Single-letter variables are italic; numbers, words and symbols upright."""
+    out = []
+    for tok in re.findall(r'(?<![A-Za-z])[A-Za-z](?![A-Za-z])|[A-Za-z]{2,}|[^A-Za-z]+', text):
+        italic = len(tok) == 1 and tok.isalpha()
+        sty = '' if italic else '<m:rPr><m:sty m:val="p"/></m:rPr>'
+        out.append(
+            f'<m:r>{sty}<w:rPr><w:rFonts w:ascii="Cambria Math" w:hAnsi="Cambria Math"/>'
+            f'<w:color w:val="1A1A1A"/><w:sz w:val="{int(size * 2)}"/></w:rPr>'
+            f'<m:t xml:space="preserve">{_xml_escape(tok)}</m:t></m:r>'
+        )
+    return ''.join(out)
+
+def _omml(expr, size=12.0):
+    """Converts plain Unicode math with frac(a, b), abs(x), sqrt(x) and x^(n) into Word OMML."""
+    out, buf, i = [], '', 0
+    expr = expr.replace('∣', '|')
+    while i < len(expr):
+        m = re.match(r'(frac|abs|sqrt)\(', expr[i:])
+        if m:
+            if buf:
+                out.append(_omml_runs(buf, size)); buf = ''
+            start = i + len(m.group(1))
+            end = _match_paren(expr, start)
+            inner = expr[start + 1:end]
+            if m.group(1) == 'frac':
+                a, b = _split_top_level(inner)
+                out.append(f'<m:f><m:num>{_omml(a, size)}</m:num><m:den>{_omml(b, size)}</m:den></m:f>')
+            elif m.group(1) == 'abs':
+                out.append(f'<m:d><m:dPr><m:begChr m:val="|"/><m:endChr m:val="|"/></m:dPr><m:e>{_omml(inner, size)}</m:e></m:d>')
+            else:
+                out.append(f'<m:rad><m:radPr><m:degHide m:val="1"/></m:radPr><m:deg/><m:e>{_omml(inner, size)}</m:e></m:rad>')
+            i = end + 1
+            continue
+        if expr[i] in '^_' and i + 1 < len(expr) and expr[i + 1] == '(':
+            tag = 'm:sSup' if expr[i] == '^' else 'm:sSub'
+            part = 'm:sup' if expr[i] == '^' else 'm:sub'
+            bm = re.search(r'([A-Za-z0-9]+|\S)$', buf)
+            base = bm.group(1) if bm else ''
+            buf = buf[:len(buf) - len(base)]
+            if buf:
+                out.append(_omml_runs(buf, size)); buf = ''
+            end = _match_paren(expr, i + 1)
+            out.append(f'<{tag}><m:e>{_omml_runs(base, size)}</m:e><{part}>{_omml(expr[i + 2:end], size)}</{part}></{tag}>')
+            i = end + 1
+            continue
+        buf += expr[i]
+        i += 1
+    if buf:
+        out.append(_omml_runs(buf, size))
+    return ''.join(out)
+
+TEX_SYMBOLS = {
+    'times': '×', 'div': '÷', 'cdot': '·', 'pm': '±', 'mp': '∓', 'le': '≤', 'leq': '≤', 'ge': '≥', 'geq': '≥',
+    'ne': '≠', 'neq': '≠', 'approx': '≈', 'equiv': '≡', 'sim': '∼', 'cong': '≅', 'propto': '∝',
+    'lt': '<', 'gt': '>', 'pi': 'π', 'theta': 'θ', 'alpha': 'α', 'beta': 'β', 'gamma': 'γ', 'delta': 'δ',
+    'Delta': 'Δ', 'lambda': 'λ', 'mu': 'μ', 'sigma': 'σ', 'Sigma': 'Σ', 'omega': 'ω', 'phi': 'φ',
+    'infty': '∞', 'circ': '°', 'degree': '°', 'cdots': '⋯', 'ldots': '…', 'dots': '…', 'to': '→',
+    'rightarrow': '→', 'leftarrow': '←', 'Rightarrow': '⇒', 'implies': '⇒', 'iff': '⇔', 'angle': '∠',
+    'triangle': '△', 'perp': '⊥', 'parallel': '∥', 'in': '∈', 'notin': '∉', 'cup': '∪', 'cap': '∩',
+    'subset': '⊂', 'emptyset': '∅', 'therefore': '∴', 'because': '∵', 'lvert': '|', 'rvert': '|',
+    'vert': '|', 'mid': '|', '%': '%', '{': '{', '}': '}', '$': '$', '#': '#', '&': '&', '_': '_',
+    ',': ' ', ';': ' ', ':': ' ', '!': '', ' ': ' ', 'quad': '  ', 'qquad': '    ',
+    'displaystyle': '', 'textstyle': '', 'limits': '', 'nolimits': '',
+}
+TEX_TEXT_CMDS = ('text', 'textrm', 'textbf', 'textit', 'mathrm', 'mathbf', 'mathit', 'operatorname', 'mbox', 'boxed',
+                 'overline', 'underline', 'mathbb', 'mathcal')
+TEX_SIZERS = ('left', 'right', 'big', 'Big', 'bigg', 'Bigg', 'bigl', 'bigr', 'Bigl', 'Bigr')
+
+def _tex_group(s, i):
+    # Returns (content, next_index) for a {group}, or a single token, starting at s[i].
+    while i < len(s) and s[i] == ' ':
+        i += 1
+    if i >= len(s):
+        return '', i
+    if s[i] == '{':
+        depth = 0
+        for j in range(i, len(s)):
+            if s[j] == '{':
+                depth += 1
+            elif s[j] == '}':
+                depth -= 1
+                if depth == 0:
+                    return s[i + 1:j], j + 1
+        return s[i + 1:], len(s)
+    if s[i] == '\\':
+        m = re.match(r'\\([A-Za-z]+|.)', s[i:])
+        return m.group(0), i + len(m.group(0))
+    return s[i], i + 1
+
+def tex_to_math(s):
+    # Converts LaTeX (as ChatGPT writes it) into the builder's math syntax: frac(), sqrt(), ^(), _().
+    out, i = '', 0
+    while i < len(s):
+        ch = s[i]
+        if ch == '\\':
+            if s[i:i + 2] == '\\\\':
+                out += '\n'; i += 2; continue
+            m = re.match(r'\\([A-Za-z]+|.)', s[i:])
+            name = m.group(1); i += len(m.group(0))
+            if name in ('frac', 'dfrac', 'tfrac'):
+                a, i = _tex_group(s, i); b, i = _tex_group(s, i)
+                out += f'frac({tex_to_math(a)}, {tex_to_math(b)})'
+            elif name == 'sqrt':
+                if i < len(s) and s[i] == '[':
+                    i = s.index(']', i) + 1
+                a, i = _tex_group(s, i)
+                out += f'sqrt({tex_to_math(a)})'
+            elif name in TEX_TEXT_CMDS:
+                a, i = _tex_group(s, i)
+                out += tex_to_math(a) if name.startswith('math') or name in ('boxed', 'overline', 'underline') else a
+            elif name in TEX_SIZERS:
+                if i < len(s) and s[i] == '.':
+                    i += 1
+            elif name in ('begin', 'end'):
+                _, i = _tex_group(s, i)
+                if i < len(s) and s[i] == '{':
+                    _, i = _tex_group(s, i)
+            elif name in TEX_SYMBOLS:
+                out += TEX_SYMBOLS[name]
+            else:
+                out += name
+            continue
+        if ch in '^_':
+            g, i = _tex_group(s, i + 1)
+            g = tex_to_math(g)
+            out += f'{ch}({g})'
+            continue
+        if ch in '{}':
+            i += 1
+            continue
+        out += ch
+        i += 1
+    return out
+
+def _prep_math(expr):
+    expr = tex_to_math(expr.strip()).replace('&', '')
+    return _true_minus(clean_math_text(expr))
+
+def add_inline_math(paragraph, expr, size=11.0):
+    paragraph._p.append(parse_xml(f'<m:oMath {nsdecls("m", "w")}>{_omml(_prep_math(expr), size)}</m:oMath>'))
+
+def _display_math_block(lines, i):
+    # Returns (expression, next_line_index) when lines[i] opens a $$ or \[ display block, else None.
+    s = lines[i].strip()
+    for op, cl in (('$$', '$$'), ('\\[', '\\]')):
+        if not s.startswith(op):
+            continue
+        if len(s) > len(op) + len(cl) - 1 and s.endswith(cl) and s != op:
+            return s[len(op):-len(cl)], i + 1
+        body, j = [s[len(op):]], i + 1
+        while j < len(lines):
+            t = lines[j].strip()
+            if t.endswith(cl):
+                body.append(t[:-len(cl)])
+                return '\n'.join(b for b in body if b.strip()), j + 1
+            body.append(t)
+            j += 1
+    return None
+
+def add_display_math(container, expr, size=12.5):
+    """Centered display formula on its own line, typeset as real Word math."""
+    if '\\\\' in expr or '\n' in expr.strip():
+        rows = []
+        for line in re.split(r'\\\\|\n', expr):
+            line = re.sub(r'\\(begin|end)\{[^}]*\}(\{[^}]*\})?', '', line).strip()
+            if not line:
+                continue
+            body, _, why = line.partition('&&')
+            body = tex_to_math(body).replace('&', '').strip()
+            why = re.sub(r'^\(|\)$', '', tex_to_math(why).strip())
+            rows.append(body + (f' | {why}' if why else ''))
+        return add_steps(container, rows, size=size - 1)
+    p = container.add_paragraph()
+    format_paragraph(p, space_before=3, space_after=5, align=WD_ALIGN_PARAGRAPH.CENTER)
+    p._p.append(parse_xml(
+        f'<m:oMathPara {nsdecls("m", "w")}><m:oMathParaPr><m:jc m:val="center"/></m:oMathParaPr>'
+        f'<m:oMath>{_omml(_prep_math(expr), size)}</m:oMath></m:oMathPara>'
+    ))
+    return p
+
+def _top_level_eq(s):
+    depth = 0
+    for i, ch in enumerate(s):
+        if ch == '(':
+            depth += 1
+        elif ch == ')':
+            depth -= 1
+        elif ch == '=' and depth == 0:
+            return i
+    return -1
+
+def add_steps(container, lines, size=11.0):
+    """Solution steps aligned at '=' with the reason in a third column."""
+    rows = []
+    for raw in lines:
+        s = raw.strip().strip('$')
+        if not s:
+            continue
+        expr, reason = s, ''
+        if ' | ' in s:
+            a, b = s.rsplit(' | ', 1)
+            if re.search(r'[A-Za-z]', b):
+                expr, reason = a.strip(), b.strip()
+        if expr.startswith('='):
+            lhs, rhs = '', expr[1:].strip()
+        else:
+            k = _top_level_eq(expr)
+            lhs, rhs = (expr[:k].strip(), expr[k + 1:].strip()) if k >= 0 else (expr, None)
+        rows.append((lhs, rhs, reason))
+    if not rows:
+        return
+    t = container.add_table(rows=len(rows), cols=3)
+    t.alignment = WD_TABLE_ALIGNMENT.CENTER
+    t.autofit = False
+    set_table_no_borders(t)
+    for r, (lhs, rhs, reason) in zip(t.rows, rows):
+        for cell, w in zip(r.cells, (2.1, 2.3, 2.1)):
+            cell.width = Inches(w)
+        p = r.cells[0].paragraphs[0]
+        format_paragraph(p, space_before=1, space_after=1, align=WD_ALIGN_PARAGRAPH.RIGHT)
+        if lhs:
+            add_inline_math(p, lhs, size)
+        p = r.cells[1].paragraphs[0]
+        format_paragraph(p, space_before=1, space_after=1)
+        if rhs is not None:
+            add_inline_math(p, '= ' + rhs, size)
+        p = r.cells[2].paragraphs[0]
+        format_paragraph(p, space_before=1, space_after=1)
+        if reason:
+            format_inline_runs(p, reason, default_size=9.0, default_color=RGBColor(0x5A, 0x62, 0x70), default_italic=True)
+    format_paragraph(container.add_paragraph(), space_before=0, space_after=2)
+
+def add_exercises(container, lines, cols=2, start=1, size=10.5):
+    """Numbered exercise grid (borderless table) like a math-book practice set."""
+    items = [re.sub(r'^\s*(\d+[.)]|[-*•])\s+', '', l).strip() for l in lines if l.strip()]
+    if not items:
+        return
+    cols = max(1, min(cols, 4))
+    nrows = (len(items) + cols - 1) // cols
+    t = container.add_table(rows=nrows, cols=cols)
+    t.autofit = False
+    set_table_no_borders(t)
+    for idx, item in enumerate(items):
+        cell = t.rows[idx // cols].cells[idx % cols]
+        cell.width = Inches(6.6 / cols)
+        p = cell.paragraphs[0]
+        format_paragraph(p, space_before=2, space_after=3)
+        r = p.add_run(f"{start + idx}.  ")
+        r.font.name = 'Cambria'; r.font.size = Pt(size); r.font.bold = True
+        r.font.color.rgb = RGBColor(0x1B, 0x36, 0x5D)
+        format_inline_runs(p, _true_minus(item), default_size=size)
+    format_paragraph(container.add_paragraph(), space_before=0, space_after=3)
+
+BOX_STYLES = {
+    'concept':  ("EAF2FB", "1B365D", "📐 "),
+    'example':  ("F7F9FC", "2A4B7C", "💡 "),
+    'watchout': ("FFF7E6", "C77700", "⚠️ "),
+    'note':     ("F4F7FA", "1B365D", ""),
+}
+
+def add_box(container, kind, title, inner_markdown):
+    """Boxed Key Concept / Worked Example / Watch Out containing full markdown (figures, steps, math)."""
+    bg, border, icon = BOX_STYLES.get(kind, BOX_STYLES['note'])
+    t = container.add_table(rows=1, cols=1)
+    t.alignment = WD_TABLE_ALIGNMENT.CENTER
+    c = t.rows[0].cells[0]
+    set_cell_shading(c, bg)
+    set_callout_border(c, color_hex=border, sz="36")
+    set_cell_margins(c, top=120, bottom=120, left=200, right=200)
+    p = c.paragraphs[0]
+    format_paragraph(p, space_before=1, space_after=4)
+    p.paragraph_format.keep_with_next = True
+    if title:
+        col = RGBColor(int(border[0:2], 16), int(border[2:4], 16), int(border[4:6], 16))
+        format_inline_runs(p, icon + title, default_size=11.0, default_color=col, default_bold=True)
+    append_markdown_to_doc(c, inner_markdown)
+    format_paragraph(container.add_paragraph(), space_before=0, space_after=4)
+
+def _parse_figure_spec(lines):
+    spec = {}
+    for l in lines:
+        if ':' not in l:
+            continue
+        k, v = l.split(':', 1)
+        spec.setdefault(k.strip().lower(), []).append(v.strip())
+    return spec
+
+def _nums(s):
+    return [float(x) for x in re.findall(r'-?\d+(?:\.\d+)?', s.replace('−', '-'))]
+
+def _fmt(v):
+    v = float(v)
+    s = str(int(v)) if v == int(v) else ('%g' % v)
+    return s.replace('-', '−')
+
+def _label(s):
+    return _true_minus(s.replace('−', '-')) if s else s
+
+def _fig_numberline(plt, spec, vertical=False):
+    from matplotlib.patches import FancyArrowPatch
+    from matplotlib.path import Path
+    lo, hi, *rest = _nums(spec.get('range', ['-6, 6'])[0])
+    step = rest[0] if rest else 1
+    hops = [h.split(',', 2) for h in spec.get('hop', [])]
+    n_h = len(hops)
+    if vertical:
+        fig, ax = plt.subplots(figsize=(2.6 + 0.5 * n_h, 0.42 * ((hi - lo) / step + 2)))
+    else:
+        fig, ax = plt.subplots(figsize=(6.6, 1.2 + 0.42 * max(n_h, 1)))
+    P = (lambda a, o: (o, a)) if vertical else (lambda a, o: (a, o))
+    ext = 0.6 * step
+    ax.annotate('', xy=P(hi + ext, 0), xytext=P(lo - ext, 0), annotation_clip=False,
+                arrowprops=dict(arrowstyle='<|-|>', lw=1.6, color=NAVY_HEX, mutation_scale=12))
+    ax.plot(*zip(P(lo - ext, 0), P(hi + ext, 0)), alpha=0)
+    v, unit = lo, step * 0.12
+    while v <= hi + 1e-9:
+        ax.plot(*zip(P(v, -unit), P(v, unit)), color=NAVY_HEX, lw=1.4)
+        kw = dict(ha='right', va='center') if vertical else dict(ha='center', va='top')
+        ax.text(*P(v, -2.6 * unit), _fmt(v), fontsize=10, color='#1A1A1A',
+                fontweight='bold' if v == 0 else 'normal', **kw)
+        v += step
+    if spec.get('zero'):
+        ax.text(*P(0, 2.2 * unit), spec['zero'][0], fontsize=9, color=GRAY_HEX, style='italic',
+                **(dict(ha='left', va='bottom') if vertical else dict(ha='center', va='bottom')))
+    for k, h in enumerate(hops):
+        s, e = float(h[0].replace('−', '-')), float(h[1].replace('−', '-'))
+        lab = _label(h[2].strip()) if len(h) > 2 else ''
+        height = step * (0.9 + 0.75 * k)
+        path = Path([P(s, unit), P((s + e) / 2, 2 * height), P(e, unit)], [Path.MOVETO, Path.CURVE3, Path.CURVE3])
+        ax.add_patch(FancyArrowPatch(path=path, arrowstyle='-|>', mutation_scale=13, lw=1.6,
+                                     color=RED_HEX if e < s else BLUE_HEX))
+        if lab:
+            kw = dict(ha='left', va='center') if vertical else dict(ha='center', va='bottom')
+            ax.text(*P((s + e) / 2, height + 0.15 * step), lab, fontsize=10, fontweight='bold',
+                    color=RED_HEX if e < s else BLUE_HEX, **kw)
+    for ptxt in spec.get('point', []):
+        parts = ptxt.split(',', 1)
+        pv = float(parts[0].replace('−', '-'))
+        ax.plot(*P(pv, 0), 'o', ms=8, color=TEAL_HEX, zorder=5, mec='white', mew=1)
+        if len(parts) > 1 and parts[1].strip():
+            off = -5.2 * unit if (n_h or vertical) else 2.4 * unit
+            kw = dict(ha='right', va='center') if vertical else dict(ha='center', va='top' if n_h else 'bottom')
+            if vertical:
+                off = -14 * unit
+            ax.text(*P(pv, off), _label(parts[1].strip()), fontsize=9, color=TEAL_HEX, fontweight='bold', **kw)
+    for dtxt in spec.get('distance', []):
+        parts = dtxt.split(',', 2)
+        a, b = float(parts[0].replace('−', '-')), float(parts[1].replace('−', '-'))
+        o = -7.5 * unit if not vertical else 3 * unit + (0.75 * step if n_h else 0) * 0
+        if vertical:
+            o = -9.5 * unit
+        ax.annotate('', xy=P(b, o), xytext=P(a, o), annotation_clip=False,
+                    arrowprops=dict(arrowstyle='<->', lw=1.2, color=GRAY_HEX))
+        ax.plot(*zip(P(a, o), P(b, o)), alpha=0)
+        if len(parts) > 2:
+            kw = dict(ha='right', va='center') if vertical else dict(ha='center', va='top')
+            ax.text(*P((a + b) / 2, o - 1.2 * unit), _label(parts[2].strip()), fontsize=9, color=GRAY_HEX, **kw)
+    ax.set_aspect('equal', adjustable='datalim')
+    ax.axis('off')
+    return fig, (2.4 + 0.45 * n_h if vertical else 6.0)
+
+def _counter(ax, x, y, positive, r=0.36):
+    from matplotlib.patches import Circle
+    ax.add_patch(Circle((x, y), r, fc=BLUE_HEX if positive else RED_HEX, ec='white', lw=1.5, zorder=3))
+    ax.text(x, y - 0.02, '+' if positive else '−', ha='center', va='center', color='white',
+            fontsize=15, fontweight='bold', zorder=4)
+
+def _fig_counters(plt, spec):
+    from matplotlib.patches import FancyBboxPatch
+    pos = int(_nums(spec.get('positive', ['0'])[0])[0])
+    neg = int(_nums(spec.get('negative', ['0'])[0])[0])
+    pairs = min(pos, neg) if spec.get('pairs', ['no'])[0].lower().startswith('y') else 0
+    cols = max(pos, neg, 1)
+    fig, ax = plt.subplots(figsize=(0.62 * cols + 1.2, 2.4))
+    for i in range(pos):
+        _counter(ax, i, 1, True)
+    for i in range(neg):
+        _counter(ax, i, 0, False)
+    for i in range(pairs):
+        ax.add_patch(FancyBboxPatch((i - 0.44, -0.44), 0.88, 1.88, boxstyle='round,pad=0.02,rounding_size=0.3',
+                                    fc='none', ec=GRAY_HEX, lw=1.2, ls='--', zorder=2))
+    for rtxt in spec.get('remove', []):
+        n = int(_nums(rtxt)[0]); row = 1 if 'pos' in rtxt.lower() else 0
+        count = pos if row == 1 else neg
+        for i in range(max(0, count - n), count):
+            ax.plot([i - 0.35, i + 0.35], [row - 0.35, row + 0.35], color='#222', lw=2.2, zorder=5)
+            ax.plot([i - 0.35, i + 0.35], [row + 0.35, row - 0.35], color='#222', lw=2.2, zorder=5)
+    _counter(ax, -0.2, -1.05, True, r=0.2); ax.text(0.1, -1.05, '= +1', va='center', fontsize=9.5)
+    _counter(ax, 1.4, -1.05, False, r=0.2); ax.text(1.7, -1.05, '= −1', va='center', fontsize=9.5)
+    if pairs:
+        ax.add_patch(FancyBboxPatch((3.0, -1.3), 0.5, 0.5, boxstyle='round,pad=0.02,rounding_size=0.15',
+                                    fc='none', ec=GRAY_HEX, lw=1.1, ls='--'))
+        ax.text(3.7, -1.05, '= zero pair', va='center', fontsize=9.5, color=GRAY_HEX)
+    ax.set_xlim(-0.8, cols + 0.2); ax.set_ylim(-1.4, 1.6)
+    ax.set_aspect('equal'); ax.axis('off')
+    return fig, min(0.5 * cols + 1.6, 5.6)
+
+def _fig_groups(plt, spec):
+    from matplotlib.patches import FancyBboxPatch
+    g = int(_nums(spec.get('groups', ['3'])[0])[0])
+    each = int(_nums(spec.get('each', ['2'])[0])[0])
+    k, per_row = abs(each), min(abs(each), 4) or 1
+    rows = (k + per_row - 1) // per_row
+    w = per_row + 0.6
+    fig, ax = plt.subplots(figsize=(g * (w + 0.4) * 0.6 + 0.4, rows * 0.6 + 1.0))
+    for gi in range(g):
+        x0 = gi * (w + 0.4)
+        ax.add_patch(FancyBboxPatch((x0, 0), w, rows + 0.2, boxstyle='round,pad=0.05,rounding_size=0.25',
+                                    fc='#F4F7FA', ec=NAVY_HEX, lw=1.2))
+        for j in range(k):
+            _counter(ax, x0 + 0.8 + (j % per_row), rows - 0.4 - (j // per_row), each > 0)
+        ax.text(x0 + w / 2, -0.35, f'group {gi + 1}', ha='center', va='top', fontsize=8.5, color=GRAY_HEX)
+    ax.set_xlim(-0.2, g * (w + 0.4)); ax.set_ylim(-0.9, rows + 0.5)
+    ax.set_aspect('equal'); ax.axis('off')
+    return fig, min(1.1 * g * (w + 0.4) * 0.6 + 0.6, 5.8)
+
+def _style_axes(ax, spec):
+    ax.spines[['top', 'right']].set_visible(False)
+    ax.yaxis.grid(True, color='#E3E8EF', lw=0.8); ax.set_axisbelow(True)
+    if spec.get('xlabel'): ax.set_xlabel(spec['xlabel'][0], fontsize=10)
+    if spec.get('ylabel'): ax.set_ylabel(spec['ylabel'][0], fontsize=10)
+    if spec.get('title'): ax.set_title(spec['title'][0], fontsize=11, fontweight='bold', color=NAVY_HEX)
+
+def _labels_values(spec):
+    labels = [x.strip() for x in spec.get('labels', [''])[0].split(',')]
+    values = _nums(spec.get('values', ['0'])[0])
+    return labels, values
+
+def _fig_bar(plt, spec):
+    from matplotlib.ticker import MaxNLocator
+    labels, values = _labels_values(spec)
+    fig, ax = plt.subplots(figsize=(5.2, 3.0))
+    bars = ax.bar(labels, values, color=NAVY_HEX, width=0.6)
+    for b, v in zip(bars, values):
+        ax.text(b.get_x() + b.get_width() / 2, v, _fmt(v), ha='center', va='bottom', fontsize=9)
+    ax.set_ylim(0, max(values) * 1.15 if values else 1)
+    ax.yaxis.set_major_locator(MaxNLocator(integer=True))
+    _style_axes(ax, spec)
+    return fig, 4.6
+
+def _fig_line(plt, spec):
+    from matplotlib.ticker import MaxNLocator
+    labels, values = _labels_values(spec)
+    fig, ax = plt.subplots(figsize=(5.2, 3.0))
+    ax.plot(labels, values, color=NAVY_HEX, lw=2, marker='o', mfc=TEAL_HEX, mec='white', ms=8)
+    for x, v in zip(labels, values):
+        ax.annotate(_fmt(v), (x, v), textcoords='offset points', xytext=(0, 7), ha='center', fontsize=9)
+    lo = min(values + [0])
+    ax.set_ylim(lo, max(values) * 1.15 if values else 1)
+    ax.yaxis.set_major_locator(MaxNLocator(integer=True))
+    _style_axes(ax, spec)
+    return fig, 4.6
+
+def _fig_pie(plt, spec):
+    labels, values = _labels_values(spec)
+    total = sum(values) or 1
+    show = spec.get('angles', ['no'])[0].lower().startswith('y')
+    names = [f"{l}\n{_fmt(round(v / total * 360, 1))}°" if show else l for l, v in zip(labels, values)]
+    colors = [NAVY_HEX, TEAL_HEX, '#F2A93B', '#8E6CCF', RED_HEX, '#7FA7D9']
+    fig, ax = plt.subplots(figsize=(3.8, 3.4))
+    ax.pie(values, labels=names, colors=colors[:len(values)], startangle=90, counterclock=False,
+           wedgeprops=dict(ec='white', lw=2), textprops=dict(fontsize=9.5))
+    ax.set_aspect('equal')
+    if spec.get('title'):
+        ax.set_title(spec['title'][0], fontsize=11, fontweight='bold', color=NAVY_HEX)
+    return fig, 3.4
+
+def _fig_stemleaf(plt, spec):
+    data = sorted(int(x) for x in _nums(spec.get('data', [''])[0]))
+    stems = {}
+    for d in data:
+        stems.setdefault(d // 10, []).append(d % 10)
+    rows = list(range(min(stems), max(stems) + 1)) if stems else []
+    fig, ax = plt.subplots(figsize=(3.0, 0.42 * len(rows) + 1.0))
+    ax.text(0.9, len(rows) + 0.2, 'Stem', ha='right', fontsize=10, fontweight='bold', color=NAVY_HEX)
+    ax.text(1.3, len(rows) + 0.2, 'Leaf', ha='left', fontsize=10, fontweight='bold', color=NAVY_HEX)
+    for k, s in enumerate(rows):
+        y = len(rows) - 1 - k
+        ax.text(0.9, y, str(s), ha='right', va='center', fontsize=11)
+        ax.text(1.3, y, '  '.join(str(l) for l in stems.get(s, [])), ha='left', va='center', fontsize=11)
+    ax.plot([1.1, 1.1], [-0.5, len(rows) - 0.4], color=NAVY_HEX, lw=1.5)
+    if spec.get('key'):
+        ax.text(0.0, -1.0, 'Key: ' + spec['key'][0], fontsize=9, style='italic', color=GRAY_HEX)
+    ax.set_xlim(0, 4); ax.set_ylim(-1.3, len(rows) + 0.7); ax.axis('off')
+    return fig, 2.6
+
+def _fig_coordinate(plt, spec):
+    lo, hi = _nums(spec.get('range', ['-5, 5'])[0])[:2]
+    fig, ax = plt.subplots(figsize=(3.8, 3.8))
+    ax.set_xlim(lo - 0.5, hi + 0.5); ax.set_ylim(lo - 0.5, hi + 0.5)
+    ax.set_xticks(range(int(lo), int(hi) + 1)); ax.set_yticks(range(int(lo), int(hi) + 1))
+    ax.grid(True, color='#E3E8EF', lw=0.8)
+    for s in ('left', 'bottom'):
+        ax.spines[s].set_position('zero'); ax.spines[s].set_color(NAVY_HEX)
+    ax.spines[['top', 'right']].set_visible(False)
+    ax.tick_params(labelsize=8)
+    for segtxt in spec.get('segment', []):
+        x1, y1, x2, y2 = _nums(segtxt)[:4]
+        ax.plot([x1, x2], [y1, y2], color=NAVY_HEX, lw=1.8)
+    for ptxt in spec.get('point', []):
+        nums = _nums(ptxt); lab = re.sub(r'^[\s\-−\d.,]+', '', ptxt).strip(' ,')
+        ax.plot(nums[0], nums[1], 'o', color=TEAL_HEX, ms=7, zorder=5)
+        if lab:
+            left = nums[0] < 0
+            ax.annotate(f"{lab}({_fmt(nums[0])}, {_fmt(nums[1])})", (nums[0], nums[1]), textcoords='offset points',
+                        xytext=(-6, 6) if left else (6, 6), ha='right' if left else 'left',
+                        fontsize=9, fontweight='bold', color=TEAL_HEX,
+                        bbox=dict(boxstyle='round,pad=0.15', fc='white', ec='none', alpha=0.85))
+    ax.set_aspect('equal')
+    return fig, 3.4
+
+def _fig_polygon(plt, spec):
+    from matplotlib.patches import Polygon
+    verts = re.findall(r'([A-Z])\(\s*(-?[\d.]+)\s*,\s*(-?[\d.]+)\s*\)', spec.get('vertices', [''])[0])
+    names = [v[0] for v in verts]; pts = [(float(v[1]), float(v[2])) for v in verts]
+    cx = sum(p[0] for p in pts) / len(pts); cy = sum(p[1] for p in pts) / len(pts)
+    fig, ax = plt.subplots(figsize=(4.0, 3.2))
+    ax.add_patch(Polygon(pts, closed=True, fc='#EAF2FB', ec=NAVY_HEX, lw=2))
+    span = max(max(p[0] for p in pts) - min(p[0] for p in pts), max(p[1] for p in pts) - min(p[1] for p in pts)) or 1
+    for n, (x, y) in zip(names, pts):
+        dx, dy = x - cx, y - cy; d = (dx * dx + dy * dy) ** 0.5 or 1
+        ax.text(x + dx / d * span * 0.07, y + dy / d * span * 0.07, n, ha='center', va='center', fontsize=11, fontweight='bold')
+    for stxt in spec.get('side', []):
+        seg, _, lab = stxt.partition(',')
+        a, b = names.index(seg.strip()[0]), names.index(seg.strip()[1])
+        (x1, y1), (x2, y2) = pts[a], pts[b]
+        mx, my = (x1 + x2) / 2, (y1 + y2) / 2; dx, dy = mx - cx, my - cy; d = (dx * dx + dy * dy) ** 0.5 or 1
+        ax.text(mx + dx / d * span * 0.13, my + dy / d * span * 0.13, lab.strip(), ha='center', va='center', fontsize=10, color=GRAY_HEX)
+    for rtxt in spec.get('right', []):
+        i = names.index(rtxt.strip()[0]); x, y = pts[i]
+        (ax_, ay_), (bx_, by_) = pts[i - 1], pts[(i + 1) % len(pts)]
+        s = span * 0.08
+        u = ((ax_ - x), (ay_ - y)); v = ((bx_ - x), (by_ - y))
+        lu = (u[0] ** 2 + u[1] ** 2) ** 0.5; lv = (v[0] ** 2 + v[1] ** 2) ** 0.5
+        u = (u[0] / lu * s, u[1] / lu * s); v = (v[0] / lv * s, v[1] / lv * s)
+        ax.plot([x + u[0], x + u[0] + v[0], x + v[0]], [y + u[1], y + u[1] + v[1], y + v[1]], color=NAVY_HEX, lw=1.3)
+    ax.set_xlim(min(p[0] for p in pts) - span * 0.2, max(p[0] for p in pts) + span * 0.2)
+    ax.set_ylim(min(p[1] for p in pts) - span * 0.2, max(p[1] for p in pts) + span * 0.2)
+    ax.set_aspect('equal'); ax.axis('off')
+    return fig, 3.2
+
+FIGURE_TYPES = {
+    'numberline': lambda plt, s: _fig_numberline(plt, s),
+    'vnumberline': lambda plt, s: _fig_numberline(plt, s, vertical=True),
+    'counters': _fig_counters, 'groups': _fig_groups, 'bar': _fig_bar, 'line': _fig_line,
+    'pie': _fig_pie, 'stemleaf': _fig_stemleaf, 'coordinate': _fig_coordinate, 'polygon': _fig_polygon,
+}
+
+def add_figure(container, spec_lines, max_width=5.8):
+    """Draws an exact math figure with matplotlib, inserts it centered, and adds a numbered caption."""
+    import tempfile
+    spec = _parse_figure_spec(spec_lines)
+    _MATH_STATE['fig'] += 1
+    num = f"{_MATH_STATE['lesson']}.{_MATH_STATE['fig']}" if _MATH_STATE['lesson'] else str(_MATH_STATE['fig'])
+    kind = spec.get('type', ['?'])[0].lower()
+    p = container.add_paragraph()
+    format_paragraph(p, space_before=4, space_after=1, align=WD_ALIGN_PARAGRAPH.CENTER)
+    p.paragraph_format.keep_with_next = True
+    try:
+        import matplotlib
+        matplotlib.use('Agg')
+        import matplotlib.pyplot as plt
+        plt.rcParams.update({'font.family': 'DejaVu Sans', 'axes.unicode_minus': True})
+        fig, width = FIGURE_TYPES[kind](plt, spec)
+        path = os.path.join(tempfile.mkdtemp(), f'figure_{num}.png')
+        fig.savefig(path, dpi=220, bbox_inches='tight', pad_inches=0.06, facecolor='white')
+        plt.close(fig)
+        p.add_run().add_picture(path, width=Inches(min(width, max_width)))
+    except Exception as e:
+        r = p.add_run(f"[FIGURE {num} COULD NOT BE DRAWN: type '{kind}' — {e}]")
+        r.font.bold = True; r.font.color.rgb = RGBColor(0xCC, 0x00, 0x00); r.font.size = Pt(9)
+    cap = container.add_paragraph()
+    format_paragraph(cap, space_before=0, space_after=6, align=WD_ALIGN_PARAGRAPH.CENTER)
+    r = cap.add_run(f"Figure {num}")
+    r.font.name = 'Cambria'; r.font.size = Pt(9); r.font.bold = True; r.font.color.rgb = RGBColor(0x1B, 0x36, 0x5D)
+    if spec.get('caption'):
+        format_inline_runs(cap, '  ' + _true_minus(spec['caption'][0]), default_size=9.0,
+                           default_color=RGBColor(0x5A, 0x62, 0x70), default_italic=True)
+
 def append_markdown_to_doc(doc, markdown_text):
     """
     Appends raw or cleaned markdown lines directly into an existing docx.Document.
@@ -616,8 +1263,48 @@ def append_markdown_to_doc(doc, markdown_text):
             continue
 
         if '[PAGE BREAK]' in stripped:
-            doc.add_page_break()
+            if hasattr(doc, 'add_page_break'):
+                doc.add_page_break()
             i += 1
+            continue
+
+        # Math fenced blocks: ```figure / ```steps / ```exercises (file 07)
+        fence = re.match(r'^```\s*(figure|steps|exercises)\b(.*)$', stripped)
+        if fence:
+            kind, args = fence.group(1), fence.group(2)
+            block = []
+            i += 1
+            while i < total and not lines[i].strip().startswith('```'):
+                block.append(lines[i])
+                i += 1
+            i += 1
+            if kind == 'figure':
+                add_figure(doc, block)
+            elif kind == 'steps':
+                add_steps(doc, block)
+            else:
+                cols = re.search(r'cols\s*=\s*(\d+)', args)
+                start = re.search(r'start\s*=\s*(\d+)', args)
+                add_exercises(doc, block, cols=int(cols.group(1)) if cols else 2, start=int(start.group(1)) if start else 1)
+            continue
+
+        # Boxed containers: ::: concept|example|watchout|note Title ... ::: (file 07)
+        box = re.match(r'^:::\s*(concept|example|watchout|note)\b\s*(.*)$', stripped)
+        if box:
+            block = []
+            i += 1
+            while i < total and lines[i].strip() != ':::':
+                block.append(lines[i])
+                i += 1
+            i += 1
+            add_box(doc, box.group(1), box.group(2).strip(), '\n'.join(block))
+            continue
+
+        # Display formula: $$ ... $$ or \[ ... \], on one line or across several lines (file 07)
+        disp = _display_math_block(lines, i)
+        if disp:
+            expr, i = disp
+            add_display_math(doc, expr)
             continue
 
         # Blockquote Containers (> ...)
@@ -644,6 +1331,9 @@ def append_markdown_to_doc(doc, markdown_text):
             if re.match(r'^PAGE \d+ -', h_text, re.IGNORECASE):
                 pass
             else:
+                lesson = re.search(r'LESSON\s+(\d+(?:\.\d+)*)', h_text, re.IGNORECASE)
+                if lesson:
+                    _MATH_STATE.update(lesson=lesson.group(1), fig=0)
                 add_heading_1(doc, h_text)
             i += 1
             continue
@@ -738,6 +1428,7 @@ def compile_markdown_to_docx(source_md_path_or_text, output_docx_path, subject="
         raw_text = source_md_path_or_text
 
     doc = initialize_document(subject=subject, grade=grade, quarter=quarter)
+    _MATH_STATE.update(lesson=None, fig=0)
     append_markdown_to_doc(doc, raw_text)
     doc.save(output_docx_path)
     print(f"Successfully compiled {output_docx_path} ({len(doc.paragraphs)} paragraphs, {len(doc.tables)} tables)")

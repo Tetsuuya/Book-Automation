@@ -205,6 +205,7 @@ To prevent visual clutter and maintain high editorial density:
 - **Every Lesson**: Exactly 3 Image Prompt Boxes (Subtopic 1, Subtopic 2, Applied / Multimodal Task, `--ar 16:9`).
 - **Unit Assessment & Back Matter**: Zero image prompts (focused purely on 1-30 MCQ quiz, Performance Task, Synthesis, and Answer Keys).
 - **Total Quota = 1 + (3 × number of lessons)**: 3-lesson unit = **10 prompts**; 5-lesson quarter = **16 prompts**; 6-lesson quarter = **19 prompts**.
+- **Mathematics exception**: lesson figures are drawn by code per `07_MATHEMATICS_TEXTBOOK_STANDARDS.md` (no AI prompt boxes inside Math lessons); only the cover uses an AI prompt.
 
 ---
 
