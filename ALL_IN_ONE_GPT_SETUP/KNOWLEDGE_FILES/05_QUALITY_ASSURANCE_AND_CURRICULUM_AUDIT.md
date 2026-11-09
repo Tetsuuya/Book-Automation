@@ -103,7 +103,7 @@ The AI must NEVER fabricate data, dates, laws, historical figures, or mathematic
    - **BAN DRAFT LABELS**: Strict zero-tolerance for `"Visual Prompt 1"`, `"Visual Prompt 2"`, `"sample visual prompt"`, or internal notes in the document! Use ONLY production titles: `🖼️ Larawan: [Mapanuring Pamagat]` or `🖼️ Figure: [Descriptive Title]`.
    - **100% Boxed Containment**: Title, Pedagogical Purpose, AI Prompt, and Replacement Note MUST ALL be cleanly enclosed inside ONE dedicated container box (`> ...` in Markdown or 1-cell shaded table in DOCX). No loose text outside the box.
    - **Zero Branding in Image Prompts**: NO `"DepEd"`, `"MATATAG"`, or publisher logos inside AI image prompts. NO DepEd/MATATAG marks anywhere in the book either (cover, running headers, footers); the curriculum is cited only in lesson alignment lines and the sources table.
-   - **Strict Image-Prompt Quota**: Exactly 1 Cover Prompt on Page 1 (`--ar 8.5:11`) + 3 Image Prompts per Lesson (`--ar 16:9`) = **1 + 3 × lessons** (10 for a 3-lesson unit, 19 for a 6-lesson quarter). Zero image prompts in Back Matter. **Mathematics:** 1 cover prompt only; lesson figures are code-drawn and audited with the Math QA Checklist in file 07. **Science:** audit with the Science QA Checklist in file 08.
+   - **Strict Image-Prompt Quota**: Exactly 1 Cover Prompt on Page 1 (tall 8.5 by 11 portrait) + 3 Image Prompts per Lesson (wide 16:9 landscape) = **1 + 3 × lessons** (10 for a 3-lesson unit, 19 for a 6-lesson quarter). Zero image prompts in Back Matter. **Mathematics:** 1 cover prompt only; lesson figures are code-drawn and audited with the Math QA Checklist in file 07. **Science:** audit with the Science QA Checklist in file 08.
 3. **Bulletproof YouTube Multimedia Modules (Topic-Specific Direct Video Links, Zero Fake Timestamps, Zero Disclaimers)**:
    - **Legitimate & Verified Media**: Video module must cite legitimate, active channels (*DepEd TV Official, Knowledge Channel, CrashCourse, Khan Academy, DOST-SEI, GMA Public Affairs, TED-Ed, SoulPancake*).
    - **Topic-Specific Direct Real Video Link**: Must provide the authentic direct video URL (`https://www.youtube.com/watch?v=[REAL_VIDEO_ID]`) specifically covering THAT lesson's topic or activity. **NO SEARCH LINKS** (`results?search_query=...`) and **NO GENERIC WHOLE-COURSE COMPILATIONS**.
@@ -116,7 +116,7 @@ The AI must NEVER fabricate data, dates, laws, historical figures, or mathematic
 5. **Navy Header System & Non-Table Table of Contents**:
    - Heading 1 in solid Navy Blue (`#1B365D`) banner cell with white text.
    - Heading 2 in soft blue (`#EBF3FA`) block with 4.5pt solid Navy left border.
-   - **Page 3 Table of Contents**: Formatted strictly as a hierarchical indented typographic list with right-aligned page numbers. **STRICTLY NO TABLE GRIDS** (`| ... |`)!
+   - **Page 3 Table of Contents**: Generated automatically by the compiler (a Word TOC with real page numbers); ChatGPT never types page numbers. Formatted as a typographic list with right-aligned page numbers. **STRICTLY NO TABLE GRIDS** (`| ... |`)!
 6. **Unit Assessment Architecture & Structured Table Keys**:
    - **Unit Assessment (50 Pts)**: Comprehensive 30-Item Multiple Choice Quiz (Items 1–30 with `[  ]` checkboxes, balanced A–D spread) followed immediately by the Authentic Performance Task (GRASPS Model + Complete 4x4 Analytic Rubric).
    - **Structured Table Answer Keys**: Rendered in clean table grids (10-col for lessons, two 15-col grids for 30-item Unit Assessment, plus 2-col rationale tables). **ZERO paragraph blobs!**
@@ -161,3 +161,11 @@ OPTION DISTRIBUTION: Balanced Psychometric Spread across A, B, C, D (~25% each, 
 OVERALL QA AUDIT SCORE: [sum of verified rubric rows]/100 • STATUS: [PASSED only if ≥95 AND page count verified in the rendered DOCX; otherwise PENDING + list of open checks]
 ═══════════════════════════════════════════════════════════════════════════════
 ```
+
+---
+
+## MANDATORY FAITH CONNECTION CHECK (ALL SUBJECTS)
+
+- [ ] Every lesson has one FAITH CONNECTION (or UGNAYAN SA PANANAMPALATAYA) box after the Summary Box in Section 9.
+- [ ] Each box passes the concept test in file 01, Section 7A: it uses that lesson's actual concept.
+- [ ] No verse or theme repeats within the book, and every quotation is real.

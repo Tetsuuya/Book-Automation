@@ -22,7 +22,7 @@ Lessons follow the **5E model** used in DepEd science teaching: Engage, Explore,
 | Explanation text | 1,600–2,100 words total | Short blocks of **50–90 words**, each followed by a diagram, table, formula, or example. Never more than **3 consecutive prose paragraphs**. |
 | Key terms | 5–8 | Listed in Section 1, bolded where defined, all in the glossary. |
 | Quick Activity | 1 | 5–10 minutes in Section 1 (Explore), no special materials. |
-| AI image prompts | **3** | **1 phenomenon opener scene** (Section 1) + **2 labeled illustrations** of real things (Section 4.2). |
+| AI image prompts | **3** | **1 phenomenon opener** (Ghibli scene, Section 1) + **2 labeled diagrams** with labels in the image (Section 4.2). |
 | Code-drawn figures | **3–6** | Graphs, scales, **cycles, food chains, and flowcharts**, drawn exactly by the compiler (Section 4.1). |
 | Key Concept boxes | 2–4 | Definitions, laws, and formulas with units (Section 3). |
 | Investigation | **1** | Full lab or field activity with safety box and data table (Section 2). |
@@ -165,29 +165,43 @@ caption: The water cycle. Which stage forms clouds?
 ```
 ````
 
-### 4.2 Pictures of real things, AI prompt boxes (no numbers, no words)
+### 4.2 AI pictures: 1 opener scene + 2 labeled diagrams
 Each lesson has **3 AI image prompt boxes** (format from file 06):
 
-1. **Phenomenon opener (Section 1):** a realistic, striking scene of the lesson's phenomenon in a Philippine setting (Mayon at dawn, a flooded rice paddy, a rusting jeepney). Semi-realistic educational illustration, wide `--ar 16:9`, no text. It sits right below the lesson banner, like a chapter-opener photo.
-2. **Two labeled illustrations (Sections 2, 3, or 6):** cells, organs, organisms, ecosystems, Earth's layers, volcanoes, weather systems, lab apparatus.
+1. **Phenomenon opener (Section 1), Studio Ghibli scene, no text:** the lesson's phenomenon happening in a Philippine setting (Mayon at dawn, a flooded rice paddy, a jeepney braking). It sits right below the lesson banner, like a chapter-opener picture.
+2. **Two labeled diagrams (Sections 2, 3, or 6):** the real structure the lesson teaches, **with its labels drawn in the image**, like a real science book: parts of a plant cell, layers of the Earth, parts of a flower, a volcano cross-section, a microscope, a filtration setup, a spring scale.
 
-Rules for all three:
+**Every box starts from its INTENT.** Write the **Shows:** line first: the one idea the picture must make visible, taken from the text right before it and the task right after it. Then describe only what proves that idea, accurately. Anything that does not serve the intent stays out.
 
-- **Style:** clean scientific textbook illustration, flat vector or soft semi-realistic shading, white or light background, accurate proportions and colors. Not Ghibli (Ghibli is for the cover only).
-- **NO TEXT IN THE IMAGE.** AI garbles letters. The prompt must say "no text, no labels, no letters". Instead, the box lists **Labels to add in Word**: numbered parts the author types as callouts after inserting the image.
-- **Philippine contexts** where they fit: Taal Volcano, Mayon, Tubbataha Reef, Banaue Rice Terraces, mangroves, tamaraw, Philippine eagle.
-- **People** are allowed only in lab or field-work scenes, and they must wear proper safety gear (goggles, gloves) and follow safe practice.
-- **Never use AI** for cycles, food chains, food webs, or flowcharts (use `cycle` and `flow`), or for circuit diagrams, ray diagrams, force diagrams, the periodic table, or anything with scales or values.
-- **Every caption asks one question** (a "visual check"), for code figures and AI pictures alike: "Figure 4.2.3 Layers of the Earth. Which layer is hottest?" If no figure type in 4.1 fits, use a prompt box titled `Exact Diagram — draw in Word or verify by hand` with a precise description of every part.
+**Labeled diagram rules:**
+- **Accurate first:** correct shapes, positions, proportions, and colors for the real thing at the learner's grade level. Name every part you want drawn, and where it is ("nucleus near the center, chloroplasts along the cell edge").
+- **3–6 labels**, each 1–3 words, spelled exactly as in the lesson text and glossary. Put them in the prompt in quotes: `labels with thin leader lines pointing to each part: "Cell wall", "Cell membrane", "Nucleus", "Chloroplast", "Vacuole"`.
+- **Style tag:** `clean labeled science textbook diagram, accurate proportions, soft colors, white background, clear sans-serif labels, no other text, no logos, no watermark. Wide 16:9 landscape image.`
+- **Check line in the Replacement Note:** the author checks each label's spelling and that each leader line points to the right part. If one is wrong, regenerate, or cover it with a Word text box.
+- **Any generator (Gemini, ChatGPT):** write the labels as a sentence ("Add only these labels in clear sans-serif text with thin leader lines: ..."), never as tool flags. If one label is misspelled or points wrong, ask the generator in the same chat to fix just that label.
 
-Example box:
+**Still NOT AI (code `figure`, 4.1, or a table):** anything with numbers, scales, or measured values (graphs, thermometer readings, distance–time), cycles, food chains, flowcharts, circuits, ray and force diagrams, and the periodic table. AI misplaces numbers and arrow directions.
+
+**For all three:**
+- **Every caption asks one question** about the intent: "Figure 7.1.2 Parts of a plant cell. Which part makes food?" If you cannot write that question, the picture has no job: drop it.
+- **Short prompt, 40–70 words,** in plain words; no jargon ("orthographic", "molecule-inspired clusters").
+- **Context decides the style** (file 06, Part 3): a scene, story, or opener is Ghibli; a picture learners must recognize in real life (a rock sample, a real Philippine species) may be a real photo; a picture whose job is naming parts is a labeled diagram.
+- **People** in lab or field-work scenes wear proper safety gear (goggles, gloves) and follow safe practice.
+
+Example boxes:
+
+```
+> ### 🖼️ Figure: Mayon at Dawn
+> **Shows:** A volcano is an opening where hot material from inside the Earth comes out.
+> **AI Prompt:** Mayon Volcano at dawn with a thin plume of steam rising from its perfect cone, rice fields and a small village in the foreground, farmers looking up, soft golden light, Studio Ghibli-inspired warm watercolor illustration, no text, no logos, no watermark. Wide 16:9 landscape image.
+> **Replacement Note:** Insert the image (Insert > Pictures). Caption: "Mayon steams at dawn. Where does the steam come from?"
+```
 
 ```
 > ### 🖼️ Figure: Parts of a Plant Cell
-> **Purpose:** Identify the organelles that make a plant cell different from an animal cell.
-> **AI Prompt:** Clean scientific textbook illustration of a single plant cell in cross-section, rectangular cell wall, thin cell membrane, large central vacuole, green chloroplasts, nucleus with nucleolus, mitochondria, flat vector with soft shading, white background, accurate proportions, no text, no labels, no letters, no logos --ar 16:9 --v 6.0
-> **Labels to add in Word:** 1 cell wall, 2 cell membrane, 3 central vacuole, 4 chloroplast, 5 nucleus, 6 mitochondrion.
-> **Replacement Note:** Insert the image (Insert > Pictures), then add the six labels as numbered callouts.
+> **Shows:** A plant cell has a cell wall and chloroplasts, which an animal cell does not have.
+> **AI Prompt:** A single plant cell cut open, rectangular with a thick green cell wall, a thin cell membrane just inside it, a large clear vacuole in the middle, a round nucleus beside it, small green chloroplasts along the edges, labels with thin leader lines pointing to each part: "Cell wall", "Cell membrane", "Vacuole", "Nucleus", "Chloroplast", clean labeled science textbook diagram, accurate proportions, soft colors, white background, clear sans-serif labels, no other text, no logos, no watermark. Wide 16:9 landscape image.
+> **Replacement Note:** Insert the image. Check: all 5 labels spelled right, each line points to its part. Caption: "Parts of a plant cell. Which two parts are missing in an animal cell?"
 ```
 
 ---
@@ -197,13 +211,13 @@ Example box:
 | Blueprint section | 5E stage | What goes there |
 | :--- | :--- | :--- |
 | 1. Alignment & opener | **Engage, Explore** | Phenomenon opener image; the big question ("Why does Taal steam?"); learners write a first explanation; 5–8 **Key Terms**; the video box; a 5–10 minute **Quick Activity** with no special materials (e.g., breathe on a cold glass to see condensation). |
-| 2, 3. Subtopics 1–2 | **Explain** | Short text → labeled illustration, graph, cycle, or flow → Key Concept box → Quick Check. |
+| 2, 3. Subtopics 1–2 | **Explain** | Short text → labeled diagram, graph, cycle, or flow → Key Concept box → Quick Check. |
 | 4. Core anchor | **Explain** | Formula box and Sample Problems (quantitative), or Data Analysis Examples (qualitative). |
 | 5. Reasoning | **Elaborate** | Watch Out box with **Wrong idea → Scientific idea** pairs (e.g., "Heavier objects fall faster" → "Without air resistance, all objects fall with the same acceleration"). |
 | 6. Subtopic 3 | **Elaborate** | Application to Philippine contexts, technology, health, or the environment. |
 | 7. Practice | **Evaluate** | Graded practice (`exercises` blocks for short items), including graph and table reading. |
 | 8. Application | **Explore, Elaborate** | The full Investigation (Section 2 of this file), with SAFETY FIRST. |
-| 9. Exit ticket | **Evaluate** | Revisit the opening phenomenon: learners rewrite their first explanation as a CER, then the summary box. |
+| 9. Exit ticket | **Evaluate** | Revisit the opening phenomenon: learners rewrite their first explanation as a CER, then the summary box, then the boxed **FAITH CONNECTION** (file 01, Section 7A) built on the lesson's own science. |
 | 10. Assessment | **Evaluate** | 15 items, at least 3 using a table or graph. |
 
 ---
@@ -228,7 +242,8 @@ Example box:
 - [ ] Units on every quantity and in every solution step.
 - [ ] Chemical formulas use Unicode subscripts (H₂O), never TeX.
 - [ ] Graphs and scales are code-drawn `figure` blocks with labeled axes and units.
-- [ ] 3 AI prompts per lesson (1 phenomenon opener + 2 labeled illustrations), each with "no text"; illustrations include a "Labels to add in Word" list.
-- [ ] No AI images for circuits, ray or force diagrams, the periodic table, or anything with values.
+- [ ] 3 AI prompts per lesson: 1 Ghibli opener (no text) + 2 accurate labeled diagrams (3–6 quoted labels, matching the glossary spelling); every box has a **Shows:** intent line and a label check.
+- [ ] No AI images for graphs, scales, measured values, cycles, food chains, circuits, ray or force diagrams, or the periodic table.
 - [ ] 15–20 graded practice items; at least 3 assessment items use a table or graph.
 - [ ] Every scientific claim and value is accurate for the grade level.
+- [ ] Every lesson has a FAITH CONNECTION box built on that lesson's own science; no verse is used as scientific proof.

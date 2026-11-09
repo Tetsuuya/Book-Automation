@@ -185,6 +185,12 @@ Use an `exercises` block. Write one item per line with **no numbers**; the compi
 
 ---
 
+## 5A. Faith Connection (every lesson)
+
+After the Summary Box in Section 9, add the boxed **FAITH CONNECTION** from file 01, Section 7A. In Math it must use the lesson's own mathematics: fractions and the tithe (1/10) or Sabbath (1/7), equations and the "just weight", volume and the ark's dimensions. Its **Apply** line is one short computation or reasoning question.
+
+---
+
 ## 6. Math QA Checklist (add to the file 05 audit)
 
 - [ ] Every rule, property, and key equation is on a `$$` display line or inside a `concept` box.
@@ -194,3 +200,4 @@ Use an `exercises` block. Write one item per line with **no numbers**; the compi
 - [ ] 20–24 graded exercises per lesson, all answered in the key.
 - [ ] No prose run longer than 2 paragraphs; no paragraph over 70 words inside subtopics.
 - [ ] No formula left as plain text: every formula sits inside `$…$`, `$$…$$`, `\(…\)`, or `\[…\]` (TeX allowed) so it compiles into a real Word equation.
+- [ ] Every lesson has a FAITH CONNECTION box that uses that lesson's own mathematics.

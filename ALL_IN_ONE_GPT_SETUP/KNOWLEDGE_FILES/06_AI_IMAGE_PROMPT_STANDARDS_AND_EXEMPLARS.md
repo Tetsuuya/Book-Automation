@@ -1,5 +1,5 @@
 # DEPED MATATAG AI IMAGE PROMPT ENGINEERING & VISUAL EXEMPLARS
-## Zero-Abstract, Cinematographic Scene Architecture for Midjourney v6 & DALL-E 3
+## Zero-Abstract, Cinematographic Scene Architecture for any image generator (Gemini, ChatGPT, Midjourney)
 
 This document is the mandatory standard for generating **all AI image prompts** across all DepEd MATATAG subjects (Filipino, English, Science, Mathematics, Araling Panlipunan, MAPEH, TLE, and Values Education / GMRC) for Grades 1 through 10.
 
@@ -9,9 +9,9 @@ This document is the mandatory standard for generating **all AI image prompts** 
 
 > ### 🛑 THE MANDATORY "PROMPT-ONLY / PLACEHOLDER" LAW:
 > The AI generator must **NEVER** attempt to generate, scrape, fetch, or embed actual image files or web URLs in the manuscript!
-> In every lesson, the AI outputs **ONLY THE TEXT PROMPT INSIDE THE BOXED CONTAINER FRAME**. This serves as a clean, styled placeholder so the author/educator can generate the images themselves in Midjourney v6 or DALL-E 3 and manually insert them into the Word document via `Insert > Pictures`.
+> In every lesson, the AI outputs **ONLY THE TEXT PROMPT INSIDE THE BOXED CONTAINER FRAME**. This serves as a clean, styled placeholder so the author/educator can generate the images themselves in any generator (Gemini, ChatGPT, Midjourney) and manually insert them into the Word document via `Insert > Pictures`.
 
-Image generation models (Midjourney v6, DALL-E 3) **do NOT understand abstract curriculum concepts**, "subtopics", "pedagogical competencies", or mental activities like "analyzing" or "source checking". 
+Image generation models (Gemini, ChatGPT, Midjourney) **do NOT understand abstract curriculum concepts**, "subtopics", "pedagogical competencies", or mental activities like "analyzing" or "source checking". 
 
 When a prompt says *"illustrating the central concept of this subtopic"* or *"showing textual analysis"*, the AI generator hallucinates:
 - Blurry floating circles and random meaningless arrows.
@@ -29,17 +29,17 @@ The following types of prompts are **STRICTLY PROHIBITED** and will fail the Qua
 
 ### ❌ BANNED PROMPT 1: The "Abstract Concept" Cop-Out
 ```text
-BANNED: "A publication-grade Grade 8 Filipino educational infographic illustrating the central concept of this subtopic through historically respectful, non-branded visual elements, clear hierarchy, realistic Filipino context, no readable gibberish, no logos, no watermark, no branding --ar 16:9 --v 6.0"
+BANNED: "A publication-grade Grade 8 Filipino educational infographic illustrating the central concept of this subtopic through historically respectful, non-branded visual elements, clear hierarchy, realistic Filipino context, no readable gibberish, no logos, no watermark, no branding. Wide 16:9 landscape image."
 ```
 **Why it Fails**:
 - What is in the picture? Nobody knows!
 - *"Illustrating the central concept"* is meta-instruction, not a physical scene.
 - *"Historically respectful visual elements"* does not name a single actual object.
-- Result in Midjourney: Floating meaningless blue shapes and unreadable pseudo-text.
+- Result in any generator: Floating meaningless blue shapes and unreadable pseudo-text.
 
 ### ❌ BANNED PROMPT 2: The "Mental Action" Storyboard
 ```text
-BANNED: "A six-frame educational storyboard for Filipino Grade 8 showing source checking, textual analysis, historically respectful archival-style imagery, camera framing, caption review, and final narration recording. Clean pencil storyboard, no logos, no watermark, no branding --ar 16:9 --v 6.0"
+BANNED: "A six-frame educational storyboard for Filipino Grade 8 showing source checking, textual analysis, historically respectful archival-style imagery, camera framing, caption review, and final narration recording. Clean pencil storyboard, no logos, no watermark, no branding. Wide 16:9 landscape image."
 ```
 **Why it Fails**:
 - You cannot draw "source checking" or "textual analysis" — those are invisible cognitive processes.
@@ -47,18 +47,18 @@ BANNED: "A six-frame educational storyboard for Filipino Grade 8 showing source 
 
 ### ❌ BANNED PROMPT 3: The Generic "Students Learning" Cliché
 ```text
-BANNED: "Filipino students in a classroom learning about the lesson with happy faces and books on their desk --ar 16:9"
+BANNED: "Filipino students in a classroom learning about the lesson with happy faces and books on their desk. Wide 16:9 landscape image."
 ```
 **Why it Fails**:
 - Generic stock photo feel with zero subject-matter connection.
 
 ### ❌ BANNED PROMPT 4: The "Faking Real Historical Heroes / Specific Persons" Blunder
 ```text
-BANNED: "A portrait of Dr. Jose Rizal writing Noli Me Tangere in Berlin --ar 16:9"
-BANNED: "Andres Bonifacio shouting in the Cry of Pugad Lawin holding a bolo with angry face --ar 16:9"
+BANNED: "A portrait of Dr. Jose Rizal writing Noli Me Tangere in Berlin. Wide 16:9 landscape image."
+BANNED: "Andres Bonifacio shouting in the Cry of Pugad Lawin holding a bolo with angry face. Wide 16:9 landscape image."
 ```
 **Why it Fails**:
-- AI image models (Midjourney, DALL-E) **cannot** accurately reproduce the true facial likeness of real historical persons. They hallucinate distorted faces, alien-looking eyes, inaccurate Westernized features, or disrespectful caricatures.
+- AI image models (Gemini, ChatGPT, Midjourney) **cannot** accurately reproduce the true facial likeness of real historical persons. They hallucinate distorted faces, alien-looking eyes, inaccurate Westernized features, or disrespectful caricatures.
 - In national educational publishing, generating a fake AI face of a revered historical figure (Dr. Jose Rizal, Andres Bonifacio, Apolinario Mabini, Tandang Sora, Emilio Aguinaldo) is an unacceptable historical distortion and violates DepEd textbook standards.
 
 ### 🏛️ THE NATIONAL HERO INTEGRITY RULE (ZERO EXTRA WORK PROTOCOL):
@@ -71,7 +71,7 @@ BANNED: "Andres Bonifacio shouting in the Cry of Pugad Lawin holding a bolo with
 > - **Studying Pre-Colonial Society?** ➔ Prompt the ancient wooden balangay boat docked on a pristine shore with woven baskets of spices, native gold ornaments, and porcelain jars at golden sunrise.
 > - **Studying Maritime Trade?** ➔ Prompt the 17th-century Spanish galleon cargo deck loaded with silk bolts and spice crates in Manila Bay.
 > 
-> **Result**: Generates breathtaking, dignified, historically rich visuals in Midjourney/DALL-E with **ZERO distorted hero faces** and **ZERO extra manual search work** for the user!
+> **Result**: Generates breathtaking, dignified, historically rich visuals in any image generator with **ZERO distorted hero faces** and **ZERO extra manual search work** for the user!
 
 ---
 
@@ -100,9 +100,26 @@ When generating an image prompt for a subtopic, the AI must NEVER summarize the 
 ├────────────────────────────────────────────────────────────────────────────┤
 │ STEP 3: ASSEMBLE THE 5 PHYSICAL PILLARS                                    │
 │ Assemble Characters + Setting + 3-4 Props + Lighting + Camera Optics.      │
-│ Terminate with: no text, no logos, no watermark, no branding --ar 16:9     │
+│ Terminate with: no text, no logos, no watermark, no branding. Wide 16:9 landscape image.     │
 └────────────────────────────────────────────────────────────────────────────┘
 ```
+
+---
+
+## UNIVERSAL PROMPT RECIPE (works in Gemini, ChatGPT, Midjourney, any generator)
+
+Write every prompt as **plain descriptive sentences**, never tool codes. Modern generators (Gemini, ChatGPT) read sentences best; tool flags such as `--ar 16:9 --v 6.0` are Midjourney-only and other generators may draw them as text.
+
+Build it in this order, 40–70 words:
+1. **Subject and action:** who or what, doing what ("A Filipino girl pushes a wooden cart of rice sacks").
+2. **Setting:** a concrete Philippine place ("along a sunny barangay road with nipa houses").
+3. **Composition:** the view and what fills the frame ("side view, the cart in the center").
+4. **Light:** ("soft morning light").
+5. **Style:** one style sentence from the matrix below ("Studio Ghibli-inspired warm watercolor illustration").
+6. **Format in words:** "Wide 16:9 landscape image." (covers: "Tall portrait image, 8.5 by 11 page.")
+7. **Text rule:** "No words, letters, logos, or watermarks." Covers instead: "Spell the three title lines exactly as quoted; no other words, no logos, no watermark." (never "no text" on a cover). For labeled diagrams instead: "Add only these labels in clear sans-serif text with thin leader lines: "Nucleus", "Cell wall"."
+
+If a result is slightly wrong, fix it in the same chat with one short edit request ("move the label "Nucleus" so its line points to the round center part"). Gemini and ChatGPT edit the image they just made.
 
 ---
 
@@ -110,45 +127,28 @@ When generating an image prompt for a subtopic, the AI must NEVER summarize the 
 
 Image generation in an educational textbook must **never look like generic AI plastic or eerie uncanny-valley stock photography**. Furthermore, different subjects demand fundamentally different visual languages:
 
-```text
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                   SUBJECT-CALIBRATED VISUAL ART MATRIX & MEDIUM                        │
-├──────────────────────────┬─────────────────────────────┬───────────────────────────────┤
-│ DISCIPLINE / SUBJECT     │ MANDATORY VISUAL STYLE      │ KEY AESTHETIC MARKERS         │
-├──────────────────────────┼─────────────────────────────┼───────────────────────────────┤
-│ • FILIPINO               │ Studio Ghibli-Inspired      │ Hand-painted lush watercolor  │
-│ • ENGLISH                │ Pastoral Anime &            │ background art, warm Hayao    │
-│ • VALUES ED / GMRC       │ High-Detail Storybook       │ Miyazaki lighting, soft       │
-│ • TEXTBOOK FRONT COVERS  │ Illustration Aesthetic      │ expressive linework, nostalgic│
-│                          │                             │ atmospheric skies, tropical   │
-│                          │ (NOT hyper-real stock CGI!) │ flora, cultural warmth.       │
-├──────────────────────────┼─────────────────────────────┼───────────────────────────────┤
-│ • TLE / TVL              │ Real Object Sample /        │ Authentic workshop product    │
-│   (Technical-Vocational) │ Technical Engineering       │ photography, crisp isometric  │
-│                          │ Photography & Blueprints    │ drafting, real hand tools,    │
-│                          │                             │ clean workbench schematics,   │
-│                          │ (STRICT: NO GHIBLI/CARTOON!)│ OHS safety gear in action.    │
-├──────────────────────────┼─────────────────────────────┼───────────────────────────────┤
-│ • ARALING PANLIPUNAN     │ ZERO EXTRA WORK PROTOCOL:   │ Primary Source Still-Life &   │
-│   (Philippine History &  │ NO AI HERO FACES &          │ Tangible Period Settings:     │
-│    Historical Events)    │ NO MANUAL SEARCH HOMEWORK!  │ Historic desks, draft         │
-│                          │                             │ manuscripts, flags, ships,    │
-│                          │ 100% turnkey generatable    │ artifacts. Ready to generate; │
-│                          │ still-life / POV scenes.    │ zero fake faces, zero hunting!│
-├──────────────────────────┼─────────────────────────────┼───────────────────────────────┤
-│ • MAPEH                  │ Museum Cultural Artifact    │ Authentic cultural organology │
-│   (Music, Arts, PE,      │ Documentation & Precise     │ (Kulintang, Okir carvings),   │
-│    Health)               │ Biomechanical Kinesiology   │ museum-grade folk art, real   │
-│                          │                             │ athletic human kinesiology.   │
-├──────────────────────────┼─────────────────────────────┼───────────────────────────────┤
-│ • MATHEMATICS & SCIENCE  │ Clean 2D Vector Educational │ High-contrast 2D schematics,  │
-│   (STEM Disciplines)     │ Technical Diagrams &        │ Cartesian grids, number lines,│
-│                          │ Publication Schematics      │ 2-color integer discs, proofs.│
-│                          │                             │ Pure white/graph background.  │
-│                          │ (STRICT: NO DESK CLUTTER,   │ Zero tables, zero pencils,    │
-│                          │  NO SUNLIGHT/ROOM SCENES!)  │ zero hands, pure schematics!  │
-└──────────────────────────┴─────────────────────────────┴───────────────────────────────┘
-```
+**SUBJECT-CALIBRATED VISUAL STYLE**
+
+| Subject | Style | Notes |
+| :--- | :--- | :--- |
+| **Default lean:** Filipino, English, Values Ed / GMRC, Science, Araling Panlipunan, MAPEH Music and Arts, **all covers** | **Studio Ghibli-inspired warm watercolor** | Soft natural light, gentle linework, Philippine settings, people doing things. Never hyper-real stock CGI. |
+| TLE / TVL | Lean **real** (photorealistic) | Real tools, materials, procedures, OHS safety gear: learners copy what they see. |
+| MAPEH PE and Health | Lean **real** (photorealistic) | Correct body form, first aid, hygiene steps. |
+| Mathematics | Code-drawn figures (file 07) | Only the cover is a prompt (Ghibli). |
+| Araling Panlipunan | Ghibli | Period scenes, places, artifacts; NEVER an AI face of a real hero or historical person. |
+
+Prompts are **35–60 words** in plain words, and they never ask for text in the image, except **Science labeled diagrams** (file 08), which list 3–6 exact labels.
+
+**CONTEXT DECIDES THE STYLE (every image, every subject).** Before writing each prompt, read three things: the text **right before** the image, the image's **caption question**, and what comes **right after** it (the next paragraph, activity, Quick Check, or exercise). Then decide what job the image does there:
+
+| If the nearby text… | Style | Example |
+| :--- | :--- | :--- |
+| asks learners to **look closely at real details**: identify, name, compare, spot the difference, recognize it in real life, follow these steps, check if it is safe, or use the picture as evidence in the next task | **Real** photo style: `realistic educational photograph, natural light, accurate colors and proportions, no text, no logos, no watermark` | "Look at the two rock samples. Which one has visible crystals?" → real photo of granite and basalt |
+| **sets the scene, opens the lesson, tells a story, shows people doing something, or invites wonder or feeling**, and nothing after it needs exact real details | **Studio Ghibli** warm watercolor | "Ana noticed the river stones were all different…" → Ghibli scene of kids at a riverbank |
+
+- **Tie-breaker:** if a wrong or cartoon detail would teach something wrong (a species, a tool grip, a first-aid step, a heritage site), choose **real**.
+- **The subject is only a starting lean:** TLE/TVL and PE/Health images usually come out real; literature and Values images usually come out Ghibli. Still decide each image from its context. The same lesson can have both.
+- **Covers** are always Ghibli. **Never** create a real person's face (heroes, officials, celebrities) in any style.
 
 ---
 
@@ -193,20 +193,20 @@ For Mathematics, Statistics, Physics, Chemistry, and Biology:
 
 ### Parameter Suffix:
 Always end with clean negative prompts and aspect ratio:
-- **Interior Lesson Prompts**: `no text, no logos, no watermarks, no branding --ar 16:9 --v 6.0`
-- **Front Cover Prompts**: `no text, no logos, no watermarks, no branding --ar 8.5:11 --v 6.0`
+- **Interior Lesson Prompts**: `No words, letters, logos, or watermarks. Wide 16:9 landscape image.`
+- **Front Cover Prompts**: `Spell the three title lines exactly as quoted; no other words, no logos, no watermark. Tall portrait image, 8.5 by 11 page.` (the cover is the one image that MUST show text: its 3 quoted title lines).
 
 ---
 
 # PART 4: STRICT IMAGE-PROMPT ALLOCATION QUOTA (1 COVER + 3 PER LESSON)
 
 To prevent visual clutter and maintain high editorial density:
-- **Page 1 (Front Cover)**: Exactly 1 Full-Page Cover AI Prompt Box (3-tier title banner, `--ar 8.5:11`).
-- **Every Lesson**: Exactly 3 Image Prompt Boxes (Subtopic 1, Subtopic 2, Applied / Multimodal Task, `--ar 16:9`).
+- **Page 1 (Front Cover)**: Exactly 1 Full-Page Cover AI Prompt Box (3-tier title banner, tall 8.5 by 11 portrait).
+- **Every Lesson**: Exactly 3 Image Prompt Boxes (Subtopic 1, Subtopic 2, Applied / Multimodal Task; wide 16:9 landscape).
 - **Unit Assessment & Back Matter**: Zero image prompts (focused purely on 1-30 MCQ quiz, Performance Task, Synthesis, and Answer Keys).
 - **Total Quota = 1 + (3 × number of lessons)**: 3-lesson unit = **10 prompts**; 5-lesson quarter = **16 prompts**; 6-lesson quarter = **19 prompts**.
 - **Mathematics exception**: lesson figures are drawn by code per `07_MATHEMATICS_TEXTBOOK_STANDARDS.md` (no AI prompt boxes inside Math lessons); only the cover uses an AI prompt.
-- **Science rules**: per `08_SCIENCE_TEXTBOOK_STANDARDS.md`, the 3 lesson prompts are 1 phenomenon opener scene + 2 labeled scientific illustrations, all with NO text inside the image (a 'Labels to add in Word' list instead); graphs, scales, cycles, food chains, flowcharts, and anything with values are code-drawn figures, never AI.
+- **Science rules**: per `08_SCIENCE_TEXTBOOK_STANDARDS.md`, the 3 lesson prompts are 1 Studio Ghibli phenomenon opener (no text) + 2 accurate labeled diagrams with 3-6 short quoted labels drawn in the image, each box with a 'Shows:' intent line; graphs, scales, cycles, food chains, flowcharts, circuits, and anything with values are code-drawn figures, never AI.
 
 ---
 
@@ -221,8 +221,8 @@ To prevent visual clutter and maintain high editorial density:
 
 > ### 🖼️ Larawan: Tagong Palimbagan ng Panitikan sa Panahon ng Hapon (1943)
 > **Pedagohikal na Layunin:** Magbigay ng madamdaming historikal na konteksto sa lihim na pagsulat ng panitikan sa ilalim ng sensura noong 1943 sa estilong Studio Ghibli.  
-> **AI Prompt (Midjourney v6 / DALL-E 3):**  
-> `A warm, evocative, beautifully hand-painted Studio Ghibli anime aesthetic scene set in 1943 Manila during the Japanese occupation. Inside a dimly lit clandestine wooden attic, two Filipino writers—a young man with rolled-up white cotton sleeves and an elder editor wearing round wire spectacles—quietly inspect newly inked mimeograph sheets of wartime Tagalog short stories. On the heavy weathered acacia wood table rests a vintage hand-cranked mimeograph machine, dark ink bottles, stacks of warm brown paper, and a brass kerosene lantern casting a soft golden glow over their determined faces. In the background, wooden shelves stacked with hidden manuscripts, and a window opening to twilight rooftop silhouettes under a deep indigo sky. Lush hand-painted watercolor background art, Hayao Miyazaki pastoral warmth, gentle line art, rich nostalgic atmosphere, no text, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
+> **AI Prompt (any generator: Gemini, ChatGPT, Midjourney):**  
+> `A warm, evocative, beautifully hand-painted Studio Ghibli anime aesthetic scene set in 1943 Manila during the Japanese occupation. Inside a dimly lit clandestine wooden attic, two Filipino writers—a young man with rolled-up white cotton sleeves and an elder editor wearing round wire spectacles—quietly inspect newly inked mimeograph sheets of wartime Tagalog short stories. On the heavy weathered acacia wood table rests a vintage hand-cranked mimeograph machine, dark ink bottles, stacks of warm brown paper, and a brass kerosene lantern casting a soft golden glow over their determined faces. In the background, wooden shelves stacked with hidden manuscripts, and a window opening to twilight rooftop silhouettes under a deep indigo sky. Lush hand-painted watercolor background art, Hayao Miyazaki pastoral warmth, gentle line art, rich nostalgic atmosphere, no text, no logos, no watermark, no branding. Wide 16:9 landscape image.`  
 >  
 > *Paunawa sa Guro at Mag-aaral: Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures).*
 
@@ -233,8 +233,8 @@ To prevent visual clutter and maintain high editorial density:
 
 > ### 🖼️ Larawan: Pagbigkas ng Katutubong Tula sa Balkonahe ng Bahay Kubo
 > **Pedagohikal na Layunin:** Ipakita ang tradisyong oral at kultural na init ng pagpapasa ng panitikan sa nakababatang henerasyon.  
-> **AI Prompt (Midjourney v6 / DALL-E 3):**  
-> `A breathtaking Studio Ghibli inspired anime illustration of a peaceful rural afternoon in Bulacan, Philippines. On the polished bamboo-slatted balcony of a traditional bahay kubo, a gentle elderly Filipina grandmother in a floral vintage kimona recites traditional 7-syllable Tanaga verses to two attentive teenage students (a 13-year-old Filipino boy and girl in neat school uniforms). On a low wooden dulang table between them sit a clay tea pot with steaming cups and an open handwritten journal. Golden tropical sunlight filters through sliding capiz-shell window panels, casting intricate diamond light patterns across the floor. In the lush background, wind gently sways emerald banana groves, tall mango trees, and billowy painted cumulus clouds in an azure summer sky. Masterful watercolor anime scenery, Makoto Shinkai and Hayao Miyazaki aesthetic, warm heartfelt emotions, fine hand-drawn details, no text, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
+> **AI Prompt (any generator: Gemini, ChatGPT, Midjourney):**  
+> `A breathtaking Studio Ghibli inspired anime illustration of a peaceful rural afternoon in Bulacan, Philippines. On the polished bamboo-slatted balcony of a traditional bahay kubo, a gentle elderly Filipina grandmother in a floral vintage kimona recites traditional 7-syllable Tanaga verses to two attentive teenage students (a 13-year-old Filipino boy and girl in neat school uniforms). On a low wooden dulang table between them sit a clay tea pot with steaming cups and an open handwritten journal. Golden tropical sunlight filters through sliding capiz-shell window panels, casting intricate diamond light patterns across the floor. In the lush background, wind gently sways emerald banana groves, tall mango trees, and billowy painted cumulus clouds in an azure summer sky. Masterful watercolor anime scenery, Makoto Shinkai and Hayao Miyazaki aesthetic, warm heartfelt emotions, fine hand-drawn details, no text, no logos, no watermark, no branding. Wide 16:9 landscape image.`  
 >  
 > *Paunawa sa Guro at Mag-aaral: Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures).*
 
@@ -245,8 +245,8 @@ To prevent visual clutter and maintain high editorial density:
 
 > ### 🖼️ Larawan: Taos-Pusong Pagkakasundo ng Magkaibigan sa Ilalim ng Puno ng Acacia
 > **Pedagohikal na Layunin:** Magbigay ng positibo, makatao, at emosyonal na representasyon ng pagpapatawad at pagtutulungan ng mga kabataan.  
-> **AI Prompt (Midjourney v6 / DALL-E 3):**  
-> `A heartwarming, emotionally resonant Studio Ghibli style anime illustration capturing sincere reconciliation between two 13-year-old Filipino Grade 7 students. Seated side-by-side on a rustic wooden bench under a sprawling, canopy-rich acacia tree in a quiet school courtyard, one boy smiles gently while placing a reassuring hand on his friend's shoulder, who looks up with humble relief. Between them, an open sketchbook with colorful drawings rests on their knees. Dappled golden morning sunlight dances through leaves, illuminating floating pollen and warm gentle breezes. Surrounding the courtyard are vibrant potted tropical flowers, blooming yellow kalachuchi, and retro school hallways. Soft hand-painted watercolor textures, heartfelt anime aesthetic, warm nostalgic color palette, no text, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
+> **AI Prompt (any generator: Gemini, ChatGPT, Midjourney):**  
+> `A heartwarming, emotionally resonant Studio Ghibli style anime illustration capturing sincere reconciliation between two 13-year-old Filipino Grade 7 students. Seated side-by-side on a rustic wooden bench under a sprawling, canopy-rich acacia tree in a quiet school courtyard, one boy smiles gently while placing a reassuring hand on his friend's shoulder, who looks up with humble relief. Between them, an open sketchbook with colorful drawings rests on their knees. Dappled golden morning sunlight dances through leaves, illuminating floating pollen and warm gentle breezes. Surrounding the courtyard are vibrant potted tropical flowers, blooming yellow kalachuchi, and retro school hallways. Soft hand-painted watercolor textures, heartfelt anime aesthetic, warm nostalgic color palette, no text, no logos, no watermark, no branding. Wide 16:9 landscape image.`  
 >  
 > *Paunawa sa Guro at Mag-aaral: Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures).*
 
@@ -257,8 +257,8 @@ To prevent visual clutter and maintain high editorial density:
 
 > ### 🖼️ Figure: Actual Wooden Mortise and Tenon Joint Sample & Hand Tools
 > **Pedagogical Purpose:** Ipakita ang aktuwal na estruktura at precision craftsmanship ng mortise and tenon joint para sa gawaing-kahoy.  
-> **AI Prompt (Midjourney v6 / DALL-E 3):**  
-> `A crisp, professional real-object product sample photograph of a finely crafted wooden mortise and tenon joint on a heavy carpenter's workbench. The joint is shown partially disassembled, revealing the precise rectangular tenon tongue fitting perfectly into the clean chiseled mortise hole in solid Narra hardwood with rich natural wood grain. Lying neatly beside the wooden joint are real authentic carpentry tools: a vintage steel marking gauge, an oiled hand-chisel with polished wooden handle, a brass sliding caliper, and fresh curly wood shavings scattered on the scarred wooden tabletop. Bright natural daylight from an overhead workshop window, macro commercial tool photography, sharp focus across wood fibers, authentic technical craftsmanship, no text, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
+> **AI Prompt (any generator: Gemini, ChatGPT, Midjourney):**  
+> `A crisp, professional real-object product sample photograph of a finely crafted wooden mortise and tenon joint on a heavy carpenter's workbench. The joint is shown partially disassembled, revealing the precise rectangular tenon tongue fitting perfectly into the clean chiseled mortise hole in solid Narra hardwood with rich natural wood grain. Lying neatly beside the wooden joint are real authentic carpentry tools: a vintage steel marking gauge, an oiled hand-chisel with polished wooden handle, a brass sliding caliper, and fresh curly wood shavings scattered on the scarred wooden tabletop. Bright natural daylight from an overhead workshop window, macro commercial tool photography, sharp focus across wood fibers, authentic technical craftsmanship, no text, no logos, no watermark, no branding. Wide 16:9 landscape image.`  
 >  
 > *Paunawa sa Guro at Mag-aaral: Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures).*
 
@@ -279,8 +279,8 @@ To prevent visual clutter and maintain high editorial density:
 
 > ### 🖼️ Larawan: Pagsulat ng Noli Me Tangere: Ang Mesa ng Manunulat sa Berlin (1887)
 > **Pedagohikal na Layunin:** Ilarawan ang kongkretong atmospera at mga kagamitan sa pagsulat ng Noli Me Tangere sa Berlin nang hindi gumagawa ng pekeng mukha ng bayani.  
-> **AI Prompt (Midjourney v6 / DALL-E 3):**  
-> `An authentic 1887 historical still life and point-of-view scene inside a cold, modest attic room in Berlin, Germany. Focus on a heavy oak writing desk: open handwritten draft manuscripts of "Noli Me Tangere" with neat Spanish cursive script in sepia ink, a dark glass ink bottle, a slender steel dip pen resting on an inkstand, and vintage round wire-rimmed reading spectacles lying beside an unfolded letter addressed to Ferdinand Blumentritt. On the corner of the table sits an antique brass kerosene lamp casting a warm amber pool of light over the paper, alongside a small, half-eaten loaf of dark rye bread. In the background, tall wooden windowpanes with frost patterns overlooking dim European cobblestone streets under a snowy twilight sky. Classical museum oil painting realism, rich canvas textures, dignified historical atmosphere, NO human faces, no text, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
+> **AI Prompt (any generator: Gemini, ChatGPT, Midjourney):**  
+> `An authentic 1887 historical still life and point-of-view scene inside a cold, modest attic room in Berlin, Germany. Focus on a heavy oak writing desk: open handwritten draft manuscripts of "Noli Me Tangere" with neat Spanish cursive script in sepia ink, a dark glass ink bottle, a slender steel dip pen resting on an inkstand, and vintage round wire-rimmed reading spectacles lying beside an unfolded letter addressed to Ferdinand Blumentritt. On the corner of the table sits an antique brass kerosene lamp casting a warm amber pool of light over the paper, alongside a small, half-eaten loaf of dark rye bread. In the background, tall wooden windowpanes with frost patterns overlooking dim European cobblestone streets under a snowy twilight sky. Classical museum oil painting realism, rich canvas textures, dignified historical atmosphere, NO human faces, no text, no logos, no watermark, no branding. Wide 16:9 landscape image.`  
 >  
 > *Paunawa sa Guro at Mag-aaral: Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures).*
 
@@ -291,8 +291,8 @@ To prevent visual clutter and maintain high editorial density:
 
 > ### 🖼️ Figure: Integer Addition on a Number Line Model (-4 + 7 = +3)
 > **Pedagogical Purpose:** Ipakita ang direksyonal na paggalaw ng mga integer gamit ang horizontal number line sa malinaw na 2D vector schematic.  
-> **AI Prompt (Midjourney v6 / DALL-E 3):**  
-> `A clean, publication-grade 2D vector technical textbook diagram illustrating integer addition on a horizontal number line. Set centered on a pure white background with subtle light gray grid lines. A bold horizontal coordinate axis with sharp arrowheads at both ends and evenly spaced integer tick marks clearly numbered from -8 to +8 in crisp modern sans-serif typography. Zero (0) is marked with a distinct solid circular origin node. A smooth curved directional vector arrow in bold burnt-orange (#D9534F) arches from 0 to -4 (labeled "-4"). Above it, a second smooth directional vector arrow in vibrant cobalt blue (#1B365D) arches 7 units right from -4 and lands cleanly on +3 (labeled "+7"). A bold vertical indicator points to the final endpoint at +3. Flat 2D vector graphics, high-contrast educational schematic, clean crisp line art, publication vector illustration style, perfectly straight orthographic projection. STRICT BANS: NO wooden desks, NO pencils, NO rulers, NO hands, NO people, NO room backgrounds, NO 3D perspective, no text gibberish, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
+> **AI Prompt (any generator: Gemini, ChatGPT, Midjourney):**  
+> `A clean, publication-grade 2D vector technical textbook diagram illustrating integer addition on a horizontal number line. Set centered on a pure white background with subtle light gray grid lines. A bold horizontal coordinate axis with sharp arrowheads at both ends and evenly spaced integer tick marks clearly numbered from -8 to +8 in crisp modern sans-serif typography. Zero (0) is marked with a distinct solid circular origin node. A smooth curved directional vector arrow in bold burnt-orange (#D9534F) arches from 0 to -4 (labeled "-4"). Above it, a second smooth directional vector arrow in vibrant cobalt blue (#1B365D) arches 7 units right from -4 and lands cleanly on +3 (labeled "+7"). A bold vertical indicator points to the final endpoint at +3. Flat 2D vector graphics, high-contrast educational schematic, clean crisp line art, publication vector illustration style, perfectly straight orthographic projection. STRICT BANS: NO wooden desks, NO pencils, NO rulers, NO hands, NO people, NO room backgrounds, NO 3D perspective, no text gibberish, no logos, no watermark, no branding. Wide 16:9 landscape image.`  
 >  
 > *Paunawa sa Guro at Mag-aaral: Placeholder lamang. Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures).*
 
@@ -303,8 +303,8 @@ To prevent visual clutter and maintain high editorial density:
 
 > ### 🖼️ Figure: Zero-Pair Cancellation Model for Integers (-3 + 5 = +2)
 > **Pedagogical Purpose:** Ilarawan ang kongkretong konsepto ng zero pairs (neutral cancellation) gamit ang malinis na 2D vector discrete counter model.  
-> **AI Prompt (Midjourney v6 / DALL-E 3):**  
-> `A crisp, publication-grade 2D vector mathematics textbook diagram illustrating the zero-pair model of integer addition. Set against a pure flat white background. In the upper row, three solid circular negative counters in flat coral-red (#EF4444), each with a crisp white minus sign (-) centered inside. In the lower row, five solid circular positive counters in flat cyan-blue (#0284C7), each with a crisp white plus sign (+) centered inside, perfectly aligned under the counters above. The first three vertical columns of (+)/(-) pairs are neatly enclosed inside vertical dashed gray rounded capsules labeled "Zero Pair = 0" with small diagonal cancel slash lines. To the right, the two remaining positive blue counters (+2) are grouped inside a solid rounded highlight box labeled "Net Result = +2". Flat 2D vector graphic design, clean geometric symmetry, high-contrast textbook schematic, straight-on orthographic view. STRICT BANS: NO wooden tables, NO pencils, NO paper textures, NO hands, NO room lighting, NO 3D shadows, no text gibberish, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
+> **AI Prompt (any generator: Gemini, ChatGPT, Midjourney):**  
+> `A crisp, publication-grade 2D vector mathematics textbook diagram illustrating the zero-pair model of integer addition. Set against a pure flat white background. In the upper row, three solid circular negative counters in flat coral-red (#EF4444), each with a crisp white minus sign (-) centered inside. In the lower row, five solid circular positive counters in flat cyan-blue (#0284C7), each with a crisp white plus sign (+) centered inside, perfectly aligned under the counters above. The first three vertical columns of (+)/(-) pairs are neatly enclosed inside vertical dashed gray rounded capsules labeled "Zero Pair = 0" with small diagonal cancel slash lines. To the right, the two remaining positive blue counters (+2) are grouped inside a solid rounded highlight box labeled "Net Result = +2". Flat 2D vector graphic design, clean geometric symmetry, high-contrast textbook schematic, straight-on orthographic view. STRICT BANS: NO wooden tables, NO pencils, NO paper textures, NO hands, NO room lighting, NO 3D shadows, no text gibberish, no logos, no watermark, no branding. Wide 16:9 landscape image.`  
 >  
 > *Paunawa sa Guro at Mag-aaral: Placeholder lamang. Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures).*
 
@@ -315,8 +315,8 @@ To prevent visual clutter and maintain high editorial density:
 
 > ### 🖼️ Figure: Laboratory Filtration Apparatus & Separation Setup
 > **Pedagogical Purpose:** Ipakita ang tamang pagkakaayos ng mga kagamitang panlaboratoryo para sa pagsasala (filtration) ng heterogeneous mixture sa kaakit-akit na estilong Ghibli.  
-> **AI Prompt (Midjourney v6 / DALL-E 3):**  
-> `A charming, meticulously detailed Studio Ghibli anime style watercolor textbook scientific illustration of a school laboratory filtration workstation. On a sturdy dark wooden lab bench, a clear glass conical funnel lined with folded white fluted filter paper sits atop an Erlenmeyer flask, capturing clear dripping liquid filtrate. Standing nearby is a glass beaker containing a cloudy indigo precipitate mixture, a glass stirring rod, an iron stand with an adjustable ring clamp, and an open student laboratory notebook showing neat hand-drawn pencil diagrams. Morning sunlight streams through tall laboratory windows illuminating tiny dust motes in the air, with potted green ferns on the windowsill. Warm hand-painted watercolor scenery, Hayao Miyazaki scientific warmth, clean outlines, no text, no logos, no watermark, no branding --ar 16:9 --v 6.0`  
+> **AI Prompt (any generator: Gemini, ChatGPT, Midjourney):**  
+> `A charming, meticulously detailed Studio Ghibli anime style watercolor textbook scientific illustration of a school laboratory filtration workstation. On a sturdy dark wooden lab bench, a clear glass conical funnel lined with folded white fluted filter paper sits atop an Erlenmeyer flask, capturing clear dripping liquid filtrate. Standing nearby is a glass beaker containing a cloudy indigo precipitate mixture, a glass stirring rod, an iron stand with an adjustable ring clamp, and an open student laboratory notebook showing neat hand-drawn pencil diagrams. Morning sunlight streams through tall laboratory windows illuminating tiny dust motes in the air, with potted green ferns on the windowsill. Warm hand-painted watercolor scenery, Hayao Miyazaki scientific warmth, clean outlines, no text, no logos, no watermark, no branding. Wide 16:9 landscape image.`  
 >  
 > *Paunawa sa Guro at Mag-aaral: Placeholder lamang. Palitan ang kahong ito ng nabuong larawan sa Microsoft Word (Insert > Pictures).*
 
@@ -328,13 +328,9 @@ Before outputting ANY image prompt frame in the textbook, verify that it passes 
 
 - [ ] **Check 1: Clean Production Title Only (BAN "Visual Prompt 1")**: Does it use ONLY `🖼️ Larawan: [Title]` or `🖼️ Figure: [Title]`? Is `"Visual Prompt 1"` or any draft number strictly banned?
 - [ ] **Check 2: 100% Inside Dedicated Container Box**: Are the title, purpose, prompt, and note ALL completely enclosed inside the container box (`> ...` in Markdown or 1-cell shaded table in DOCX) with NO loose text outside?
-- [ ] **Check 3: Style Calibration**: 
-      - Is it **English, Filipino, Values Ed / GMRC, or Book Cover**? -> Must be **Studio Ghibli-inspired warm pastoral anime watercolor illustration**!
-      - Is it **Science or Mathematics (STEM)**? -> Must be **PROBLEM-RELATED FIGURES & DIAGRAMS** (number lines, zero-pair models, coordinate planes, balance scales, lab glassware apparatus) in clean **Studio Ghibli hand-drawn textbook watercolor diagram style**! Strictly ban generic classroom stock photos!
-      - Is it **TLE / TVL**? -> Must be **real object sample photography / engineering schematics**!
-      - Is it **History / AP (real heroes/events)**? -> **STRICT BAN on AI-generating hero faces!** Use Archival Photo Frame (NHCP) OR Primary Source Still-Life / POV (desks, manuscripts, artifacts; NO fake hero faces)!
+- [ ] **Check 3: Style from Context**: Did you read the text before the image, its caption question, and what comes after? Real details needed there (identify, compare, copy steps, safety, evidence) -> **real** style; scene, story, opener, or feeling -> **Studio Ghibli**. Covers always Ghibli; never a real person's face.
 - [ ] **Check 4: Zero Meta-Words**: Does it completely avoid words like *"infographic"*, *"illustrating the concept"*, *"showing textual analysis"*, or *"central concept"*?
 - [ ] **Check 5: Physical People & Action / Diagram Elements**: Are the subjects physically described with specific postures, hands, or exact diagram markers/arrows?
 - [ ] **Check 6: Concrete Physical Setting**: Is the room, desk, background, or paper texture explicitly named?
 - [ ] **Check 7: 3 to 4 Tangible Artifacts/Props**: Are there real physical objects mentioned (mimeograph, dulang, number line tick marks, counters, beaker, funnel)?
-- [ ] **Check 8: Strict Zero Branding & Proper Parameters**: Are all brand acronyms (`DepEd`, `MATATAG`) completely omitted, and does it end with `--ar 16:9 --v 6.0` (or `--ar 8.5:11` for covers)?
+- [ ] **Check 8: Strict Zero Branding & Proper Parameters**: Are all brand acronyms (`DepEd`, `MATATAG`) completely omitted, is it written in plain sentences with NO tool flags (`--ar`, `--v`), and does it end with `Wide 16:9 landscape image.` (covers: `Tall portrait image, 8.5 by 11 page.`)?

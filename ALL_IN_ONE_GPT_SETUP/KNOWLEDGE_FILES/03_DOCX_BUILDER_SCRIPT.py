@@ -17,6 +17,7 @@ import sys
 import re
 import docx
 from docx import Document
+from docx.text.paragraph import Paragraph
 from docx.shared import Inches, Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
@@ -518,6 +519,34 @@ def render_callout_box(doc, lines):
         if disp:
             add_display_math(c, disp[0])
             skip_to = disp[1]
+            continue
+        # tables inside a callout (formula-card symbol tables, lab variable and data tables)
+        if clean_l.startswith('|') and clean_l.endswith('|'):
+            j = idx
+            block = []
+            while j < len(lines) and lines[j].lstrip('> ').strip().startswith('|') and lines[j].lstrip('> ').strip().endswith('|'):
+                block.append(lines[j].lstrip('> ').strip())
+                j += 1
+            render_markdown_table(c, block)
+            skip_to = j
+            continue
+        fence = re.match(r'^```\s*(figure|steps|exercises)\b(.*)$', clean_l)
+        if fence:
+            j = idx + 1
+            block = []
+            while j < len(lines) and not lines[j].lstrip('> ').strip().startswith('```'):
+                block.append(lines[j].lstrip('> '))
+                j += 1
+            kind, args = fence.group(1), fence.group(2)
+            if kind == 'figure':
+                add_figure(c, block)
+            elif kind == 'steps':
+                add_steps(c, block)
+            else:
+                cols = re.search(r'cols\s*=\s*(\d+)', args)
+                start = re.search(r'start\s*=\s*(\d+)', args)
+                add_exercises(c, block, cols=int(cols.group(1)) if cols else 2, start=int(start.group(1)) if start else 1)
+            skip_to = j + 1
             continue
         p = c.paragraphs[0] if idx == 0 and len(c.paragraphs) == 1 and not c.paragraphs[0].text else c.add_paragraph()
         format_paragraph(p, space_before=1, space_after=2, line_spacing=1.15)
@@ -1504,6 +1533,15 @@ def append_markdown_to_doc(doc, markdown_text):
             h_text = stripped[2:].strip()
             if re.match(r'^PAGE \d+ -', h_text, re.IGNORECASE):
                 pass
+            elif hasattr(doc, 'sections') and re.search(r'TABLE OF CONTENTS|TALAAN NG NILALAMAN', h_text, re.IGNORECASE):
+                # The TOC typed in Turn 1 cannot know real page numbers; it is replaced at compile time
+                # by a Word TOC built from the banners (see _build_toc).
+                add_heading_1(doc, h_text)
+                _MATH_STATE['toc_p'] = doc.add_paragraph()._p
+                i += 1
+                while i < total and '[PAGE BREAK]' not in lines[i] and not lines[i].strip().startswith('# '):
+                    i += 1
+                continue
             else:
                 lesson = re.search(r'LESSON\s+(\d+(?:\.\d+)*)', h_text, re.IGNORECASE)
                 if lesson:
@@ -1590,6 +1628,69 @@ def initialize_document(subject="Mathematics", grade="7", quarter="Quarter 3"):
 
     return doc
 
+def _build_toc(doc):
+    """Replaces the typed TOC with a real Word TOC field listing every H1 banner after the TOC (lessons,
+    assessment, synthesis, answer keys). Page numbers are pre-filled from the page estimator, and the file
+    asks Word to refresh them on opening, so Word shows the exact pages."""
+    import tempfile
+    from docx.enum.style import WD_STYLE_TYPE
+    from docx.enum.text import WD_TAB_ALIGNMENT, WD_TAB_LEADER
+    toc_p = _MATH_STATE['toc_p']
+    # banners before the TOC (cover title, preface, the TOC banner itself) stay out of the TOC
+    for el in doc.element.body.iterchildren():
+        if el is toc_p:
+            break
+        for o in list(el.iter(qn('w:outlineLvl'))):
+            o.getparent().remove(o)
+    path = os.path.join(tempfile.mkdtemp(), 'toc_estimate.docx')
+    doc.save(path)
+    headings = []
+    estimate_docx_pages(path, headings=headings)
+
+    try:
+        style = doc.styles['TOC 1']
+    except KeyError:
+        style = doc.styles.add_style('TOC 1', WD_STYLE_TYPE.PARAGRAPH)
+    style.font.name = 'Cambria'
+    style.font.size = Pt(10.5)
+    style.paragraph_format.space_after = Pt(4)
+    style.paragraph_format.tab_stops.add_tab_stop(Inches(6.85), WD_TAB_ALIGNMENT.RIGHT, WD_TAB_LEADER.DOTS)
+
+    def fld(kind):
+        r = OxmlElement('w:r')
+        el = OxmlElement('w:fldChar')
+        el.set(qn('w:fldCharType'), kind)
+        r.append(el)
+        return r
+
+    begin = Paragraph(toc_p, doc._body)
+    begin._p.append(fld('begin'))
+    instr = OxmlElement('w:r')
+    t = OxmlElement('w:instrText')
+    t.set(qn('xml:space'), 'preserve')
+    t.text = ' TOC \\o "1-1" \\h \\z \\u '
+    instr.append(t)
+    begin._p.append(instr)
+    begin._p.append(fld('separate'))
+    last = toc_p
+    for text, page in headings:
+        p = OxmlElement('w:p')
+        last.addnext(p)
+        last = p
+        para = Paragraph(p, doc._body)
+        para.style = style
+        run = para.add_run(f"{text}\t{page}")
+        run.font.name = 'Cambria'
+        run.font.size = Pt(10.5)
+    end = OxmlElement('w:p')
+    end.append(fld('end'))
+    last.addnext(end)
+    settings = doc.settings.element
+    if settings.find(qn('w:updateFields')) is None:
+        upd = OxmlElement('w:updateFields')
+        upd.set(qn('w:val'), 'true')
+        settings.append(upd)
+
 def compile_markdown_to_docx(source_md_path_or_text, output_docx_path, subject="Mathematics", grade="7", quarter="Quarter 3"):
     """
     Main entry point: Compiles any markdown textbook file into a publication-grade DOCX.
@@ -1602,8 +1703,10 @@ def compile_markdown_to_docx(source_md_path_or_text, output_docx_path, subject="
         raw_text = source_md_path_or_text
 
     doc = initialize_document(subject=subject, grade=grade, quarter=quarter)
-    _MATH_STATE.update(lesson=None, fig=0)
+    _MATH_STATE.update(lesson=None, fig=0, toc_p=None)
     append_markdown_to_doc(doc, raw_text)
+    if _MATH_STATE.get('toc_p') is not None:
+        _build_toc(doc)
     doc.save(output_docx_path)
     print(f"Successfully compiled {output_docx_path} ({len(doc.paragraphs)} paragraphs, {len(doc.tables)} tables)")
     return output_docx_path
@@ -1725,9 +1828,10 @@ def _table_row_heights(tbl, width_pt):
         heights.append(max(hs or [12.0]) + 1.0)
     return heights
 
-def estimate_docx_pages(docx_path, start_text=None, stop_texts=()):
+def estimate_docx_pages(docx_path, start_text=None, stop_texts=(), headings=None):
     """Estimated Word page count of a compiled DOCX. With start_text/stop_texts, counts only the pages
-    from the banner containing start_text, skipping sections whose banner contains any stop_texts."""
+    from the banner containing start_text, skipping sections whose banner contains any stop_texts.
+    If a list is passed as headings, it receives (banner text, estimated page) for each H1 banner."""
     d = Document(docx_path)
     sec = d.sections[0]
     usable = (sec.page_height - sec.top_margin - sec.bottom_margin) / 12700.0
@@ -1761,6 +1865,9 @@ def estimate_docx_pages(docx_path, start_text=None, stop_texts=()):
                     counting = True
             for h in _table_row_heights(el, width):
                 place(h)
+            if headings is not None and el.find(f'.//{_W}outlineLvl[@{_W}val="0"]') is not None:
+                text = ''.join(t.text or '' for t in el.iter(_W + 't')).strip()
+                headings.append((text, int(round(pages * PAGE_CALIBRATION)) + 1))
         elif tag == 'p':
             if el.find(f'.//{_W}br[@{_W}type="page"]') is not None or el.find(f'{_W}pPr/{_W}pageBreakBefore') is not None:
                 pages += 1
@@ -1791,6 +1898,11 @@ def append_lesson(manuscript_path, lesson_markdown, total_lessons):
     manuscript ONLY if it fits the remaining budget (75 counted pages minus the back-matter allowance,
     shared by the lessons still to come). If it is rejected, rewrite the lesson shorter BEFORE showing it,
     then call append_lesson again. Returns True when appended."""
+    if not re.search(r'FAITH CONNECTION|UGNAYAN SA PANANAMPALATAYA', lesson_markdown, re.IGNORECASE):
+        print("FAITH CONNECTION: REJECTED, NOTHING APPENDED. Add the boxed FAITH CONNECTION (Filipino: UGNAYAN SA "
+              "PANANAMPALATAYA) after the Lesson Summary Box, tied to this lesson's concept (file 01, Section 7A), "
+              "then call append_lesson again.")
+        return False
     existing = open(manuscript_path, encoding='utf-8').read() if os.path.exists(manuscript_path) else ''
     done = len(re.findall(r'^#\s+LESSON\b', existing, re.MULTILINE | re.IGNORECASE))
     used = _estimate_markdown_pages(_lessons_part(existing)) if done else 0.0
