@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DepEd MATATAG Setup & Knowledge Files Explained</title>
+<style>
+
+  @page {
+    size: letter;
+    margin: 16mm 16mm 16mm 16mm;
+  }
+  body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+    color: #24292f;
+    line-height: 1.5;
+    font-size: 10pt;
+    margin: 0;
+    padding: 0;
+  }
+  h1 {
+    color: #ffffff;
+    background-color: #1B365D;
+    padding: 12px 16px;
+    font-size: 16pt;
+    font-weight: 700;
+    border-radius: 4px;
+    margin-top: 0;
+    margin-bottom: 14px;
+    letter-spacing: -0.2px;
+  }
+  h2 {
+    color: #1B365D;
+    border-bottom: 2px solid #1B365D;
+    padding-bottom: 5px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 12.5pt;
+    font-weight: 600;
+    page-break-after: avoid;
+  }
+  h3 {
+    color: #0f2d59;
+    background-color: #F0F4F8;
+    border-left: 4px solid #1B365D;
+    padding: 5px 10px;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    font-size: 10.5pt;
+    font-weight: 600;
+    page-break-after: avoid;
+  }
+  p, ul, ol {
+    margin-top: 4px;
+    margin-bottom: 8px;
+  }
+  ul {
+    padding-left: 20px;
+  }
+  li {
+    margin-bottom: 4px;
+  }
+  li strong {
+    color: #1B365D;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid #d0d7de;
+    margin: 16px 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+  th, td {
+    border: 1px solid #d0d7de;
+    padding: 7px 9px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background-color: #1B365D;
+    color: #ffffff;
+    font-weight: 600;
+  }
+  tr:nth-child(even) {
+    background-color: #F8FAFC;
+  }
+  code {
+    background-color: #f6f8fa;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 9pt;
+    font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    color: #cf222e;
+  }
+
+</style>
+</head>
+<body>
+<h1>Simple Guide: DepEd MATATAG All-in-One GPT Setup &amp; Knowledge Files</h1>
+<p>This document provides a clear, specific breakdown in basic English of what the instructions and each knowledge file contain, and what their exact purpose is.</p>
+<hr />
+<h2>🎯 Big Picture: What is this folder for?</h2>
+<p>This folder contains everything needed to set up a single <strong>Custom ChatGPT</strong> that generates publication-grade, 45-to-75 page quarterly textbooks for the Philippine <strong>DepEd MATATAG Curriculum</strong> (Grades 1 to 10) across all subjects, and compiles them directly into formatted Microsoft Word (<code>.docx</code>) files.</p>
+<hr />
+<h2>📜 1. The Main Instruction File (<code>INSTRUCTIONS_FOR_CHATGPT.txt</code>)</h2>
+<p>This is the master prompt pasted into ChatGPT's <strong>Instructions</strong> box. It acts as the "brain" and rulebook.</p>
+<h3>Specifically What It Contains:</h3>
+<ol>
+<li><strong>The 10 Non-Negotiable Core Rules:</strong></li>
+<li><strong>1. Publication Prose:</strong> Written in 100% formal academic language with zero rough draft tags (banning tags like "Visual Prompt").</li>
+<li><strong>2. Verbatim Law (No Summarizing):</strong> Transfer 100% of all generated chat text word-for-word into the Word document. Never condense or omit items.</li>
+<li><strong>3. 45–75 Counted Pages Target:</strong> <ul>
+<li>Only counts from Lesson 1 to Answer Keys (Cover, Preface, TOC, Synthesis, and Glossary are uncounted).</li>
+<li>Word budget: 18,000–24,000 words total (4,000–4,500 words/lesson for 3-lesson units; 2,200–2,600 words/lesson for 5–7 lesson STEM quarters).</li>
+<li>Typography is locked: 10.5 pt font, 1.15 line spacing, 0.8-inch margins (never shrink fonts to fit).</li>
+</ul>
+</li>
+<li><strong>4. Continuous Flow:</strong> Natural flow without internal page breaks. Breaks are only allowed between major structural milestones.</li>
+<li><strong>5. Zero Branding:</strong> No "DepEd", "MATATAG", or commercial logos in prompts, headers, or footers.</li>
+<li><strong>6. Prompts Only (No Fake AI Images):</strong> Output text prompt boxes for the author to generate later. Exactly 3 image boxes per lesson + 1 cover prompt.</li>
+<li><strong>7. Blue Header Banners:</strong> Solid Navy (<code>#1B365D</code>) banners for H1 headers, soft blue (<code>#EBF3FA</code>) with navy left borders for H2 subtopics.</li>
+<li><strong>8. Structured Table Keys:</strong> All quiz answers must be in clean table grids with balanced A–D answers (~25% each; max 2 consecutive same letters).</li>
+<li><strong>9. Factual Integrity &amp; DOK:</strong> Zero fake dates, fake laws, or fake science. Matches cognitive depth to Grade Level (DOK 1–4).</li>
+<li>
+<p><strong>10. STEM Standards:</strong> Real math equations in <code>$…$</code> or <code>$$…$$</code>, formula definition cards, and 5-step worked examples.</p>
+</li>
+<li>
+<p><strong>The Turn-by-Turn Delivery Protocol:</strong></p>
+</li>
+<li><strong>Turn 0 (Handshake):</strong> ChatGPT asks for the Subject, Grade, Quarter, and Lesson Range.</li>
+<li><strong>Turn 1 (Front Matter):</strong> Generates Page 1 Cover, Page 2 Preface (350+ words), and Page 3 Table of Contents.</li>
+<li><strong>Lesson Turns:</strong> Generates <strong>one lesson per turn</strong> following a strict 10-section blueprint.</li>
+<li><strong>Back Matter Turn:</strong> Generates the 50-point unit assessment, culminating performance task (4x4 rubric), unit synthesis, glossary, structured answer tables, and QA stamp.</li>
+<li>
+<p><strong>Compilation Turn:</strong> Runs the Python compiler (<code>docx_builder.py</code>) to produce the final <code>.docx</code> book.</p>
+</li>
+<li>
+<p><strong>The 10-Section Lesson Blueprint:</strong></p>
+</li>
+<li><strong>Sec 1:</strong> H1 Banner, Competency Codes, 3 Essential Questions, Boxed YouTube Module, and 150–250 word Background.</li>
+<li><strong>Sec 2:</strong> Subtopic 1 (Theory), Image Box 1, Concept Matrix (3 cols), Quick Check (3 items).</li>
+<li><strong>Sec 3:</strong> Subtopic 2 (Proofs/Mechanisms), Image Box 2, Comparative Matrix, Quick Check (3 items).</li>
+<li><strong>Sec 4:</strong> Core Anchor (Literary text for Filipino/Values OR Formula card &amp; two 5-step examples for STEM).</li>
+<li><strong>Sec 5:</strong> Inquiry &amp; Analysis (Socratic Seminar OR Math Reasoning &amp; Misconceptions).</li>
+<li><strong>Sec 6:</strong> Subtopic 3 (Applied Mastery), Image Box 3, Procedural Matrix, Quick Check (3 items).</li>
+<li><strong>Sec 7:</strong> Guided Practice (Task X.1 drill &amp; Task X.2 matrix).</li>
+<li><strong>Sec 8:</strong> Contextual Application (Practical real-world task).</li>
+<li><strong>Sec 9:</strong> 3-2-1 Exit Ticket, Lesson Summary Box, and Boxed "Faith Connection" reflection.</li>
+<li><strong>Sec 10:</strong> Formative Assessment (15 items: 10 Multiple-Choice + 5 Open-Ended/Calculation items).</li>
+</ol>
+<hr />
+<h2>📚 2. The Knowledge Files (Inside <code>KNOWLEDGE_FILES/</code>)</h2>
+<p>These 9 files are uploaded to ChatGPT's <strong>Knowledge</strong> base to provide detailed standards for every part of the book:</p>
+<h3>1. <code>00_REFERENCE_TEXTBOOK_BENCHMARK.docx</code></h3>
+<ul>
+<li><strong>Purpose:</strong> The visual model and gold-standard Word file.</li>
+<li><strong>Specifically Contains:</strong></li>
+<li>Sample solid Navy Blue (<code>#1B365D</code>) table banners and soft blue section blocks.</li>
+<li>Exact table styling: 4x4 analytic rubrics, concept matrices, and answer key grids.</li>
+<li>Visual styling for callout containers (image prompts, YouTube boxes, formula cards).</li>
+<li>Proof of continuous text flow without awkward blank spaces.</li>
+</ul>
+<h3>2. <code>01_PEDAGOGICAL_FRAMEWORK_AND_EXEMPLAR.md</code></h3>
+<ul>
+<li><strong>Purpose:</strong> The teaching methodology, structure, and pacing guide.</li>
+<li><strong>Specifically Contains:</strong></li>
+<li><strong>The 70/30 Instructional Formula:</strong> 70% deep reading and explanation, 30% exercises, drills, and rubrics.</li>
+<li><strong>Page and Word Budgets:</strong> Exact formulas for 3-lesson units (Filipino/Values) vs 5–7 lesson quarters (Math/Science).</li>
+<li><strong>The 3-Page Front Matter Architecture:</strong> Rules for Cover, 350+ word Preface, and clean Table of Contents.</li>
+<li><strong>The Detailed 10-Section Lesson Blueprint:</strong> Full instructions for each section of a lesson.</li>
+<li><strong>The Faith Connection Standard:</strong> Guidelines for moral and spiritual reflections tied to the lesson topic.</li>
+</ul>
+<h3>3. <code>02_VISUAL_AND_MULTIMEDIA_STANDARDS.md</code></h3>
+<ul>
+<li><strong>Purpose:</strong> Formatting standards for image placeholders and video modules.</li>
+<li><strong>Specifically Contains:</strong></li>
+<li><strong>Mandatory "Prompts-Only" Rule:</strong> Forbids generating fake images; requires text prompt boxes with Title, Purpose, Prompt, and Replacement Note.</li>
+<li><strong>Image Quota:</strong> Exactly 1 cover prompt + 3 image prompts per lesson.</li>
+<li><strong>Style Matrix:</strong> When to use <strong>Studio Ghibli watercolor</strong> (covers, stories, history) vs <strong>Realistic Educational Photography</strong> (TLE tools, PE exercises, science lab safety).</li>
+<li><strong>Interactive YouTube Module Spec:</strong> Single-cell red-bordered container, official channel name, 3 viewing questions, and zero fake timestamps or AI disclaimers.</li>
+<li><strong>Curated Video Bank:</strong> A table of verified, working YouTube URLs for Values Ed, Filipino, and Science.</li>
+</ul>
+<h3>4. <code>03_DOCX_BUILDER_SCRIPT.py</code> (or <code>docx_builder.py</code>)</h3>
+<ul>
+<li><strong>Purpose:</strong> The Python compilation engine that ChatGPT runs via Code Interpreter.</li>
+<li><strong>Specifically Contains:</strong></li>
+<li><strong>XML Styling Functions:</strong> Custom code for colored shading, left-stripe borders, dashed borders, and cell padding.</li>
+<li><strong>Math Equation Converter:</strong> Converts LaTeX TeX formulas (<code>$…$</code> and <code>$$…$$</code>) into real native Word math equations (OMML).</li>
+<li><strong>Pacing Gating (<code>append_lesson</code>):</strong> Estimates page count and warns/rejects lessons if they exceed their page budget.</li>
+<li><strong>Typography Checker (<code>finalize_book</code>):</strong> Verifies that body text is 10.5 pt with 1.15 line spacing and 0.8-inch margins.</li>
+</ul>
+<h3>5. <code>04_FRONT_MATTER_AND_ANSWER_KEYS_STANDARDS.md</code></h3>
+<ul>
+<li><strong>Purpose:</strong> Standards for Page 1 (Front Cover), Page 3 (TOC), and the Back Matter Answer Keys.</li>
+<li><strong>Specifically Contains:</strong></li>
+<li><strong>Page 1 Cover Blueprint:</strong> 3-tier navy title banner in quotes (Tier 1: Book Title, Tier 2: Unit Title, Tier 3: Scope Sub-text) tailored for Values, Filipino, Science, Math, and AP.</li>
+<li><strong>Page 3 Table of Contents Blueprint:</strong> Strict ban on table grids/pipes (<code>|...|</code>); uses a clean hierarchical indented typographic list.</li>
+<li><strong>Structured Answer Key Layouts:</strong> Strict ban on paragraph answer blobs; provides table templates for Multiple-Choice grids and 2-column calculation explanations with balanced A–D answers.</li>
+</ul>
+<h3>6. <code>05_QUALITY_ASSURANCE_AND_CURRICULUM_AUDIT.md</code></h3>
+<ul>
+<li><strong>Purpose:</strong> The quality inspector and fact-checking audit.</li>
+<li><strong>Specifically Contains:</strong></li>
+<li><strong>Zero-Hallucination Fact Verification:</strong> Real Philippine historical dates (Tejeros Convention, Independence Day), real Republic Acts (RA 10533, RA 11476), authentic literary texts, and strict poetic syllable counts (Tanaga: 7-7-7-7).</li>
+<li><strong>Grade-Level Calibration Matrix:</strong> Bloom / DOK levels (1 to 4) and Lexile reading difficulty bands from Grade 7 to Grade 10.</li>
+<li><strong>Gender-Fair &amp; Inclusive Language:</strong> Rules following DepEd Order No. 32, s. 2017 and IPED cultural inclusion.</li>
+<li><strong>The 100-Point DepEd MATATAG QA Audit Scorecard:</strong> 5 pillars evaluated prior to publishing.</li>
+</ul>
+<h3>7. <code>06_AI_IMAGE_PROMPT_STANDARDS_AND_EXEMPLARS.md</code></h3>
+<ul>
+<li><strong>Purpose:</strong> Guide for writing concrete physical image prompts for image generators (Gemini, Midjourney, ChatGPT).</li>
+<li><strong>Specifically Contains:</strong></li>
+<li><strong>The "Wall of Shame":</strong> Examples of banned lazy prompts (e.g., abstract concepts, mental actions, generic students).</li>
+<li><strong>The 5 Physical Cinematographic Pillars:</strong> Prompts must describe Subject, Action, Setting, Props, and Lighting/Camera.</li>
+<li><strong>The National Hero Integrity Rule:</strong> Forbids generating AI faces of heroes (Rizal, Bonifacio); uses historical desks, manuscripts, quills, flags, and artifacts instead.</li>
+<li><strong>Subject-Specific Prompt Exemplars:</strong> Ready-to-use prompt examples across Filipino, Science, Math, History, and Values Ed.</li>
+</ul>
+<h3>8. <code>07_MATHEMATICS_TEXTBOOK_STANDARDS.md</code> (Math Only)</h3>
+<ul>
+<li><strong>Purpose:</strong> Specialized standards that override general writing rules specifically for Mathematics textbooks.</li>
+<li><strong>Specifically Contains:</strong></li>
+<li><strong>Page Balance:</strong> Reduces reading to short 40-to-70 word explanation chunks (no long prose blocks).</li>
+<li><strong>Formula Markup:</strong> All formulas centered on display lines with <code>$$…$$</code>, aligned step-by-step solutions at <code>=</code>, and real math symbols (<code>×, ÷, ±, √, π</code>).</li>
+<li><strong>Required Elements:</strong> 10–15 code-drawn figures (number lines, coordinate graphs, geometric angles), 2–4 Key Concept boxes, 4 boxed worked examples, and 20–24 graded exercises.</li>
+</ul>
+<h3>9. <code>08_SCIENCE_TEXTBOOK_STANDARDS.md</code> (Science Only)</h3>
+<ul>
+<li><strong>Purpose:</strong> Specialized standards that override general writing rules specifically for Science textbooks.</li>
+<li><strong>Specifically Contains:</strong></li>
+<li><strong>The 5E Model:</strong> Maps lessons to Engage, Explore, Explain, Elaborate, and Evaluate.</li>
+<li><strong>Lesson Balance:</strong> 1,600–2,100 words with short 50–90 word paragraphs.</li>
+<li><strong>Hands-on Investigation (Lab):</strong> A complete safe experiment per lesson with question, variables table (independent, dependent, controlled), materials, procedure, data table, and safety box (<code>::: watchout</code>).</li>
+<li><strong>Visual &amp; Formula Elements:</strong> 1 phenomenon opener image, 2 labeled scientific diagrams, 3–6 code-drawn cycles/flowcharts, and formulas with explicit symbol-quantity-unit tables.</li>
+</ul>
+<hr />
+<h2>📁 3. Supporting Files in the Folder</h2>
+<ul>
+<li><strong><code>README_SETUP_GUIDE.md</code></strong>: Step-by-step 2-minute walkthrough showing where to copy the instructions and how to upload the files in the ChatGPT GPT Builder interface.</li>
+<li><strong><code>SAMPLE_COVER_OUTPUT.jpg</code> &amp; <code>SAMPLE_FULL_TITLE_COVER.jpg</code></strong>: Visual cover reference examples showing the 3-tier title banner and illustration styling.</li>
+</ul>
+<hr />
+<h2>⚡ Quick Reference Table</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">File Name</th>
+<th style="text-align: left;">Primary Scope</th>
+<th style="text-align: left;">Specifically What It Contains</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong><code>INSTRUCTIONS_FOR_CHATGPT.txt</code></strong></td>
+<td style="text-align: left;">Master Instructions</td>
+<td style="text-align: left;">The 10 Core Rules, 10-section lesson blueprint, turn-by-turn pacing, and auto-compilation commands.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>00_REFERENCE_TEXTBOOK_BENCHMARK.docx</code></strong></td>
+<td style="text-align: left;">Layout Sample</td>
+<td style="text-align: left;">Finished Word document showing navy banners, rubrics, table grids, and callouts.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>01_PEDAGOGICAL_FRAMEWORK_AND_EXEMPLAR.md</code></strong></td>
+<td style="text-align: left;">Lesson Recipe</td>
+<td style="text-align: left;">70/30 teaching ratio, page budgets, 10-section blueprint, and Faith Connection box.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>02_VISUAL_AND_MULTIMEDIA_STANDARDS.md</code></strong></td>
+<td style="text-align: left;">Media Standards</td>
+<td style="text-align: left;">Image prompt box layout, image quotas (3 per lesson), Ghibli vs Photo rules, and verified YouTube links.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>03_DOCX_BUILDER_SCRIPT.py</code></strong></td>
+<td style="text-align: left;">Python Compiler</td>
+<td style="text-align: left;">Code Interpreter engine that converts text into Word format, styles tables, and converts math to real equations.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>04_FRONT_MATTER_AND_ANSWER_KEYS_STANDARDS.md</code></strong></td>
+<td style="text-align: left;">Cover &amp; Back Matter</td>
+<td style="text-align: left;">3-tier cover banner, typographic TOC without table pipes, and structured MCQ answer grids.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>05_QUALITY_ASSURANCE_AND_CURRICULUM_AUDIT.md</code></strong></td>
+<td style="text-align: left;">Quality Audit</td>
+<td style="text-align: left;">Fact verification (real dates/laws), grade-level Lexile/DOK matrix, and 100-point QA audit scorecard.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>06_AI_IMAGE_PROMPT_STANDARDS_AND_EXEMPLARS.md</code></strong></td>
+<td style="text-align: left;">Visual Prompts</td>
+<td style="text-align: left;">5-pillar physical scene rule, banned lazy prompts, national hero integrity rule, and subject prompt exemplars.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>07_MATHEMATICS_TEXTBOOK_STANDARDS.md</code></strong></td>
+<td style="text-align: left;">Math Only</td>
+<td style="text-align: left;">Short text chunks, real TeX math formulas, 10–15 code-drawn figures, and 4 step-by-step worked examples.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>08_SCIENCE_TEXTBOOK_STANDARDS.md</code></strong></td>
+<td style="text-align: left;">Science Only</td>
+<td style="text-align: left;">5E model, phenomenon opener, hands-on lab investigation with safety box, and data tables with units.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>README_SETUP_GUIDE.md</code></strong></td>
+<td style="text-align: left;">Setup Manual</td>
+<td style="text-align: left;">Step-by-step setup guide for creating the Custom GPT in ChatGPT.</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

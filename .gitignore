@@ -14,5 +14,6 @@ Desktop.ini
 *.tmp
 *.log
 *.pdf
+!ALL_IN_ONE_GPT_SETUP/*.pdf
 preview_pages/
 preview_pages_premium/
